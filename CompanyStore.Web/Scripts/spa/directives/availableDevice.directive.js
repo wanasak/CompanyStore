@@ -1,9 +1,9 @@
 ﻿(function (app) {
     'use strcit';
 
-    app.directive('avaiableDevice', avaiableDevice);
+    app.directive('availableDevice', availableDevice);
 
-    function avaiableDevice() {
+    function availableDevice() {
         return {
             restrict: "E",
             templateUrl: "/Scripts/spa/directives/availableDevice.html",

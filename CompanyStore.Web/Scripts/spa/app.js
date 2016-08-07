@@ -18,8 +18,12 @@
                 controller: "loginCtrl"
             })
             .when("/register", {
-                templetUrl: "",
+                templetUrl: "scripts/spa/account/register.html",
                 controller: "registerCtrl"
+            })
+            .when("/devices", {
+                templetUrl: "scripts/spa/device/index.html",
+                controller: "deviceCtrl"
             })
             .otherwise({ redirectTo: "/" });
     }

@@ -12,7 +12,7 @@ namespace CompanyStore.Data.Configuration
         public DeviceConfiguration()
         {
             Property(d => d.Name).IsRequired().HasMaxLength(100);
-            Property(d => d.Description).IsOptional().HasMaxLength(200);
+            Property(d => d.Description).IsOptional().HasMaxLength(1000);
             Property(d => d.CategoryID).IsRequired();
             Property(d => d.CreatedDate).IsRequired();
             HasMany(d => d.Stocks).WithRequired().HasForeignKey(s => s.DeviceID);

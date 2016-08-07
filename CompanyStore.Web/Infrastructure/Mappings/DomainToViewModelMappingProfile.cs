@@ -19,7 +19,7 @@ namespace CompanyStore.Web.Infrastructure.Mappings
         protected override void Configure()
         {
             Mapper.CreateMap<Device, DeviceViewModel>()
-                .ForMember(vm => vm.IsAvilable,
+                .ForMember(vm => vm.IsAvailable,
                 map => map.MapFrom(d => d.Stocks.Any(s => s.IsAvaiable)));
             Mapper.CreateMap<Category, CategoryViewModel>()
                 .ForMember(vm => vm.NumberOfDevices, 

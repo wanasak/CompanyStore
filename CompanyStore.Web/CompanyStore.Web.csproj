@@ -180,6 +180,27 @@
     <Content Include="Content\fonts\fontawesome-webfont.svg" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Content\images\background.jpg" />
+    <Content Include="Content\images\devices\400000271705-a1.jpg" />
+    <Content Include="Content\images\devices\4712900063196-01.jpg" />
+    <Content Include="Content\images\devices\4712900347722-a1.jpg" />
+    <Content Include="Content\images\devices\6935364050559-e1.jpg" />
+    <Content Include="Content\images\devices\6943518917665_1.jpg" />
+    <Content Include="Content\images\devices\745883568291-1.jpg" />
+    <Content Include="Content\images\devices\8806086099431_f1.jpg" />
+    <Content Include="Content\images\devices\8806087596076_a1.jpg" />
+    <Content Include="Content\images\devices\885370433845-1.jpg" />
+    <Content Include="Content\images\devices\8859255800925-1.jpg" />
+    <Content Include="Content\images\devices\888462831345-1.jpg" />
+    <Content Include="Content\images\devices\889894575241-01.jpg" />
+    <Content Include="Content\images\devices\889894987747-01.jpg" />
+    <Content Include="Content\images\devices\9785506712-01.jpg" />
+    <Content Include="Content\images\devices\97855089250_01.jpg" />
+    <Content Include="Content\images\devices\C11CE57501-01.jpg" />
+    <Content Include="Content\images\devices\dt.b15st.002-1.jpg" />
+    <Content Include="Content\images\devices\MK462THA-a1.jpg" />
+    <Content Include="Content\images\devices\UM.FW3SS.002_a1.jpg" />
+    <Content Include="Content\images\devices\W260933TH_V3650_BLACK_UBUNTU-1.jpg" />
+    <Content Include="Content\images\devices\W561077TH-3459-BLACK-WIN10-1.jpg" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
@@ -240,8 +261,8 @@
     <Content Include="Scripts\spa\account\register.html" />
     <Content Include="Scripts\spa\account\registerCtrl.js" />
     <Content Include="Scripts\spa\app.js" />
-    <Content Include="Scripts\spa\directives\avaiableDevice.directive.js" />
-    <Content Include="Scripts\spa\directives\avaiableDevice.html" />
+    <Content Include="Scripts\spa\directives\availableDevice.directive.js" />
+    <Content Include="Scripts\spa\directives\availableDevice.html" />
     <Content Include="Scripts\spa\home\index.html" />
     <Content Include="Scripts\spa\home\indexCtrl.js" />
     <Content Include="Scripts\spa\home\rootCtrl.js" />
@@ -284,7 +305,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Content\images\device\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

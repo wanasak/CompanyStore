@@ -14,11 +14,11 @@
                     </div>
                     <div class="col-xs-4"></div>
                 </div>
-                <div class="col-xs-12 col-sm-6" ng-repeat="device in devices">
+                <div class="col-xs-12 col-sm-6" ng-repeat="device in latestDevices">
                     <div class="panel panel-default">
-                        <div class="panel-heading"><strong>{{device.Title}} </strong></div>
+                        <div class="panel-heading"><strong>{{device.Name}} </strong></div>
                         <div class="panel-body">
-                            <div class="media">
+                            <!--<div class="media">
                                 <a class="pull-left" href="#"><a class="fancybox pull-left" rel="gallery1" ng-href="../../Content/images/devices/{{device.Image}}" title="{{device.Description | limitTo:200}}">
                                     <img class="media-object" height="120" ng-src="../../Content/images/devices/{{device.Image}}" alt="" />
                                 </a>
@@ -29,6 +29,17 @@
                                     <label class="label label-info">{{device.Category}}</label><br />
                                 </div>
                                 <br />
+                            </div>-->
+                            <div class="media">
+                                <a class="media-left" href="#">
+                                    <img class="media-object" height="120" ng-src="../../Content/images/devices/{{device.Image}}" alt="" />
+                                </a>
+                                <div class="media-body">
+                                    <h4 class="media-heading">Media heading</h4>
+                                    <p><available-device is-available="{{device.IsAvailable}}"></available-device></p>
+                                    <small>{{device.Description | limitTo: 120}}...</small>
+                                    <label class="label label-info">{{device.Category}}</label><br />
+                                </div>
                             </div>
                         </div>
                         <div class="panel-footer">
