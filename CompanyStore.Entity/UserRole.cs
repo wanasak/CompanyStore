@@ -11,6 +11,6 @@ namespace CompanyStore.Entity
         public int ID { get; set; }
         public int UserID { get; set; }
         public int RoleID { get; set; }
-        public Role Role { get; set; }
+        public virtual Role Role { get; set; }
     }
 }

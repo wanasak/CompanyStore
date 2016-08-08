@@ -11,7 +11,7 @@ namespace CompanyStore.Service
     public class MembershipContext
     {
         public IPrincipal Principal { get; set; }
-        public User user { get; set; }
+        public User User { get; set; }
         public bool Isvalid()
         {
             return Principal != null;

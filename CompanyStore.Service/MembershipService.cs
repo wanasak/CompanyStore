@@ -41,7 +41,7 @@ namespace CompanyStore.Service
             if (user != null && IsUserValid(user, password))
             {
                 var roles = GetUserRole(user.Username);
-                membershipContext.user = user;
+                membershipContext.User = user;
 
                 var identity = new GenericIdentity(username);
                 membershipContext.Principal = new GenericPrincipal(

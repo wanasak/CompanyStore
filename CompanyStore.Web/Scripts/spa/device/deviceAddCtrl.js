@@ -13,6 +13,7 @@
         $scope.addDevice = addDevice;
 
         function addDevice() {
+            //console.log($scope.device);
             apiService.post("api/device/add", $scope.device,
             addDeviceCompleted,
             addDeviceFailed);
@@ -27,7 +28,7 @@
         }
 
         function loadCategories() {
-            apiService.post("api/device/add", $scope.device,
+            apiService.get("api/category", null,
             loadCategoriesCompleted,
             loadCategoriesFailed);
         }

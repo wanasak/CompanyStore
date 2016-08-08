@@ -27,7 +27,7 @@ namespace CompanyStore.Web.Controllers
             _categoryRepository = categoryRepository;
         }
 
-        [AllowAnonymous]
+        [HttpGet]
         public HttpResponseMessage Get(HttpRequestMessage request)
         {
             return CreateHttpResponseMessage(request, () =>

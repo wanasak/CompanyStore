@@ -18,6 +18,7 @@ namespace CompanyStore.Web.Infrastructure.Mappings
 
         protected override void Configure()
         {
+            //Mapper.CreateMap<DeviceViewModel, Device>();
         }
     }
 }

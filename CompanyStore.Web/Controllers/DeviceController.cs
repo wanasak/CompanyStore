@@ -14,7 +14,7 @@ using System.Web.Http;
 
 namespace CompanyStore.Web.Controllers
 {
-    [Authorize(Roles = "Adimin")]
+    [Authorize(Roles = "Admin")]
     [RoutePrefix("api/device")]
     public class DeviceController : ApiControllerBase
     {

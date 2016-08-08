@@ -30,10 +30,32 @@ namespace CompanyStore.Data.Migrations
 
             //  Create Genres
             context.Categories.AddOrUpdate(g => g.Name, GenerateCategories());
-            context.SaveChanges();
             // Create Devices
             context.Devices.AddOrUpdate(d => d.Name, GenerateDevices());
-            context.SaveChanges();
+            // Create Roles
+            context.Roles.AddOrUpdate(r => r.Name, GenerateRoles());
+            // Create Users
+            context.Users.AddOrUpdate(u => u.Username, new User[]{
+                new User()
+                {
+                    Email = "u510610433@gmail.com",
+                    FirstName = "Wanasak",
+                    LastName = "Suraintaranggoon",
+                    Username = "smudger",
+                    IsLocked = false,
+                    CreatedDate = DateTime.Now,
+                    HashedPassword = "2O65mFzQWIxmfzbkPjeVnS3c8U0IN07oE8ymQWwgY5Y=",
+                    Salt = "ljd/YZrfxnkEoB0l2rvjgA=="
+                }
+            });
+            // Create user admin for smudger
+            context.UserRoles.AddOrUpdate(new UserRole[]{
+                new UserRole()
+                {
+                    UserID = 1,
+                    RoleID = 1
+                }
+            });
         }
 
         private Category[] GenerateCategories()
@@ -206,6 +228,15 @@ namespace CompanyStore.Data.Migrations
                 },
             };
             return devices;
+        }
+
+        private Role[] GenerateRoles()
+        {
+            return new Role[] {
+                new Role() {
+                    Name = "Admin"
+                }
+            };
         }
     }
 }

@@ -3,18 +3,18 @@
     <div class="panel panel-default">
         <div class="panel-heading">Add new device</div>
         <div class="panel-body">
-            <form role="form">
+            <form role="form" novalidate angular-validator name="addDeviceForm" angular-validator-submit="addDevice()">
                 <div class="form-group">
-                    <label for="name">Name:</label>
-                    <input type="text" class="form-control" id="name" ng-model="device.Name" />
+                    <label for="deviceName">Name:</label>
+                    <input type="text" id="deviceName" name="deviceName" class="form-control" ng-model="device.Name" placeholder="Name" validate-on="blur" required required-message="'Name is required'">
                 </div>
                 <div class="form-group">
                     <label for="description">Description:</label>
-                    <textarea rows="3" class="form-control" id="description" ng-model="device.Description"></textarea>
+                    <textarea rows="3" placeholder="Description" class="form-control" id="description" ng-model="device.Description"></textarea>
                 </div>
                 <div class="form-group">
-                    <labe for="numberOfStocks">Number Of Stocks:</labe>
-                    <input type="number" class="form-control" id="numberOfStocks" ng-model="device.NumberOfStocks" />
+                    <label for="numberOfStocks">Number Of Stocks:</label>
+                    <input type="number" min="0" placeholder="Number Of Stocks" class="form-control" id="numberOfStocks" ng-model="device.NumberOfStocks" />
                 </div>
                 <!--<div class="checkbox">
                     <label>
@@ -23,11 +23,13 @@
                 </div>-->
                 <div class="form-group">
                     <label for="category">Category:</label>
-                    <select ng-model="device.CategoryID" ng-options="x in [1,2,3]"></select>
+                    <select class="form-control" ng-model="device.CategoryID"> 
+                        <option ng-repeat="c in categories" value="{{c.ID}}">{{ c.Name }}</option>
+                    </select>   
                 </div>
                 <button type="submit" class="btn btn-success">Save</button>
             </form>
         </div>
-        <div class="panel-footer"></div>
+        <!--<div class="panel-footer"></div>-->
     </div>
 </div>

@@ -16,13 +16,13 @@
         };
 
         function login(user, completed) {
-            apiService.post("api/authenticate", user,
+            apiService.post("api/account/authenticate", user,
                 completed,
                 loginFailed);
         }
 
         function register(user, completed) {
-            apiService.post("api/register", user,
+            apiService.post("api/account/register", user,
                 completed,
                 registerFailed);
         }
@@ -37,11 +37,11 @@
         }
 
         function saveCredentials(user) {
-            var membershipData = $base64.encode(user.username + ":" + user.password);
+            var membershipData = $base64.encode(user.username + ':' + user.password);
             $rootScope.repository = {
                 loggedUser: {
                     username: user.username,
-                    authdata: membershipData
+                    authData: membershipData
                 }
             };
             $http.defaults.headers.common['Authorization'] = 'Basic ' + membershipData;
