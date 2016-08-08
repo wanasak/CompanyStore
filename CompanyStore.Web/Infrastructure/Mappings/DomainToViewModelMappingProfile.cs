@@ -20,7 +20,8 @@ namespace CompanyStore.Web.Infrastructure.Mappings
         {
             Mapper.CreateMap<Device, DeviceViewModel>()
                 .ForMember(vm => vm.IsAvailable,
-                map => map.MapFrom(d => d.Stocks.Any(s => s.IsAvaiable)));
+                    map => map.MapFrom(d => d.Stocks.Any(s => s.IsAvaiable)))
+                .ForMember(vm => vm.Category, map => map.MapFrom(d => d.Category.Name));
             Mapper.CreateMap<Category, CategoryViewModel>()
                 .ForMember(vm => vm.NumberOfDevices, 
                 map => map.MapFrom(c => c.Devices.Count()));

@@ -1,0 +1,48 @@
+﻿<hr />
+<div class="row">
+    <div class="col-md-8">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                Device Information
+            </div>
+            <div class="panel-body">
+                <div class="media">
+                    <a class="media-left" href="#">
+                        <img class="media-object" height="120" ng-src="../../Content/images/devices/{{device.Image}}" alt="" />
+                    </a>
+                    <div class="media-body">
+                        <h4 class="media-heading">{{ device.Name }}</h4>
+                        <table class="table table-striped">
+                            <tbody>
+                                <tr>
+                                    <td>Status</td>
+                                    <td><available-device is-available="{{device.IsAvailable}}"></available-device></td>
+                                </tr>
+                                <tr>
+                                    <td>Description</td>
+                                    <td><small>{{ device.Description }}</small></td>
+                                </tr>
+                                <tr>
+                                    <td>Category</td>
+                                    <td><label class="label label-info">{{device.Category}}</label></td>
+                                </tr>
+                                <tr>
+                                    <td>Price</td>
+                                    <td>{{ 100 | currency }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Created Date</td>
+                                    <td>{{ device.CreatedDate | date: 'MMMM d, y' }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <button type="button" class="btn btn-default">Back</button>
+                        <button type="button" class="btn btn-default">Edit</button>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-footer"></div>
+        </div>
+    </div>
+    <div class="col-md-4"></div>
+</div>

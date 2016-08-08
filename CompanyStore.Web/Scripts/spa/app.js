@@ -21,9 +21,23 @@
                 templetUrl: "scripts/spa/account/register.html",
                 controller: "registerCtrl"
             })
-            .when("/devices", {
+            .when("/employee", {
+                templateUrl: "scripts/spa/employee/index.html",
+                controller: "employeeCtrl"
+            })
+            .when("/device", {
                 templetUrl: "scripts/spa/device/index.html",
                 controller: "deviceCtrl"
+            })
+            .when("/device/detail/:id", {
+                templateUrl: "scripts/spa/device/deviceDetail.html",
+                controller: "deviceDetailCtrl",
+                resolve: { isAuthenticated: isAuthenticated }
+            })
+            .when("/device/add", {
+                templateUrl: "scripts/spa/device/deviceAdd.html",
+                controller: "deviceAddCtrl",
+                resolve: { isAuthenticated: isAuthenticated }
             })
             .otherwise({ redirectTo: "/" });
     }
@@ -34,7 +48,8 @@
         // Handle page refreshs
         $rootScope.repository = $cookieStore.get('repository') || {};
         if ($rootScope.repository.loggedUser) {
-            $http.defaults.headers.common['Authorization'] = $rootScope.repository.loggedUser.authdata;
+            //$http.defaults.headers.common['Authorization'] = $rootScope.repository.loggedUser.authdata;
+            $http.defaults.headers.common['Authorization'] = 'Basic ' + $rootScope.repository.loggedUser.authData;
         }
         $(document).ready(function () {
             $(".fancybox").fancybox({
@@ -60,5 +75,6 @@
             $location.path('/login');
         }
     }
+
 
 })();

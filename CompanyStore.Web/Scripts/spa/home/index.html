@@ -18,18 +18,6 @@
                     <div class="panel panel-default">
                         <div class="panel-heading"><strong>{{device.Name}} </strong></div>
                         <div class="panel-body">
-                            <!--<div class="media">
-                                <a class="pull-left" href="#"><a class="fancybox pull-left" rel="gallery1" ng-href="../../Content/images/devices/{{device.Image}}" title="{{device.Description | limitTo:200}}">
-                                    <img class="media-object" height="120" ng-src="../../Content/images/devices/{{device.Image}}" alt="" />
-                                </a>
-                                </a>
-                                <div class="media-body">
-                                    <available-device is-available="{{device.IsAvailable}}"></available-device>
-                                    <div><small>{{device.Description | limitTo: 70}}...</small></div>
-                                    <label class="label label-info">{{device.Category}}</label><br />
-                                </div>
-                                <br />
-                            </div>-->
                             <div class="media">
                                 <a class="media-left" href="#" title="{{device.Description | limitTo:200}}">
                                     <img class="media-object" height="120" ng-src="../../Content/images/devices/{{device.Image}}" alt="" />
@@ -38,13 +26,13 @@
                                     <h4 class="media-heading">Media heading</h4>
                                     <p><available-device is-available="{{device.IsAvailable}}"></available-device></p>
                                     <small>{{device.Description | limitTo: 120}}...</small>
-                                    <label class="label label-info">{{device.Category}}</label><br />
+                                    <p><label class="label label-info">{{device.Category}}</label><br /></p>
                                 </div>
                             </div>
                         </div>
                         <div class="panel-footer">
                             <!--<span component-rating="{{device.Rating}}"></span>-->
-                            <a class="fancybox-media pull-right" ng-href="{{device.TrailerURI}}">Trailer<i class="fa fa-video-camera fa-fw"></i></a> </div>
+                            <a class="pull-right" href="#/device/detail/{{device.ID}}">More detail <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span></a> </div>
                     </div>
                 </div>
             </div>

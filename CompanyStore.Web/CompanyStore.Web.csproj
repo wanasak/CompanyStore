@@ -155,6 +155,7 @@
     <Compile Include="Infrastructure\Extension\RequestMessageExtensions.cs" />
     <Compile Include="Infrastructure\Mappings\AutoMapperConfiguration.cs" />
     <Compile Include="Infrastructure\Mappings\DomainToViewModelMappingProfile.cs" />
+    <Compile Include="Infrastructure\Mappings\ViewModelToDomainMappingProfile.cs" />
     <Compile Include="Infrastructure\MessageHandler\CompanyStoreAuthHandler.cs" />
     <Compile Include="Models\CategoryViewModel.cs" />
     <Compile Include="Models\DeviceViewModel.cs" />
@@ -261,6 +262,12 @@
     <Content Include="Scripts\spa\account\register.html" />
     <Content Include="Scripts\spa\account\registerCtrl.js" />
     <Content Include="Scripts\spa\app.js" />
+    <Content Include="Scripts\spa\device\deviceAdd.html" />
+    <Content Include="Scripts\spa\device\deviceDetail.html" />
+    <Content Include="Scripts\spa\device\deviceAddCtrl.js" />
+    <Content Include="Scripts\spa\device\deviceDetailCtrl.js" />
+    <Content Include="Scripts\spa\device\index.html" />
+    <Content Include="Scripts\spa\device\deviceCtrl.js" />
     <Content Include="Scripts\spa\directives\availableDevice.directive.js" />
     <Content Include="Scripts\spa\directives\availableDevice.html" />
     <Content Include="Scripts\spa\home\index.html" />

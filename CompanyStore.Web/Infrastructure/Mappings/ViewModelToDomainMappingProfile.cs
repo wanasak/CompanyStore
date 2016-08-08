@@ -1,0 +1,23 @@
+﻿using AutoMapper;
+using CompanyStore.Entity;
+using CompanyStore.Web.Models;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace CompanyStore.Web.Infrastructure.Mappings
+{
+    public class ViewModelToDomainMappingProfile : Profile
+    {
+        public override string ProfileName
+        {
+            get { return "ViewModelToDomainMappings"; }
+        }
+
+        protected override void Configure()
+        {
+        }
+    }
+}

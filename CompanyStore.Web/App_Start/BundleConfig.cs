@@ -42,8 +42,11 @@ namespace CompanyStore.Web.App_Start
                 "~/Scripts/spa/services/membershipService.js",
                 "~/Scripts/spa/services/apiService.js",
                 "~/Scripts/spa/directives/availableDevice.directive.js",
-                "~/Scripts/spa/accoun/loginCtrl.js",
-                "~/Scripts/spa/accoun/registerCtrl.js",
+                "~/Scripts/spa/account/loginCtrl.js",
+                "~/Scripts/spa/account/registerCtrl.js",
+                "~/Scripts/spa/device/deviceCtrl.js",
+                "~/Scripts/spa/device/deviceDetailCtrl.js",
+                "~/Scripts/spa/device/deviceAddCtrl.js",
                 "~/Scripts/spa/home/rootCtrl.js",
                 "~/Scripts/spa/home/indexCtrl.js"
                 ));

@@ -16,7 +16,7 @@ namespace CompanyStore.Web.Infrastructure.MessageHandler
             try
             {
                 request.Headers.TryGetValues("Authorization", out authHeadersValues);
-                if (authHeadersValues != null)
+                if (authHeadersValues == null)
                     return base.SendAsync(request, cancellationToken);
                 var tokens = authHeadersValues.FirstOrDefault();
                 tokens = tokens.Replace("Basic", "").Trim();

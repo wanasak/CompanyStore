@@ -14,7 +14,8 @@ namespace CompanyStore.Web.Models
         public string Image { get; set; }
         public int CategoryID { get; set; }
         public string Category { get; set; }
-        public DateTime CreateDate { get; set; }
+        public DateTime CreatedDate { get; set; }
         public bool IsAvailable { get; set; }
+        public int NumberOfStocks { get; set; }
     }
 }
