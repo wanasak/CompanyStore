@@ -4,6 +4,7 @@ using CompanyStore.Data.Repository;
 using CompanyStore.Entity;
 using CompanyStore.Web.Infrastructure.Core;
 using CompanyStore.Web.Models;
+using CompanyStore.Web.Infrastructure.Extension;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -11,6 +12,8 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Web;
+using System.IO;
 
 namespace CompanyStore.Web.Controllers
 {
@@ -80,7 +83,8 @@ namespace CompanyStore.Web.Controllers
                     response = request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);
                 else
                 {
-                    Device newDevice = Mapper.Map<DeviceViewModel, Device>(model);
+                    Device newDevice = new Device();
+                    newDevice.MapDevice(model);
                     for (int i = 0; i < model.NumberOfStocks; i++)
                     {
                         Stock stock = new Stock()
@@ -97,6 +101,43 @@ namespace CompanyStore.Web.Controllers
                     response = request.CreateResponse(HttpStatusCode.OK);
                 }
 
+                return response;
+            });
+        }
+
+        [MimeMultipart]
+        [Route("images/upload")]
+        public HttpResponseMessage Upload(HttpRequestMessage request, int deviceId)
+        {
+            return CreateHttpResponseMessage(request, () =>
+            {
+                HttpResponseMessage response = null;
+
+                var device = _deviceRepository.GetSingle(deviceId);
+                if (device == null)
+                    response = request.CreateErrorResponse(HttpStatusCode.NotFound, "Invalid device.");
+                else
+                {
+                    var uploadPath = HttpContext.Current.Server.MapPath("~/Content/images/devices");
+                    var multipartFormDataStreamProvider = new UploadMultipartFormProvider(uploadPath);
+                    // Read the MIME multipart 
+                    Request.Content.ReadAsMultipartAsync(multipartFormDataStreamProvider);
+                    string _localFileName = multipartFormDataStreamProvider
+                        .FileData.Select(m => m.LocalFileName).FirstOrDefault();
+                    // Create response
+                    FileUploadResult result = new FileUploadResult
+                    {
+                        LocalFilePath = _localFileName,
+                        FileName = Path.GetFileName(_localFileName),
+                        FileLength = new FileInfo(_localFileName).Length
+                    };
+                    // Update database
+                    device.Image = result.FileName;
+                    _deviceRepository.Edit(device);
+                    _unitOfWork.Commit();
+
+                    response = request.CreateResponse(HttpStatusCode.OK, result);
+                }
                 return response;
             });
         }

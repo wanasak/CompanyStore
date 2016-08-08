@@ -7,10 +7,30 @@
 
     function deviceAddCtrl($scope, apiService, notificationService, $location) {
 
+        var deviceImage = null;
+        $scope.prepareFile = prepareFile;
+
         $scope.pageClass = 'container';
-        $scope.device = {};
+        $scope.device = { NumberOfStocks: 1, CreatedDate: new Date() };
         $scope.categories = [];
         $scope.addDevice = addDevice;
+        $scope.datepicker = {};
+        $scope.openDatePicker = openDatePicker;
+        $scope.dateOptions = {
+            formatYear: 'yy',
+            startingDay: 1,
+            showWeeks: false
+        };
+
+        function prepareFile($files) {
+            deviceImage = $files;
+        }
+
+        function openDatePicker($event) {
+            $event.preventDefault();
+            $event.stopPropagation();
+            $scope.datepicker.opened = true;
+        }
 
         function addDevice() {
             //console.log($scope.device);
@@ -18,9 +38,17 @@
             addDeviceCompleted,
             addDeviceFailed);
         }
+
+        function redirectToDevicePage() {
+            $location.url('device');
+        }
         
         function addDeviceCompleted(result) {
-            $location.path("#/device");
+            var deviceId = result.data.ID;
+            if (deviceImage)
+                fileUploadService.uploadImage(movieImage, $scope.movie.ID, redirectToDevicePage);
+            else
+                redirectToDevicePage();
         }
 
         function addDeviceFailed(response) {

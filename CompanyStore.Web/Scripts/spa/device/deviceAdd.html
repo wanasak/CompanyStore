@@ -3,32 +3,56 @@
     <div class="panel panel-default">
         <div class="panel-heading">Add new device</div>
         <div class="panel-body">
-            <form role="form" novalidate angular-validator name="addDeviceForm" angular-validator-submit="addDevice()">
-                <div class="form-group">
-                    <label for="deviceName">Name:</label>
-                    <input type="text" id="deviceName" name="deviceName" class="form-control" ng-model="device.Name" placeholder="Name" validate-on="blur" required required-message="'Name is required'">
+            <div class="col-xs-3">
+                <div class="text-center">
+                    <img src="../../Content/images/devices/unknown.jpg" class="img-responsive" />
+                    <h6>Add device...</h6>
+                    <input type="file" ng-file-select="prepareFiles($files)" />
                 </div>
-                <div class="form-group">
-                    <label for="description">Description:</label>
-                    <textarea rows="3" placeholder="Description" class="form-control" id="description" ng-model="device.Description"></textarea>
+            </div>
+            <div class="col-xs-9">
+                <div class="bs-callout bs-callout-default">
+                    <strong>Add {{ device.Name }} device.</strong><small> Make sure you fill all required fields.</small>
                 </div>
-                <div class="form-group">
-                    <label for="numberOfStocks">Number Of Stocks:</label>
-                    <input type="number" min="0" placeholder="Number Of Stocks" class="form-control" id="numberOfStocks" ng-model="device.NumberOfStocks" />
-                </div>
-                <!--<div class="checkbox">
-                    <label>
-                        <input type="checkbox">
-                        Remember me</label>
-                </div>-->
-                <div class="form-group">
-                    <label for="category">Category:</label>
-                    <select class="form-control" ng-model="device.CategoryID"> 
-                        <option ng-repeat="c in categories" value="{{c.ID}}">{{ c.Name }}</option>
-                    </select>   
-                </div>
-                <button type="submit" class="btn btn-success">Save</button>
-            </form>
+                <form role="form" novalidate angular-validator name="addDeviceForm" angular-validator-submit="addDevice()">
+                    <div class="form-group">
+                        <label for="deviceName">Name:</label>
+                        <input type="text" id="deviceName" name="deviceName" class="form-control" ng-model="device.Name" placeholder="Name" validate-on="blur" required required-message="'Name is required'">
+                    </div>
+                    <div class="form-group">
+                        <label for="description">Description:</label>
+                        <textarea rows="3" placeholder="Description" class="form-control" id="description" ng-model="device.Description"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="numberOfStocks">Number Of Stocks:</label>
+                        <input type="number" min="0" placeholder="Number Of Stocks" class="form-control" id="numberOfStocks" ng-model="device.NumberOfStocks" />
+                    </div>
+                    <!--<div class="checkbox">
+                        <label>
+                            <input type="checkbox">
+                            Remember me</label>
+                    </div>-->
+                    <div class="form-group">
+                        <label for="category">Category:</label>
+                        <select class="form-control" ng-model="device.CategoryID"> 
+                            <option ng-repeat="c in categories" value="{{c.ID}}">{{ c.Name }}</option>
+                        </select>   
+                    </div>
+                    <div class="form-group">
+                        <label for="createdDate">Created Date:</label>
+                        <p class="input-group">
+                            <input type="date" class="form-control" name="createdDate" datepicker-popup="{{format}}" ng-model="device.CreatedDate" is-open="datepicker.opened" datepicker-options="dateOptions" ng-required="true" datepicker-append-to-body="true" close-text="Close"
+                                validate-on="blur" required required-message="'Date is required'" />
+                            <span class="input-group-btn">
+                                <button type="button" class="btn btn-default" ng-click="openDatePicker($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                            </span>
+                        </p>
+                    </div>
+                    <button type="submit" class="btn btn-success">Save</button>
+                    <a href="#/device" class="btn btn-default" role="button">Back</a>
+                </form>
+            </div>
+            
         </div>
         <!--<div class="panel-footer"></div>-->
     </div>

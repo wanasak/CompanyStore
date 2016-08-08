@@ -25,6 +25,11 @@
                 templateUrl: "scripts/spa/employee/index.html",
                 controller: "employeeCtrl"
             })
+            .when("/employee/add", {
+                templateUrl: "scripts/spa/employee/employeeAdd.html",
+                controller: "employeeAddCtrl",
+                resolve: { isAuthenticated: isAuthenticated }
+            })
             .when("/device", {
                 templetUrl: "scripts/spa/device/index.html",
                 controller: "deviceCtrl"
