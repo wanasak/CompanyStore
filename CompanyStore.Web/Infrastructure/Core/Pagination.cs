@@ -9,8 +9,8 @@ namespace CompanyStore.Web.Infrastructure.Core
     public class Pagination<T>
     {
         public int draw { get; set; }
-        public int recordFiltered { get; set; }
-        public int recordTotal { get; set; }
+        public int recordsFiltered { get; set; }
+        public int recordsTotal { get; set; }
         public IEnumerable<T> data { get; set; }
     }
 }

@@ -50,7 +50,7 @@ namespace CompanyStore.Web.Controllers
                 List<EmployeeViewModel> employeesVM = new List<EmployeeViewModel>();
 
                 var filterEmployees = _employeeRepository.GetAll()
-                    .Where(x => x.FirstName.ToLower().Contains(searchValue.ToLower()))
+                    //.Where(x => x.FirstName.ToLower().Contains(searchValue.ToLower()))
                     .Select(e => new EmployeeViewModel
                     {
                         FirstName = e.FirstName,
@@ -61,14 +61,14 @@ namespace CompanyStore.Web.Controllers
 
                 toltalFilteredEmployees = filterEmployees.Count();
 
-                employeesVM = filterEmployees.Skip(skip).Take(pageSize).ToList();
+                employeesVM = filterEmployees.OrderBy(e => e.FirstName).Skip(skip).Take(pageSize).ToList();
 
                 Pagination<EmployeeViewModel> pagination = new Pagination<EmployeeViewModel>()
                 {
                     data = employeesVM,
                     draw = draw != null ? Convert.ToInt32(draw) : 1,
-                    recordFiltered = toltalFilteredEmployees,
-                    recordTotal = employeesVM.Count
+                    recordsFiltered = toltalFilteredEmployees,
+                    recordsTotal = employeesVM.Count
                 };
 
                 response = request.CreateResponse<Pagination<EmployeeViewModel>>(HttpStatusCode.OK, pagination);

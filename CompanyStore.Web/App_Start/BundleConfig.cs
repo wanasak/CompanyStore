@@ -69,7 +69,8 @@ namespace CompanyStore.Web.App_Start
                 "~/content/css/font-awesome.css",
                 "~/content/css/morris.css",
                 "~/content/css/buttons.dataTables.css",
-                "~/content/css/dataTables.responsive.css", 
+                "~/content/css/dataTables.responsive.css",
+                "~/content/css/jquery.dataTables.css", 
                 "~/content/css/toastr.css", 
                 "~/content/css/jquery.fancybox.css", 
                 "~/content/css/loading-bar.css"

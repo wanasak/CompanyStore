@@ -182,6 +182,7 @@
     <Content Include="Content\css\fancybox_overlay.png" />
     <Content Include="Content\css\fancybox_sprite.png" />
     <Content Include="Content\css\font-awesome.css" />
+    <Content Include="Content\css\jquery.dataTables.css" />
     <Content Include="Content\css\jquery.fancybox.css" />
     <Content Include="Content\css\loading-bar.css" />
     <Content Include="Content\css\morris.css" />
@@ -279,6 +280,10 @@
     <Content Include="Scripts\spa\device\deviceCtrl.js" />
     <Content Include="Scripts\spa\directives\availableDevice.directive.js" />
     <Content Include="Scripts\spa\directives\availableDevice.html" />
+    <Content Include="Scripts\spa\employee\employeeAdd.html" />
+    <Content Include="Scripts\spa\employee\employeeAddCtrl.js" />
+    <Content Include="Scripts\spa\employee\employeeCtrl.js" />
+    <Content Include="Scripts\spa\employee\index.html" />
     <Content Include="Scripts\spa\home\index.html" />
     <Content Include="Scripts\spa\home\indexCtrl.js" />
     <Content Include="Scripts\spa\home\rootCtrl.js" />
@@ -288,6 +293,8 @@
     <Content Include="Scripts\spa\layout\topBar.html" />
     <Content Include="Scripts\spa\modules\common.core.js" />
     <Content Include="Scripts\spa\modules\common.ui.js" />
+    <Content Include="Scripts\spa\rental\index.html" />
+    <Content Include="Scripts\spa\rental\rentalCtrl.js" />
     <Content Include="Scripts\spa\services\apiService.js" />
     <Content Include="Scripts\spa\services\fileUploadService.js" />
     <Content Include="Scripts\spa\services\membershipService.js" />

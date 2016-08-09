@@ -3,11 +3,12 @@
 
     app.controller('employeeCtrl', employeeCtrl);
 
-    employeeCtrl.$inject = ['$scope', 'DTOptionsBuilder', 'DTColumnBuilder'];
+    employeeCtrl.$inject = ['$scope', 'DTOptionsBuilder', 'DTColumnBuilder', 'apiService', '$compile', 'notificationService'];
 
-    function employeeCtrl($scope, DTOptionsBuilder, DTColumnBuilder) {
+    function employeeCtrl($scope, DTOptionsBuilder, DTColumnBuilder, apiService, $complie, notificationService) {
 
         // Datatables
+        var defaultPageSize = 10;
         $scope.dtInstance = {};
         $scope.dtColumns = [
             DTColumnBuilder.newColumn('FirstName').withTitle('First'),
@@ -15,41 +16,41 @@
             DTColumnBuilder.newColumn('Email').withTitle('Email'),
             DTColumnBuilder.newColumn('IsActive').withTitle('Status'),
             DTColumnBuilder.newColumn(null).withTitle('Action').notSortable().renderWith(actionHtml)
-        ]
+        ];
 
         function loadEmployee() {
             $scope.dtOptions = DTOptionsBuilder.newOptions().withOption('ajax', {
                 dataSrc: "data",
-                url: "/api/employeeCtrl?status=" + $scope.selectedStatus,
+                url: "/api/employee?status=" + "active", //$scope.selectedStatus,
                 type: "POST",
-                header: { Authorization: $scope.$root.repository.loggedUser.authData }
+                headers: { Authorization: $scope.$root.repository.loggedUser.authData }
             })
-                .withOption('processing', true) // show progress bar
-                .withOption('serverSide', true)
-                .withOption('aaSorting', [0, 'asc'])
-                .withOption('createRow', createRow)
-                .withOption('responsive', true)
-                .withPaginationType('full_numbers')
-                .withDisplayLengthSize(5)
-                .withDOM('ftrip')
-                .withButtons([
-                    {
-                        text: 'Reload',
-                        key: '1',
-                        action: function (e, dt, node, config) {
-                            $scope.dtInstance.reloadData(); // reload datatables
-                        }
-                    },
-                    'print'
-                ]);
+            .withOption('processing', true) //for show progress bar
+            .withOption('serverSide', true) // for server side processing
+            .withPaginationType('full_numbers') // for get full pagination options // first / last / prev / next and page numbers
+            .withDisplayLength(defaultPageSize) // Page size
+            .withOption('aaSorting', [0, 'asc']) // for default sorting column // here 0 means first column
+            .withDOM('frtip')
+            .withOption('createdRow', createdRow)
+            .withOption('responsive', true)
+            .withButtons([
+                {
+                    text: 'Reload',
+                    key: '1',
+                    action: function (e, dt, node, config) {
+                        $scope.dtInstance.reloadData(); // reload datatables
+                    }
+                },
+                'print'
+            ]);
         }
-        function createRow(row, data, dataIndex) {
+        function createdRow(row, data, dataIndex) {
             $complie(angular.element(row).contents())($scope);
         }
         function actionHtml(data, type, full, meta) {
             return '<button class="btn btn-warning" ng-click="edit(' + data.ID + ')">' +
                '   <i class="fa fa-edit"></i>' +
-               '</button> | ' +
+               '</button> &nbsp; ' +
                '<button class="btn btn-danger" ng-click="delete(' + data.ID + ')" )"="">' +
                '   <i class="fa fa-trash-o"></i>' +
                '</button>';
