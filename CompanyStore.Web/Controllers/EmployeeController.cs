@@ -3,6 +3,7 @@ using CompanyStore.Data.Repository;
 using CompanyStore.Entity;
 using CompanyStore.Web.Infrastructure.Core;
 using CompanyStore.Web.Models;
+using CompanyStore.Web.Infrastructure.Extension;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -75,6 +76,31 @@ namespace CompanyStore.Web.Controllers
                 };
 
                 response = request.CreateResponse<Pagination<EmployeeViewModel>>(HttpStatusCode.OK, pagination);
+
+                return response;
+            });
+        }
+
+        [HttpPost]
+        [Route("register")]
+        public HttpResponseMessage Register(HttpRequestMessage request, EmployeeViewModel model)
+        {
+            return CreateHttpResponseMessage(request, () =>
+            {
+                HttpResponseMessage response = null;
+
+                if (!ModelState.IsValid)
+                    response = request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);
+                else
+                {
+                    Employee newEmployee = new Employee();
+                    newEmployee.IsActive = true;
+                    newEmployee.MapEmployee(model);
+                    _employeeRepository.Add(newEmployee);
+                    _unitOfWork.Commit();
+
+                    response = request.CreateResponse(HttpStatusCode.OK);
+                }
 
                 return response;
             });
