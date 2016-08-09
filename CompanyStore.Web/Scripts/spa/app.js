@@ -44,6 +44,10 @@
                 controller: "deviceAddCtrl",
                 resolve: { isAuthenticated: isAuthenticated }
             })
+            .when("/rental", {
+                templateUrl: "scripts/spa/rental/index.html",
+                controller: "rentalCtrl"
+            })
             .otherwise({ redirectTo: "/" });
     }
 

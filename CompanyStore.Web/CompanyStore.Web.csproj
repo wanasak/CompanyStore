@@ -147,6 +147,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CategoryController.cs" />
     <Compile Include="Controllers\DeviceController.cs" />
+    <Compile Include="Controllers\EmployeeController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -154,6 +155,7 @@
     <Compile Include="Infrastructure\Core\ApiControllerBase.cs" />
     <Compile Include="Infrastructure\Core\FileUploadResult.cs" />
     <Compile Include="Infrastructure\Core\MimeMultipart.cs" />
+    <Compile Include="Infrastructure\Core\Pagination.cs" />
     <Compile Include="Infrastructure\Core\UploadMultipartFormProvider.cs" />
     <Compile Include="Infrastructure\Extension\EntitiesExtensions.cs" />
     <Compile Include="Infrastructure\Extension\RequestMessageExtensions.cs" />
@@ -175,6 +177,8 @@
     <Content Include="Content\css\blank.gif" />
     <Content Include="Content\css\bootstrap-theme.css" />
     <Content Include="Content\css\bootstrap.css" />
+    <Content Include="Content\css\buttons.dataTables.css" />
+    <Content Include="Content\css\dataTables.responsive.css" />
     <Content Include="Content\css\fancybox_overlay.png" />
     <Content Include="Content\css\fancybox_sprite.png" />
     <Content Include="Content\css\font-awesome.css" />
@@ -291,11 +295,18 @@
     <Content Include="Scripts\vendors\angucomplete-alt.min.js" />
     <Content Include="Scripts\vendors\angular-base64.js" />
     <Content Include="Scripts\vendors\angular-cookies.js" />
+    <Content Include="Scripts\vendors\angular-datatables.buttons.js" />
+    <Content Include="Scripts\vendors\angular-datatables.js" />
     <Content Include="Scripts\vendors\angular-file-upload.js" />
     <Content Include="Scripts\vendors\angular-route.js" />
     <Content Include="Scripts\vendors\angular-validator.js" />
     <Content Include="Scripts\vendors\angular.js" />
     <Content Include="Scripts\vendors\bootstrap.js" />
+    <Content Include="Scripts\vendors\buttons.html5.js" />
+    <Content Include="Scripts\vendors\buttons.print.js" />
+    <Content Include="Scripts\vendors\dataTables.buttons.js" />
+    <Content Include="Scripts\vendors\dataTables.responsive.js" />
+    <Content Include="Scripts\vendors\jquery.dataTables.js" />
     <Content Include="Scripts\vendors\jquery.fancybox-media.js" />
     <Content Include="Scripts\vendors\jquery.fancybox.js" />
     <Content Include="Scripts\vendors\jquery.js" />

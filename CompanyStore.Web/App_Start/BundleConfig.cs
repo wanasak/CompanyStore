@@ -27,8 +27,15 @@ namespace CompanyStore.Web.App_Start
                 "~/Scripts/Vendors/underscore.js", 
                 "~/Scripts/Vendors/raphael.js", 
                 "~/Scripts/Vendors/morris.js", 
-                "~/Scripts/Vendors/jquery.fancybox.js", 
-                "~/Scripts/Vendors/jquery.fancybox-media.js", 
+                "~/Scripts/Vendors/jquery.fancybox.js",
+                "~/Scripts/Vendors/jquery.fancybox-media.js",
+                "~/Scripts/Vendors/jquery.dataTables.js",
+                "~/Scripts/Vendors/angular-datatables.js",
+                "~/Scripts/Vendors/angular-datatables.buttons.js",
+                "~/Scripts/Vendors/dataTables.buttons.js",
+                "~/Scripts/Vendors/dataTables.responsive.js",
+                "~/Scripts/Vendors/buttons.print.js",
+                "~/Scripts/Vendors/buttons.html5.js",
                 "~/Scripts/Vendors/loading-bar.js"
                 ));
 
@@ -48,6 +55,9 @@ namespace CompanyStore.Web.App_Start
                 "~/Scripts/spa/device/deviceCtrl.js",
                 "~/Scripts/spa/device/deviceDetailCtrl.js",
                 "~/Scripts/spa/device/deviceAddCtrl.js",
+                "~/Scripts/spa/employee/employeeAddCtrl.js",
+                "~/Scripts/spa/employee/employeeCtrl.js",
+                "~/Scripts/spa/rental/rentalCtrl.js",
                 "~/Scripts/spa/home/rootCtrl.js",
                 "~/Scripts/spa/home/indexCtrl.js"
                 ));
@@ -56,8 +66,10 @@ namespace CompanyStore.Web.App_Start
                 "~/content/css/site.css", 
                 "~/content/css/bootstrap.css", 
                 "~/content/css/bootstrap-theme.css", 
-                "~/content/css/font-awesome.css", 
-                "~/content/css/morris.css", 
+                "~/content/css/font-awesome.css",
+                "~/content/css/morris.css",
+                "~/content/css/buttons.dataTables.css",
+                "~/content/css/dataTables.responsive.css", 
                 "~/content/css/toastr.css", 
                 "~/content/css/jquery.fancybox.css", 
                 "~/content/css/loading-bar.css"

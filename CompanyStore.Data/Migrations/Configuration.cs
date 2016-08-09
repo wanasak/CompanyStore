@@ -2,6 +2,7 @@ namespace CompanyStore.Data.Migrations
 {
     using CompanyStore.Entity;
     using System;
+    using System.Collections.Generic;
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
     using System.Linq;
@@ -28,6 +29,8 @@ namespace CompanyStore.Data.Migrations
             //    );
             //
 
+            // Create Employees
+            context.Employees.AddOrUpdate(e => e.UniqueKey, GenerateEmployees());
             //  Create Genres
             context.Categories.AddOrUpdate(g => g.Name, GenerateCategories());
             // Create Devices
@@ -237,6 +240,27 @@ namespace CompanyStore.Data.Migrations
                     Name = "Admin"
                 }
             };
+        }
+
+        private Employee[] GenerateEmployees()
+        {
+            List<Employee> employees = new List<Employee>();
+
+            for (int i = 0; i < 150; i++)
+            {
+                Employee emp = new Employee()
+                {
+                    FirstName = MockData.Person.FirstName(),
+                    LastName = MockData.Person.Surname(),
+                    Email = MockData.Internet.Email(),
+                    IsActive = i % 9 == 0 ? false : true,
+                    UniqueKey = Guid.NewGuid(),
+                    CreatedDate =  DateTime.Now.AddDays(i)
+                };
+                employees.Add(emp);
+            }
+
+            return employees.ToArray();
         }
     }
 }
