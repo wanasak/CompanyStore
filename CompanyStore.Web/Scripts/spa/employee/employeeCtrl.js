@@ -3,14 +3,15 @@
 
     app.controller('employeeCtrl', employeeCtrl);
 
-    employeeCtrl.$inject = ['$scope', 'DTOptionsBuilder', 'DTColumnBuilder', 'apiService', '$compile', 'notificationService'];
+    employeeCtrl.$inject = ['$scope', 'DTOptionsBuilder', 'DTColumnBuilder', 'apiService', '$compile', 'notificationService', '$modal'];
 
-    function employeeCtrl($scope, DTOptionsBuilder, DTColumnBuilder, apiService, $complie, notificationService) {
+    function employeeCtrl($scope, DTOptionsBuilder, DTColumnBuilder, apiService, $complie, notificationService, $modal) {
 
         // Datatables
         var defaultPageSize = 10;
         $scope.dtInstance = {};
         $scope.dtColumns = [
+            DTColumnBuilder.newColumn('ID').withTitle('ID'),
             DTColumnBuilder.newColumn('FirstName').withTitle('First'),
             DTColumnBuilder.newColumn('LastName').withTitle('Last'),
             DTColumnBuilder.newColumn('Email').withTitle('Email'),
@@ -18,6 +19,8 @@
             DTColumnBuilder.newColumn('IsActive').withTitle('Status').notSortable().renderWith(statusHtml),
             DTColumnBuilder.newColumn(null).withTitle('Action').notSortable().renderWith(actionHtml)
         ];
+
+        $scope.deleteEmployee = deleteEmployee;
 
         function loadEmployee() {
             $scope.dtOptions = DTOptionsBuilder.newOptions().withOption('ajax', {
@@ -60,9 +63,26 @@
             return '<button class="btn btn-warning" ng-click="edit(' + data.ID + ')">' +
                '   <i class="fa fa-edit"></i>' +
                '</button> &nbsp; ' +
-               '<button class="btn btn-danger" ng-click="delete(' + data.ID + ')" )"="">' +
+               '<button class="btn btn-danger" ng-click="deleteEmployee(' + data.ID + ')" )"="">' +
                '   <i class="fa fa-trash-o"></i>' +
                '</button>';
+        }
+
+        function deleteEmployee(employeeId) {
+            $modal.open({
+                templateUrl: "scripts/spa/employee/deleteEmployeeModal.html",
+                controller: "deleteEmployeeModalCtrl",
+                size: "sm",
+                scope: $scope,
+                resolve: {
+                    employeeId: function () {
+                        return employeeId;
+                    }
+                }
+            }).result.then(function () {
+                //alert('delete');
+            }, function (error) {
+            });
         }
 
         loadEmployee();

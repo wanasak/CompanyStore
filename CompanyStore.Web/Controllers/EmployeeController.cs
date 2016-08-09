@@ -105,5 +105,23 @@ namespace CompanyStore.Web.Controllers
                 return response;
             });
         }
+
+        [HttpPost]
+        [Route("delete")]
+        public HttpResponseMessage Delete(HttpRequestMessage request, [FromBody] int employeeId)
+        {
+            return CreateHttpResponseMessage(request, () =>
+            {
+                HttpResponseMessage response = null;
+
+                Employee deleteEmployee = new Employee { ID = employeeId };
+                _employeeRepository.Delete(deleteEmployee);
+                _unitOfWork.Commit();
+
+                response = request.CreateResponse(HttpStatusCode.OK);
+
+                return response;
+            });
+        }
     }
 }

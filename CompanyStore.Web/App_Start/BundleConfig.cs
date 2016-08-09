@@ -57,6 +57,7 @@ namespace CompanyStore.Web.App_Start
                 "~/Scripts/spa/device/deviceAddCtrl.js",
                 "~/Scripts/spa/employee/employeeAddCtrl.js",
                 "~/Scripts/spa/employee/employeeCtrl.js",
+                "~/Scripts/spa/employee/deleteEmployeeModalCtrl.js",
                 "~/Scripts/spa/rental/rentalCtrl.js",
                 "~/Scripts/spa/home/rootCtrl.js",
                 "~/Scripts/spa/home/indexCtrl.js"
