@@ -10,10 +10,11 @@ using System.Net;
 using System.Net.Http;
 using System.Net.Http.Formatting;
 using System.Web.Http;
+using System.Linq.Dynamic;
 
 namespace CompanyStore.Web.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "Admin")]
     [RoutePrefix("api/employee")]
     public class EmployeeController : ApiControllerBase
     {
@@ -29,7 +30,7 @@ namespace CompanyStore.Web.Controllers
 
         [HttpPost]
         [Route("{status?}")]
-        public HttpResponseMessage Get(HttpRequestMessage request, FormDataCollection data, string status = "active")
+        public HttpResponseMessage Get(HttpRequestMessage request, FormDataCollection data, string status = "all")
         {
             // Datatable parameter
             var draw = data.GetValues("draw").FirstOrDefault();
@@ -50,9 +51,11 @@ namespace CompanyStore.Web.Controllers
                 List<EmployeeViewModel> employeesVM = new List<EmployeeViewModel>();
 
                 var filterEmployees = _employeeRepository.GetAll()
+                    .Where(x => x.IsActive == (status == "active") || status == "all")
                     //.Where(x => x.FirstName.ToLower().Contains(searchValue.ToLower()))
                     .Select(e => new EmployeeViewModel
                     {
+                        ID = e.ID,
                         FirstName = e.FirstName,
                         LastName = e.LastName,
                         Email = e.Email,
@@ -60,8 +63,8 @@ namespace CompanyStore.Web.Controllers
                     });
 
                 toltalFilteredEmployees = filterEmployees.Count();
-
-                employeesVM = filterEmployees.OrderBy(e => e.FirstName).Skip(skip).Take(pageSize).ToList();
+                // Using dynamic linq
+                employeesVM = filterEmployees.OrderBy(sortColumn + " " + sortColumnDir).Skip(skip).Take(pageSize).ToList();
 
                 Pagination<EmployeeViewModel> pagination = new Pagination<EmployeeViewModel>()
                 {

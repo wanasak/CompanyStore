@@ -14,14 +14,15 @@
             DTColumnBuilder.newColumn('FirstName').withTitle('First'),
             DTColumnBuilder.newColumn('LastName').withTitle('Last'),
             DTColumnBuilder.newColumn('Email').withTitle('Email'),
-            DTColumnBuilder.newColumn('IsActive').withTitle('Status'),
+            //DTColumnBuilder.newColumn('IsActive').withTitle('Status'),
+            DTColumnBuilder.newColumn('IsActive').withTitle('Status').notSortable().renderWith(statusHtml),
             DTColumnBuilder.newColumn(null).withTitle('Action').notSortable().renderWith(actionHtml)
         ];
 
         function loadEmployee() {
             $scope.dtOptions = DTOptionsBuilder.newOptions().withOption('ajax', {
                 dataSrc: "data",
-                url: "/api/employee?status=" + "active", //$scope.selectedStatus,
+                url: "/api/employee?status=" + "all", //$scope.selectedStatus,
                 type: "POST",
                 headers: { Authorization: $scope.$root.repository.loggedUser.authData }
             })
@@ -46,6 +47,14 @@
         }
         function createdRow(row, data, dataIndex) {
             $complie(angular.element(row).contents())($scope);
+        }
+        function statusHtml(data, type, full, meta) {
+            if (data === true ) {
+                return '<span class="label label-success">Active</span>';
+            }
+            else {
+                return '<span class="label label-default">Inactive</span>';
+            }
         }
         function actionHtml(data, type, full, meta) {
             return '<button class="btn btn-warning" ng-click="edit(' + data.ID + ')">' +

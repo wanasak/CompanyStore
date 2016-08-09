@@ -72,6 +72,10 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Linq.Dynamic, Version=1.0.5840.25917, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Linq.Dynamic.1.0.6\lib\net40\System.Linq.Dynamic.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Net.Http.Formatting, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
       <Private>True</Private>
@@ -212,6 +216,9 @@
     <Content Include="Content\images\devices\UM.FW3SS.002_a1.jpg" />
     <Content Include="Content\images\devices\W260933TH_V3650_BLACK_UBUNTU-1.jpg" />
     <Content Include="Content\images\devices\W561077TH-3459-BLACK-WIN10-1.jpg" />
+    <Content Include="Content\images\sort_asc.png" />
+    <Content Include="Content\images\sort_both.png" />
+    <Content Include="Content\images\sort_desc.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
@@ -267,38 +274,6 @@
     <Content Include="Content\themes\base\minified\jquery.ui.tabs.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
     <Content Include="Global.asax" />
-    <Content Include="Scripts\spa\account\login.html" />
-    <Content Include="Scripts\spa\account\loginCtrl.js" />
-    <Content Include="Scripts\spa\account\register.html" />
-    <Content Include="Scripts\spa\account\registerCtrl.js" />
-    <Content Include="Scripts\spa\app.js" />
-    <Content Include="Scripts\spa\device\deviceAdd.html" />
-    <Content Include="Scripts\spa\device\deviceDetail.html" />
-    <Content Include="Scripts\spa\device\deviceAddCtrl.js" />
-    <Content Include="Scripts\spa\device\deviceDetailCtrl.js" />
-    <Content Include="Scripts\spa\device\index.html" />
-    <Content Include="Scripts\spa\device\deviceCtrl.js" />
-    <Content Include="Scripts\spa\directives\availableDevice.directive.js" />
-    <Content Include="Scripts\spa\directives\availableDevice.html" />
-    <Content Include="Scripts\spa\employee\employeeAdd.html" />
-    <Content Include="Scripts\spa\employee\employeeAddCtrl.js" />
-    <Content Include="Scripts\spa\employee\employeeCtrl.js" />
-    <Content Include="Scripts\spa\employee\index.html" />
-    <Content Include="Scripts\spa\home\index.html" />
-    <Content Include="Scripts\spa\home\indexCtrl.js" />
-    <Content Include="Scripts\spa\home\rootCtrl.js" />
-    <Content Include="Scripts\spa\layout\sideBar.directive.js" />
-    <Content Include="Scripts\spa\layout\sideBar.html" />
-    <Content Include="Scripts\spa\layout\topBar.directive.js" />
-    <Content Include="Scripts\spa\layout\topBar.html" />
-    <Content Include="Scripts\spa\modules\common.core.js" />
-    <Content Include="Scripts\spa\modules\common.ui.js" />
-    <Content Include="Scripts\spa\rental\index.html" />
-    <Content Include="Scripts\spa\rental\rentalCtrl.js" />
-    <Content Include="Scripts\spa\services\apiService.js" />
-    <Content Include="Scripts\spa\services\fileUploadService.js" />
-    <Content Include="Scripts\spa\services\membershipService.js" />
-    <Content Include="Scripts\spa\services\notificationService.js" />
     <Content Include="Scripts\vendors\angucomplete-alt.min.js" />
     <Content Include="Scripts\vendors\angular-base64.js" />
     <Content Include="Scripts\vendors\angular-cookies.js" />
