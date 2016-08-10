@@ -144,7 +144,7 @@ namespace CompanyStore.Web.Controllers
                     {
                         Stock stock = new Stock()
                         {
-                            IsAvaiable = true,
+                            IsAvailable = true,
                             UniqueKey = Guid.NewGuid(),
                             Device = newDevice
                         };

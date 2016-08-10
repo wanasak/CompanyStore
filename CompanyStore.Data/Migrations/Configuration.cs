@@ -30,11 +30,13 @@ namespace CompanyStore.Data.Migrations
             //
 
             // Create Employees
-            context.Employees.AddOrUpdate(e => e.UniqueKey, GenerateEmployees());
+            context.Employees.AddOrUpdate(e => e.FirstName, GenerateEmployees());
             //  Create Genres
             context.Categories.AddOrUpdate(g => g.Name, GenerateCategories());
             // Create Devices
             context.Devices.AddOrUpdate(d => d.Name, GenerateDevices());
+            // Create Stocks
+            context.Stocks.AddOrUpdate(GenerateStocks());
             // Create Roles
             context.Roles.AddOrUpdate(r => r.Name, GenerateRoles());
             // Create Users
@@ -261,6 +263,30 @@ namespace CompanyStore.Data.Migrations
             }
 
             return employees.ToArray();
+        }
+
+        private Stock[] GenerateStocks()
+        {
+            List<Stock> stocks = new List<Stock>();
+
+            int devicesCount = GenerateDevices().Count();
+
+            for (int i = 1; i <= devicesCount; i++)
+            {
+                // Three stocks for each movie
+                for (int j = 0; j < MockData.RandomNumber.Next(1, 10); j++)
+                {
+                    Stock stock = new Stock()
+                    {
+                        DeviceID = i,
+                        UniqueKey = Guid.NewGuid(),
+                        IsAvailable = true
+                    };
+                    stocks.Add(stock);
+                }
+            }
+
+            return stocks.ToArray();
         }
     }
 }

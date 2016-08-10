@@ -17,7 +17,7 @@ namespace CompanyStore.Entity
         public int DeviceID { get; set; }
         public virtual Device Device { get; set; }
         public Guid UniqueKey { get; set; }
-        public bool IsAvaiable { get; set; }
+        public bool IsAvailable { get; set; }
         public virtual ICollection<Rental> Rentals { get; set; }
     }
 }

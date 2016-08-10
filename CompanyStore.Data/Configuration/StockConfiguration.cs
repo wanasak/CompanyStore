@@ -13,7 +13,7 @@ namespace CompanyStore.Data.Configuration
         {
             Property(s => s.DeviceID).IsRequired();
             Property(s => s.UniqueKey).IsRequired();
-            Property(s => s.IsAvaiable).IsRequired();
+            Property(s => s.IsAvailable).IsRequired();
             HasMany(s => s.Rentals).WithRequired().HasForeignKey(r => r.StockID);
         }
     }
