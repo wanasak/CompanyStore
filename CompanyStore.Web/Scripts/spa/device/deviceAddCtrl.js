@@ -10,7 +10,6 @@
         var deviceImage = null;
         $scope.prepareFile = prepareFile;
 
-        $scope.pageClass = 'container';
         $scope.device = { NumberOfStocks: 1, CreatedDate: new Date() };
         $scope.categories = [];
         $scope.addDevice = addDevice;

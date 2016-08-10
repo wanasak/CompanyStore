@@ -3,9 +3,9 @@
 
     app.controller('rentalCtrl', rentalCtrl);
 
-    rentalCtrl.$inject = ['$scope'];
+    rentalCtrl.$inject = ['$scope', 'apiService'];
 
-    function rentalCtrl($scope) {
+    function rentalCtrl($scope, apiService) {
 
     }
 

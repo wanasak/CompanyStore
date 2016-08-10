@@ -7,7 +7,6 @@
 
     function deviceCtrl($scope, apiService, notificationService) {
 
-        $scope.pageClass = 'container';
         $scope.loadingDevices = true;
         $scope.devices = [];
         $scope.page = 0;

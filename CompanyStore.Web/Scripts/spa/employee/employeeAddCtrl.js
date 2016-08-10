@@ -7,7 +7,6 @@
 
     function employeeAddCtrl($scope, apiService, $location) {
 
-        $scope.pageClass = 'container';
         $scope.employee = { CreatedDate: new Date() };
         $scope.registerEmployee = registerEmployee;
         $scope.datepicker = {};

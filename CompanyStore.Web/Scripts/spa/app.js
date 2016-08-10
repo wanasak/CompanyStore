@@ -45,7 +45,7 @@
                 resolve: { isAuthenticated: isAuthenticated }
             })
             .when("/rental", {
-                templateUrl: "scripts/spa/rental/index.html",
+                templateUrl: "scripts/spa/rental/rental.html",
                 controller: "rentalCtrl"
             })
             .otherwise({ redirectTo: "/" });
