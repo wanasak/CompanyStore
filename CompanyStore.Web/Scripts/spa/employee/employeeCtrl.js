@@ -21,6 +21,7 @@
         ];
 
         $scope.deleteEmployee = deleteEmployee;
+        $scope.editEmployee = editEmployee;
 
         function loadEmployee() {
             $scope.dtOptions = DTOptionsBuilder.newOptions().withOption('ajax', {
@@ -60,12 +61,33 @@
             }
         }
         function actionHtml(data, type, full, meta) {
-            return '<button class="btn btn-warning" ng-click="edit(' + data.ID + ')">' +
+            return '<button class="btn btn-warning" ng-click="editEmployee(' + data.ID + ')">' +
                '   <i class="fa fa-edit"></i>' +
                '</button> &nbsp; ' +
                '<button class="btn btn-danger" ng-click="deleteEmployee(' + data.ID + ')" )"="">' +
                '   <i class="fa fa-trash-o"></i>' +
                '</button>';
+        }
+
+        function editEmployee(employeeId) {
+            $modal.open({
+                templateUrl: "scripts/spa/employee/editEmployeeModal.html",
+                controller: "editEmployeeModalCtrl",
+                scope: $scope,
+                resolve: {
+                    employeeId: function () {
+                        return employeeId;
+                    }
+                }
+            }).result.then(function () {
+                notificationService.displaySuccess("Update employee completed");
+                // Then reload the data so that DT is refreshed
+                $scope.dtInstance.reloadData();
+            }, function (error) {
+                if (error) {
+                    notificationService.displayError(error);
+                }
+            });
         }
 
         function deleteEmployee(employeeId) {
@@ -80,9 +102,18 @@
                     }
                 }
             }).result.then(function () {
-                //alert('delete');
+                apiService.delete("api/employee/delete/" + employeeId, null,
+                    deleteEmployeeCompleted,
+                    deleteEmployeeFailed);
             }, function (error) {
             });
+        }
+        function deleteEmployeeCompleted(result) {
+            // Then reload the data so that DT is refreshed
+            $scope.dtInstance.reloadData();
+        }
+        function deleteEmployeeFailed(response) {
+
         }
 
         loadEmployee();

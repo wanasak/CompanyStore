@@ -1,0 +1,31 @@
+<div class="modal-header">
+    <h4>Edit Employee</h4>      
+</div>
+<form role="form" novalidate angular-validator name="editEmployeeForm" angular-validator-submit="updateEmployee()">
+    <div class="modal-body">
+        <div ng-show="errorMsg" class="alert alert-danger">
+            <strong>Error!</strong> {{ errorMsg }}
+        </div>
+        <div class="form-group">
+            <label for="firstName">First Name:</label>
+            <input type="text" id="firstName" name="firstName" class="form-control" ng-model="employee.FirstName" placeholder="First Name" validate-on="blur" required required-message="'First Name is required'">
+        </div>
+        <div class="form-group">
+            <label for="lastName">Last Name:</label>
+            <input type="text" id="lastName" name="lastName" class="form-control" ng-model="employee.LastName" placeholder="Last Name" validate-on="blur" required required-message="'Last Name is required'">
+        </div>
+        <div class="form-group">
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" class="form-control" ng-model="employee.Email" placeholder="Email" validate-on="blur" required required-message="'Email is required'">
+        </div>
+        <div class="form-group">
+            <label for="isActive">Status:</label>
+            <label><input type="radio" ng-model="employee.IsActive" ng-value="true">Active</label>
+            <label><input type="radio" ng-model="employee.IsActive" ng-value="false">Inactive</label>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="submit" class="btn btn-success">Save</button>
+        <button type="button" class="btn btn-default" ng-click="cancel()">Cancel</button> 
+    </div>
+</form>

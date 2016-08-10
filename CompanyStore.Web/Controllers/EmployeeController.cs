@@ -95,6 +95,7 @@ namespace CompanyStore.Web.Controllers
                 {
                     Employee newEmployee = new Employee();
                     newEmployee.IsActive = true;
+                    newEmployee.UniqueKey = Guid.NewGuid();
                     newEmployee.MapEmployee(model);
                     _employeeRepository.Add(newEmployee);
                     _unitOfWork.Commit();
@@ -106,9 +107,9 @@ namespace CompanyStore.Web.Controllers
             });
         }
 
-        [HttpPost]
-        [Route("delete")]
-        public HttpResponseMessage Delete(HttpRequestMessage request, [FromBody] int employeeId)
+        [HttpDelete]
+        [Route("delete/{employeeId:int}")]
+        public HttpResponseMessage Delete(HttpRequestMessage request, int employeeId)
         {
             return CreateHttpResponseMessage(request, () =>
             {
@@ -119,6 +120,58 @@ namespace CompanyStore.Web.Controllers
                 _unitOfWork.Commit();
 
                 response = request.CreateResponse(HttpStatusCode.OK);
+
+                return response;
+            });
+        }
+
+        [HttpPost]
+        [Route("update/{employeeId:int}")]
+        public HttpResponseMessage Update(HttpRequestMessage request, int employeeId, EmployeeViewModel model)
+        {
+            return CreateHttpResponseMessage(request, () =>
+            {
+                HttpResponseMessage response = null;
+
+                if (!ModelState.IsValid)
+                    response = request.CreateResponse(HttpStatusCode.BadRequest,
+                        ModelState.Keys.SelectMany(k => ModelState[k].Errors)
+                              .Select(m => m.ErrorMessage).ToArray());
+                else
+                {
+                    Employee updateEmloyee = _employeeRepository.GetSingle(employeeId);
+                    updateEmloyee.MapEmployee(model);
+                    _unitOfWork.Commit();
+
+                    response = request.CreateResponse(HttpStatusCode.OK);
+                }
+
+                return response;
+            });
+        }
+
+        [HttpGet]
+        [Route("{employeeId:int}")]
+        public HttpResponseMessage Detail(HttpRequestMessage request, int employeeId)
+        {
+            return CreateHttpResponseMessage(request, () =>
+            {
+                HttpResponseMessage response = null;
+
+                EmployeeViewModel employeeVM = _employeeRepository
+                    .FindBy(e => e.ID == employeeId)
+                    .Select(e => new EmployeeViewModel
+                    {
+                        ID = e.ID,
+                        FirstName = e.FirstName,
+                        LastName = e.LastName,
+                        Email = e.Email,
+                        IsActive = e.IsActive,
+                        CreatedDate = e.CreatedDate
+                    }).FirstOrDefault();
+
+                
+                response = request.CreateResponse<EmployeeViewModel>(HttpStatusCode.OK, employeeVM);
 
                 return response;
             });

@@ -25,7 +25,8 @@ namespace CompanyStore.Web.Infrastructure.Extension
             employee.LastName = model.LastName;
             employee.Email = model.Email;
             employee.CreatedDate = model.CreatedDate;
-            employee.UniqueKey = Guid.NewGuid();
+            employee.IsActive = model.IsActive;
+            //employee.UniqueKey = Guid.NewGuid();
         }
     }
 }
