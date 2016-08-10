@@ -28,7 +28,7 @@
                                 <div class="panel-heading"><strong>{{device.Name}} </strong></div>
                                 <div class="panel-body">
                                     <div class="media">
-                                        <a class="media-left" href="#" title="{{device.Description | limitTo:200}}">
+                                        <a class="media-left" href="#/device/{{device.ID}}" title="{{device.Description | limitTo:200}}">
                                             <img ng-if="device.Image" class="media-object" height="120" ng-src="../../Content/images/devices/{{device.Image}}" alt="" />
                                             <img ng-if="!device.Image" class="media-object" height="120" ng-src="../../Content/images/no-image.png" alt="" />
                                         </a>
@@ -47,7 +47,7 @@
                                 <div class="panel-footer">
                                     Stocks: <span class="badge">{{ device.NumberOfStocks }}</span>
                                     <!--<span component-rating="{{device.Rating}}"></span>-->
-                                    <a class="pull-right" href="#/device/detail/{{device.ID}}">More detail <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span></a>
+                                    <a class="pull-right" href="#/device/{{device.ID}}">More detail <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span></a>
                                 </div>
                             </div>
                         </div>

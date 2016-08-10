@@ -1,6 +1,6 @@
-﻿<hr />
+﻿<br />
 <div class="row">
-    <div class="col-md-8">
+    <div class="col-md-6">
         <div class="panel panel-default">
             <div class="panel-heading">
                 Device Information
@@ -15,24 +15,31 @@
                         <table class="table table-striped">
                             <tbody>
                                 <tr>
-                                    <td>Status</td>
-                                    <td><available-device is-available="{{device.IsAvailable}}"></available-device></td>
+                                    <td>Status:</td>
+                                    <td>
+                                        <available-device is-available="{{device.IsAvailable}}"></available-device>
+                                    </td>
                                 </tr>
                                 <tr>
-                                    <td>Description</td>
+                                    <td>Description:</td>
                                     <td><small>{{ device.Description }}</small></td>
                                 </tr>
                                 <tr>
-                                    <td>Category</td>
-                                    <td><label class="label label-info">{{device.Category}}</label></td>
+                                    <td>Category:</td>
+                                    <td>
+                                        <label class="label label-info">{{device.Category}}</label></td>
                                 </tr>
                                 <tr>
-                                    <td>Price</td>
+                                    <td>Price:</td>
                                     <td>{{ 100 | currency }}</td>
                                 </tr>
                                 <tr>
-                                    <td>Created Date</td>
+                                    <td>Created Date:</td>
                                     <td>{{ device.CreatedDate | date: 'MMMM d, y' }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Stocks:</td>
+                                    <td>{{ device.NumberOfStocks }}</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -41,8 +48,21 @@
                     </div>
                 </div>
             </div>
-            <div class="panel-footer"></div>
         </div>
     </div>
-    <div class="col-md-4"></div>
+    <div class="col-md-6">
+        <div class="panel panel-danger">
+            <div class="panel-heading">
+                <h5 class="pull-left">Rentals</h5>
+                <div class="input-group">
+                    <input id="inputSearchMovies" type="search" ng-model="filterRentals" class="form-control" placeholder="Filter..">
+                    <div class="input-group-btn">
+                        <button class="btn btn-danger" ng-click="clearSearch()"><i class="glyphicon glyphicon-remove-sign"></i></button>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-body">
+            </div>
+        </div>
+    </div>
 </div>

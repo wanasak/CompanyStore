@@ -34,14 +34,14 @@
                 templateUrl: "scripts/spa/device/device.html",
                 controller: "deviceCtrl"
             })
-            .when("/device/detail/:id", {
-                templateUrl: "scripts/spa/device/deviceDetail.html",
-                controller: "deviceDetailCtrl",
-                resolve: { isAuthenticated: isAuthenticated }
-            })
             .when("/device/add", {
                 templateUrl: "scripts/spa/device/deviceAdd.html",
                 controller: "deviceAddCtrl",
+                resolve: { isAuthenticated: isAuthenticated }
+            })
+            .when("/device/:id", {
+                templateUrl: "scripts/spa/device/deviceDetail.html",
+                controller: "deviceDetailCtrl",
                 resolve: { isAuthenticated: isAuthenticated }
             })
             .when("/rental", {

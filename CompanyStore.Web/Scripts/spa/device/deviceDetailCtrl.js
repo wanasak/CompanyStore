@@ -7,7 +7,6 @@
 
     function deviceDetailCtrl($scope, apiService, $routeParams, notificationService) {
 
-        $scope.pageClass = 'container';
         $scope.device = {};
 
         function loadDeviceDetail() {
