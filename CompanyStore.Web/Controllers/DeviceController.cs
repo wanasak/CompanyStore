@@ -52,6 +52,61 @@ namespace CompanyStore.Web.Controllers
             });
         }
 
+        [AllowAnonymous]
+        [HttpGet]   
+        [Route("{page:int=0}/{pageSize=9}/{filter?}")]
+        public HttpResponseMessage List(HttpRequestMessage request, int? page, int? pageSize, string filter = null)
+        {
+            int currentPage = page.Value;
+            int currentPageSize = pageSize.Value;
+
+            return CreateHttpResponseMessage(request, () =>
+            {
+                HttpResponseMessage response = null;
+
+                IEnumerable<Device> devices = null;
+                int totalDevices = 0;
+
+                if (!string.IsNullOrEmpty(filter))
+                {
+                    devices = _deviceRepository
+                        .FindBy(d => d.Name.ToLower().Contains(filter.ToLower().Trim()))
+                        .OrderByDescending(d => new { d.CreatedDate, d.ID })
+                        .Skip(currentPage * currentPageSize)
+                        .Take(currentPageSize)
+                        .ToList();
+                    totalDevices = _deviceRepository
+                        .FindBy(m => m.Name.ToLower()
+                        .Contains(filter.ToLower().Trim()))
+                        .Count();
+                }
+                else
+                {
+                    devices = _deviceRepository
+                        .GetAll()
+                        .OrderByDescending(d => new { d.CreatedDate, d.ID })
+                        .Skip(currentPage * currentPageSize)
+                        .Take(currentPageSize)
+                        .ToList();
+                    totalDevices = _deviceRepository.GetAll().Count();
+                }
+
+                IEnumerable<DeviceViewModel> devicesVM = Mapper.Map<IEnumerable<Device>, IEnumerable<DeviceViewModel>>(devices);
+
+                PaginationSet<DeviceViewModel> pageSet = new PaginationSet<DeviceViewModel>()
+                {
+                    Page = currentPage,
+                    Items = devicesVM,
+                    TotalCount = totalDevices,
+                    TotalPages = (int)Math.Ceiling((decimal)totalDevices / currentPageSize)
+                };
+
+                response = request.CreateResponse<PaginationSet<DeviceViewModel>>(HttpStatusCode.OK, pageSet);
+
+                return response;
+            });
+        }
+
         //[AllowAnonymous]
         [HttpGet]
         [Route("{id:int}")]

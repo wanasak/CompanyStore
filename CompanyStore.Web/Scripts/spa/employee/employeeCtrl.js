@@ -82,7 +82,7 @@
             }).result.then(function () {
                 notificationService.displaySuccess("Update employee completed");
                 // Then reload the data so that DT is refreshed
-                $scope.dtInstance.reloadData();
+                $scope.dtInstance.reloadData(null, false);
             }, function (error) {
                 if (error) {
                     notificationService.displayError(error);

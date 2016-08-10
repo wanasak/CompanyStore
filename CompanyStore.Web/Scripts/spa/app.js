@@ -18,11 +18,11 @@
                 controller: "loginCtrl"
             })
             .when("/register", {
-                templetUrl: "scripts/spa/account/register.html",
+                templateUrl: "scripts/spa/account/register.html",
                 controller: "registerCtrl"
             })
             .when("/employee", {
-                templateUrl: "scripts/spa/employee/index.html",
+                templateUrl: "scripts/spa/employee/employee.html",
                 controller: "employeeCtrl"
             })
             .when("/employee/add", {
@@ -31,7 +31,7 @@
                 resolve: { isAuthenticated: isAuthenticated }
             })
             .when("/device", {
-                templetUrl: "scripts/spa/device/index.html",
+                templateUrl: "scripts/spa/device/device.html",
                 controller: "deviceCtrl"
             })
             .when("/device/detail/:id", {

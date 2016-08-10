@@ -1,0 +1,63 @@
+﻿<br />
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title pull-left" style="padding-top: 7.5px;">Devices List</h4>
+                <div class="input-group">
+                    <input id="inputSearchDevices" type="search" ng-model="filterDevices" class="form-control shortInputSearch" placeholder="Filter, search devices..">
+                    <div class="input-group-btn">
+                        <button class="btn btn-default" ng-click="search()"><i class="glyphicon glyphicon-search"></i></button>
+                        <button class="btn btn-default" ng-click="clearSearch()"><i class="glyphicon glyphicon-remove-sign"></i></button>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-body">
+                <div ng-if="loadingDevices">
+                    <div class="col-xs-4"></div>
+                    <div class="col-xs-4">
+                        <i class="fa fa-refresh fa-5x fa-spin"></i>
+                        <label class="label label-primary">Loading devices...</label>
+                    </div>
+                    <div class="col-xs-4"></div>
+                </div>
+                <div class="row">
+                    <div ng-repeat="device in devices | filter:filterDevices">
+                        <div class="col-xs-12 col-sm-6 col-md-4">
+                            <div class="panel panel-default">
+                                <div class="panel-heading"><strong>{{device.Name}} </strong></div>
+                                <div class="panel-body">
+                                    <div class="media">
+                                        <a class="media-left" href="#" title="{{device.Description | limitTo:200}}">
+                                            <img class="media-object" height="120" ng-src="../../Content/images/devices/{{device.Image}}" alt="" />
+                                        </a>
+                                        <div class="media-body">
+                                            <h4 class="media-heading">Media heading</h4>
+                                            <p>
+                                                <available-device is-available="{{device.IsAvailable}}"></available-device>
+                                            </p>
+                                            <small>{{device.Description | limitTo: 120}}...</small>
+                                            <p>
+                                                <label class="label label-info">{{device.Category}}</label><br />
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="panel-footer">
+                                    <!--<span component-rating="{{device.Rating}}"></span>-->
+                                    <a class="pull-right" href="#/device/detail/{{device.ID}}">More detail <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span></a>
+                                </div>
+                            </div>
+                        </div>
+                        <!--<div class="clearfix"></div>-->
+                    </div>
+                </div>
+            </div>
+            <div class="panel-footer">
+                <div class="text-center">
+                    <custom-pager page="{{page}}" custom-path="{{customPath}}" pages-count="{{pagesCount}}" total-count="{{totalCount}}" search-func="search(page)"></custom-pager>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

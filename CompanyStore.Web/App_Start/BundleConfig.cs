@@ -45,6 +45,7 @@ namespace CompanyStore.Web.App_Start
                 "~/Scripts/spa/app.js",
                 "~/Scripts/spa/layout/sideBar.directive.js",
                 "~/Scripts/spa/layout/topBar.directive.js",
+                "~/Scripts/spa/layout/customPager.directive.js",
                 "~/Scripts/spa/services/notificationService.js",
                 "~/Scripts/spa/services/membershipService.js",
                 "~/Scripts/spa/services/fileUploadService.js",
