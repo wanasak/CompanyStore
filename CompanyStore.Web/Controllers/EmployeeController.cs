@@ -51,9 +51,8 @@ namespace CompanyStore.Web.Controllers
 
                 List<EmployeeViewModel> employeesVM = new List<EmployeeViewModel>();
 
-                var filterEmployees = _employeeRepository.GetAll()
-                    .Where(x => x.IsActive == (status == "active") || status == "all")
-                    //.Where(x => x.FirstName.ToLower().Contains(searchValue.ToLower()))
+                var filterEmployees = _employeeRepository
+                    .FindBy(x => (x.IsActive == (status == "active") || status == "all"))
                     .Select(e => new EmployeeViewModel
                     {
                         ID = e.ID,
@@ -62,6 +61,11 @@ namespace CompanyStore.Web.Controllers
                         Email = e.Email,
                         IsActive = e.IsActive
                     });
+
+                if (!string.IsNullOrEmpty(searchValue))
+                    filterEmployees = filterEmployees
+                        .Where(x => x.FirstName.ToLower().Contains(searchValue.ToLower()) ||
+                            x.LastName.ToLower().Contains(searchValue.ToLower()));
 
                 toltalFilteredEmployees = filterEmployees.Count();
                 // Using dynamic linq
