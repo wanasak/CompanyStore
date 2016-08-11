@@ -16,5 +16,10 @@ namespace CompanyStore.Data.Extension
                 e.FirstName.ToLower().Contains(filter.ToLower().Trim()) ||
                 e.LastName.ToLower().Contains(filter.ToLower().Trim()));
         }
+        public static string GetEmployeeFullName(this IEntityBaseRepository<Employee> employeerepository, int employeeId)
+        {
+            var employee = employeerepository.GetSingle(employeeId);
+            return employee.FirstName + " " + employee.LastName;
+        }
     }
 }

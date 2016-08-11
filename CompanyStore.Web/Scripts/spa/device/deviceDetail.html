@@ -39,11 +39,11 @@
                                 </tr>
                                 <tr>
                                     <td>Stocks:</td>
-                                    <td>{{ device.NumberOfStocks }}</td>
+                                    <td>{{ device.NumberOfStocksAvaiable }} / {{ device.NumberOfStocks }}</td>
                                 </tr>
                             </tbody>
                         </table>
-                        <a href="#/" class="btn btn-default">Back</a>
+                        <a href="javascript:history.back()" class="btn btn-default">Back</a>
                         <a href="#/device/edit/{{ device.ID }}" class="btn btn-default">Edit</a>
                         <button ng-if="device.NumberOfStocks > 0" type="button" class="btn btn-primary pull-right" ng-click="openRentModal()">Rent</button>
                     </div>
@@ -63,6 +63,30 @@
                 </div>
             </div>
             <div class="panel-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Name</th>
+                                <th>Rental Date</th>
+                                <th>Status</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="rental in rentalHistory | filter: filterRentals">
+                                <td>{{ rental.ID }}</td>
+                                <td>{{ rental.Employee }}</td>
+                                <td>{{ rental.RentalDate | date:'fullDate' }}</td>
+                                <td ng-class="getStatusColor(rental.Status)">{{rental.Status}}</td>
+                                <td class="text-center">
+                                    <button ng-if="isBorrowed(rental)" type="button" class="btn btn-primary btn-xs" ng-click="returnDevice(rental.ID)">Return</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>

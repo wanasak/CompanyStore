@@ -2,6 +2,8 @@
 using CompanyStore.Data.Repository;
 using CompanyStore.Entity;
 using CompanyStore.Web.Infrastructure.Core;
+using CompanyStore.Web.Models;
+using CompanyStore.Data.Extension;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -96,6 +98,52 @@ namespace CompanyStore.Web.Controllers
 
                 return response;
             });
+        }
+
+        [HttpGet]
+        [Route("{deviceId:int}/rentalHistory")]
+        public HttpResponseMessage RentalHistory(HttpRequestMessage request, int deviceId)
+        {
+            return CreateHttpResponseMessage(request, () =>
+            {
+                HttpResponseMessage response = null;
+
+                IEnumerable<RentalHistoryViewModel> rentalHistoryVM = GetMovieRentalHistory(deviceId);
+
+                response = request.CreateResponse<IEnumerable<RentalHistoryViewModel>>(rentalHistoryVM);
+
+                return response;
+            });
+        }
+
+        private List<RentalHistoryViewModel> GetMovieRentalHistory(int deviceId)
+        {
+            List<RentalHistoryViewModel> _rentalHistory = new List<RentalHistoryViewModel>();
+            List<Rental> _rentals = new List<Rental>();
+
+            var device = _deviceRepository.GetSingle(deviceId);
+
+            foreach (var stock in device.Stocks)
+                _rentals.AddRange(stock.Rentals);
+
+            foreach (var rental in _rentals)
+            {
+                RentalHistoryViewModel rentalHistoryVM = new RentalHistoryViewModel()
+                {
+                    ID = rental.ID,
+                    StockID = rental.StockID,
+                    RentalDate = rental.RentalDate,
+                    ReturnedDate = rental.ReturnedDate.HasValue ? rental.ReturnedDate : null,
+                    Status = rental.Status,
+                    Employee = _employeeRepository.GetEmployeeFullName(rental.EmployeeID)
+                };
+
+                _rentalHistory.Add(rentalHistoryVM);
+            }
+
+            _rentalHistory.Sort((r1, r2) => r2.RentalDate.CompareTo(r1.RentalDate));
+
+            return _rentalHistory;
         }
     }
 }
