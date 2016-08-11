@@ -45,6 +45,7 @@
                         </table>
                         <a href="#/" class="btn btn-default">Back</a>
                         <a href="#/device/edit/{{ device.ID }}" class="btn btn-default">Edit</a>
+                        <button ng-if="device.NumberOfStocks > 0" type="button" class="btn btn-primary pull-right" ng-click="openRentModal()">Rent</button>
                     </div>
                 </div>
             </div>

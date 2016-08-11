@@ -11,7 +11,7 @@ namespace CompanyStore.Data.Configuration
     {
         public RentalConfiguration()
         {
-            Property(r => r.UserID).IsRequired();
+            Property(r => r.EmployeeID).IsRequired();
             Property(r => r.StockID).IsRequired();
             Property(r => r.ReturnedDate).IsOptional();
             Property(r => r.Status).IsRequired().HasMaxLength(10);

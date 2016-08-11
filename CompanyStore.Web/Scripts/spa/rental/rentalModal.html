@@ -1,0 +1,23 @@
+<div class="modal-header">
+    <h4>Rent {{ device.Name }}</h4>
+</div>
+<div class="modal-body">
+    <form role="form">
+        <div class="form-group">
+            <label class="control-label">Available Stock:</label>
+            <select ng-model="selectedStockDevice" class="form-control" ng-options="option.ID as option.UniqueKey for option in stockDevices"
+                required></select>
+        </div>
+        <div class="form-group">
+            <label class="control-label">Select Employee:</label>
+            <angucomplete-alt id="members" placeholder="Search employees" pause="200" selected-object="selectEmployee" input-changed="selectionChanged"
+                remote-url="/api/employee?filter=" remote-url-data-field="" title-field="FirstName,LastName" description-field="Email"
+                input-class="form-control form-control-small" match-class="red" text-searching="Searching employees.." text-no-results="No employee found matching your filter."
+            />
+        </div>
+    </form>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-success" ng-disabled="!isEnabled" ng-click="rent()">Rent</button>
+    <button type="button" class="btn btn-default" ng-click="cancel()">Cancel</button>
+</div>

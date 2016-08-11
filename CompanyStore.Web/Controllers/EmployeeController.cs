@@ -4,6 +4,7 @@ using CompanyStore.Entity;
 using CompanyStore.Web.Infrastructure.Core;
 using CompanyStore.Web.Models;
 using CompanyStore.Web.Infrastructure.Extension;
+using CompanyStore.Data.Extension;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,6 +13,7 @@ using System.Net.Http;
 using System.Net.Http.Formatting;
 using System.Web.Http;
 using System.Linq.Dynamic;
+using AutoMapper;
 
 namespace CompanyStore.Web.Controllers
 {
@@ -176,6 +178,24 @@ namespace CompanyStore.Web.Controllers
 
                 
                 response = request.CreateResponse<EmployeeViewModel>(HttpStatusCode.OK, employeeVM);
+
+                return response;
+            });
+        }
+
+        [HttpGet]
+        [Route("{filter?}")]
+        public HttpResponseMessage Filter(HttpRequestMessage request, string filter = null)
+        {
+            return CreateHttpResponseMessage(request, () =>
+            {
+                HttpResponseMessage response = null;
+
+                IEnumerable<Employee> employees = _employeeRepository.GetEmployeeByFilter(filter);
+
+                IEnumerable<EmployeeViewModel> employeesVM = Mapper.Map<IEnumerable<Employee>, IEnumerable<EmployeeViewModel>>(employees);
+
+                response = request.CreateResponse<IEnumerable<EmployeeViewModel>>(HttpStatusCode.OK, employeesVM);
 
                 return response;
             });

@@ -26,6 +26,8 @@ namespace CompanyStore.Web.Infrastructure.Mappings
             Mapper.CreateMap<Category, CategoryViewModel>()
                 .ForMember(vm => vm.NumberOfDevices, 
                 map => map.MapFrom(c => c.Devices.Count()));
+            Mapper.CreateMap<Stock, StockViewModel>();
+            Mapper.CreateMap<Employee, EmployeeViewModel>();
         }
     }
 }
