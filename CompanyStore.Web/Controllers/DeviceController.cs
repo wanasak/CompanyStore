@@ -153,7 +153,7 @@ namespace CompanyStore.Web.Controllers
                     _deviceRepository.Add(newDevice);
                     _unitOfWork.Commit();
 
-                    response = request.CreateResponse(HttpStatusCode.OK);
+                    response = request.CreateResponse(HttpStatusCode.OK, newDevice.ID);
                 }
 
                 return response;
@@ -161,7 +161,7 @@ namespace CompanyStore.Web.Controllers
         }
 
         [MimeMultipart]
-        [Route("images/upload")]
+        [Route("{deviceId:int}/upload/image")]
         public HttpResponseMessage Upload(HttpRequestMessage request, int deviceId)
         {
             return CreateHttpResponseMessage(request, () =>

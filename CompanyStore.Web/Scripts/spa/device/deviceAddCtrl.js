@@ -3,9 +3,9 @@
 
     app.controller('deviceAddCtrl', deviceAddCtrl);
 
-    deviceAddCtrl.$inject = ['$scope', 'apiService', 'notificationService', '$location'];
+    deviceAddCtrl.$inject = ['$scope', 'apiService', 'notificationService', '$location', 'FileUploader'];
 
-    function deviceAddCtrl($scope, apiService, notificationService, $location) {
+    function deviceAddCtrl($scope, apiService, notificationService, $location, FileUploader) {
 
         var deviceImage = null;
         $scope.prepareFile = prepareFile;
@@ -20,6 +20,23 @@
             startingDay: 1,
             showWeeks: false
         };
+
+        // FileUpload
+        //var uploader = $scope.uploader = new FileUploader();
+        var uploader = $scope.uploader = new FileUploader({
+            //url: 'api/device/add',
+            queueLimit: 1
+        });
+        // FileUpload Add Authorization Header
+        uploader.headers["Authorization"] = 'Basic ' + $scope.$root.repository.loggedUser.authData;
+        // FileUpload Filter
+        uploader.filters.push({
+            name: 'imageFilter',
+            fn: function (item /*{File|FileLikeObject}*/, options) {
+                var type = '|' + item.type.slice(item.type.lastIndexOf('/') + 1) + '|';
+                return '|jpg|png|jpeg|bmp|gif|'.indexOf(type) !== -1;
+            }
+        });
 
         function prepareFile($files) {
             deviceImage = $files;
@@ -43,11 +60,23 @@
         }
         
         function addDeviceCompleted(result) {
-            var deviceId = result.data.ID;
-            if (deviceImage)
-                fileUploadService.uploadImage(movieImage, $scope.movie.ID, redirectToDevicePage);
+            var deviceId = result.data;
+
+            if (uploader.queue.length > 0) {
+                uploader.onBeforeUploadItem = function (item) {
+                    item.url = 'api/device/' + deviceId + '/upload/image';
+                };
+                uploader.uploadAll();
+                uploader.onCompleteAll = function () {
+                    redirectToDevicePage();
+                };
+            }
             else
                 redirectToDevicePage();
+            //if (deviceImage)
+            //    fileUploadService.uploadImage(movieImage, $scope.movie.ID, redirectToDevicePage);
+            //else
+            //    redirectToDevicePage();
         }
 
         function addDeviceFailed(response) {

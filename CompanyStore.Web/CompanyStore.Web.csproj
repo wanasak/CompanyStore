@@ -293,6 +293,7 @@
     <Content Include="Scripts\spa\device\device.html" />
     <Content Include="Scripts\spa\directives\availableDevice.directive.js" />
     <Content Include="Scripts\spa\directives\availableDevice.html" />
+    <Content Include="Scripts\spa\directives\ngThumb.directive.js" />
     <Content Include="Scripts\spa\employee\deleteEmployeeModal.html" />
     <Content Include="Scripts\spa\employee\deleteEmployeeModalCtrl.js" />
     <Content Include="Scripts\spa\employee\editEmployeeModal.html" />

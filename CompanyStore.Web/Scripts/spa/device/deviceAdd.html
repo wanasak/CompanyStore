@@ -5,12 +5,41 @@
             <div class="panel-heading">Add new device</div>
             <div class="panel-body">
                 <div class="col-xs-3">
+                    <div ng-show="uploader.queue.length == 0">
+                        <img src="../../../Content/images/no-image.png" />
+                    </div>
+                    <div ng-repeat="item in uploader.queue">
+                        <strong>{{ item.file.name }}</strong>
+                        <div ng-show="uploader.isHTML5" ng-thumb="{ file: item._file, height: 100 }">
+                            <canvas width="66.96428571428571" height="100"></canvas>
+
+                        </div>
+                        <button type="button" class="btn btn-danger btn-xs" ng-click="item.remove()">
+                            <span class="glyphicon glyphicon-trash"></span>Remove
+                        </button>
+                    </div>
+                    <h3>Select Device Image</h3>
+                    <div ng-show="uploader.isHTML5">
+                        <!-- 3. nv-file-over uploader="link" over-class="className" -->
+                        <!--<div class="well my-drop-zone" nv-file-over="" uploader="uploader">
+                            Base drop zone
+                        </div>-->
+                        <div nv-file-drop="" uploader="uploader" options="{ url: '/foo' }">
+                            <div nv-file-over="" uploader="uploader" over-class="another-file-over-class" class="well my-drop-zone">
+                                Drop Image Here
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Example: nv-file-select="" uploader="{Object}" options="{Object}" filters="{String}" -->
+                    <input type="file" nv-file-select="" uploader="uploader" multiple="">
+                </div>
+                <!--<div class="col-xs-3">
                     <div class="text-center">
                         <img src="../../Content/images/no-image.png" class="img-responsive" />
                         <h6>Add device...</h6>
                         <input type="file" ng-file-select="prepareFiles($files)" />
                     </div>
-                </div>
+                </div>-->
                 <div class="col-xs-9">
                     <div class="bs-callout bs-callout-default">
                         <strong>Add {{ device.Name }} device.</strong><small> Make sure you fill all required fields.</small>
