@@ -221,6 +221,7 @@
     <Content Include="Content\images\devices\UM.FW3SS.002_a1.jpg" />
     <Content Include="Content\images\devices\W260933TH_V3650_BLACK_UBUNTU-1.jpg" />
     <Content Include="Content\images\devices\W561077TH-3459-BLACK-WIN10-1.jpg" />
+    <Content Include="Content\images\employees\409588.jpg" />
     <Content Include="Content\images\no-image.png" />
     <Content Include="Content\images\sort_asc.png" />
     <Content Include="Content\images\sort_both.png" />
@@ -317,7 +318,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Content\images\employees\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
