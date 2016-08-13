@@ -7,8 +7,8 @@
 
     function deviceAddCtrl($scope, apiService, notificationService, $location, FileUploader) {
 
-        var deviceImage = null;
-        $scope.prepareFile = prepareFile;
+        //var deviceImage = null;
+        //$scope.prepareFile = prepareFile;
 
         $scope.device = { NumberOfStocks: 1, CreatedDate: new Date() };
         $scope.categories = [];
@@ -38,9 +38,9 @@
             }
         });
 
-        function prepareFile($files) {
-            deviceImage = $files;
-        }
+        //function prepareFile($files) {
+        //    deviceImage = $files;
+        //}
 
         function openDatePicker($event) {
             $event.preventDefault();

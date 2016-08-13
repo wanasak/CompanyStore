@@ -70,6 +70,10 @@
     <Compile Include="Infrastructure\IDbFactory.cs" />
     <Compile Include="Infrastructure\IUnitOfWork.cs" />
     <Compile Include="Infrastructure\UnitOfWork.cs" />
+    <Compile Include="Migrations\201608131119202_addEmployeeImage.cs" />
+    <Compile Include="Migrations\201608131119202_addEmployeeImage.Designer.cs">
+      <DependentUpon>201608131119202_addEmployeeImage.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\EntityBaseRepository.cs" />
@@ -88,6 +92,11 @@
   <ItemGroup>
     <Content Include="it\MockData.resources.dll" />
     <Content Include="uk\MockData.resources.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201608131119202_addEmployeeImage.resx">
+      <DependentUpon>201608131119202_addEmployeeImage.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

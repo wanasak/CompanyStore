@@ -15,5 +15,6 @@ namespace CompanyStore.Entity
         public Guid UniqueKey { get; set; }
         public DateTime CreatedDate { get; set; }
         public bool IsActive { get; set; }
+        public string Image { get; set; }
     }
 }

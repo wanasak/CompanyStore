@@ -4,35 +4,67 @@
         <div class="panel panel-default">
             <div class="panel-heading">Register Employee</div>
             <div class="panel-body">
-                <div class="bs-callout bas-callout-default">
-                    <strong>Register Employee.</strong><small> Make sure you fill all required fields.</small>
+                <div class="col-xs-3">
+                    <div ng-show="uploader.queue.length == 0">
+                        <img src="../../../Content/images/no-image.png" />
+                    </div>
+                    <div ng-repeat="item in uploader.queue">
+                        <strong>{{ item.file.name }}</strong>
+                        <div ng-show="uploader.isHTML5" ng-thumb="{ file: item._file, height: 100 }">
+                            <canvas width="66.96428571428571" height="100"></canvas>
+
+                        </div>
+                        <button type="button" class="btn btn-danger btn-xs" ng-click="item.remove()">
+                            <span class="glyphicon glyphicon-trash"></span>Remove
+                        </button>
+                    </div>
+                    <h3>Select Employee Image</h3>
+                    <div ng-show="uploader.isHTML5">
+                        <!-- 3. nv-file-over uploader="link" over-class="className" -->
+                        <!--<div class="well my-drop-zone" nv-file-over="" uploader="uploader">
+                            Base drop zone
+                        </div>-->
+                        <div nv-file-drop="" uploader="uploader" options="{ url: '/foo' }">
+                            <div nv-file-over="" uploader="uploader" over-class="another-file-over-class" class="well my-drop-zone">
+                                Drop Image Here
+                           
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Example: nv-file-select="" uploader="{Object}" options="{Object}" filters="{String}" -->
+                    <input type="file" nv-file-select="" uploader="uploader" multiple="">
                 </div>
-                <form role="form" novalidate angular-validator name="registerEmployeeForm" angular-validator-submit="registerEmployee()">
-                    <div class="form-group">
-                        <label for="firstName">First Name:</label>
-                        <input type="text" id="firstName" name="firstName" class="form-control" ng-model="employee.FirstName" placeholder="First Name" validate-on="blur" required required-message="'First Name is required'">
+                <div class="col-xs-9">
+                    <div class="bs-callout bas-callout-default">
+                        <strong>Register Employee.</strong><small> Make sure you fill all required fields.</small>
                     </div>
-                    <div class="form-group">
-                        <label for="lastName">Last Name:</label>
-                        <input type="text" id="lastName" name="lastName" class="form-control" ng-model="employee.LastName" placeholder="Last Name" validate-on="blur" required required-message="'Last Name is required'">
-                    </div>
-                    <div class="form-group">
-                        <label for="email">Email:</label>
-                        <input type="email" id="email" name="email" class="form-control" ng-model="employee.Email" placeholder="Email" validate-on="blur" required required-message="'Email is required'">
-                    </div>
-                    <div class="form-group">
-                        <label for="createdDate">Created Date:</label>
-                        <p class="input-group">
-                            <input type="date" class="form-control" name="createdDate" datepicker-popup="{{format}}" ng-model="employee.CreatedDate" is-open="datepicker.opened" datepicker-options="dateOptions" ng-required="true" datepicker-append-to-body="true" close-text="Close"
-                                validate-on="blur" required required-message="'Date is required'" />
-                            <span class="input-group-btn">
-                                <button type="button" class="btn btn-default" ng-click="openDatePicker($event)"><i class="glyphicon glyphicon-calendar"></i></button>
-                            </span>
-                        </p>
-                    </div>
-                    <button type="submit" class="btn btn-success">Save</button>
-                    <a href="#/employee" class="btn btn-default" role="button">Back</a>
-                </form>
+                    <form role="form" novalidate angular-validator name="registerEmployeeForm" angular-validator-submit="registerEmployee()">
+                        <div class="form-group">
+                            <label for="firstName">First Name:</label>
+                            <input type="text" id="firstName" name="firstName" class="form-control" ng-model="employee.FirstName" placeholder="First Name" validate-on="blur" required required-message="'First Name is required'">
+                        </div>
+                        <div class="form-group">
+                            <label for="lastName">Last Name:</label>
+                            <input type="text" id="lastName" name="lastName" class="form-control" ng-model="employee.LastName" placeholder="Last Name" validate-on="blur" required required-message="'Last Name is required'">
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email:</label>
+                            <input type="email" id="email" name="email" class="form-control" ng-model="employee.Email" placeholder="Email" validate-on="blur" required required-message="'Email is required'">
+                        </div>
+                        <div class="form-group">
+                            <label for="createdDate">Created Date:</label>
+                            <p class="input-group">
+                                <input type="date" class="form-control" name="createdDate" datepicker-popup="{{format}}" ng-model="employee.CreatedDate" is-open="datepicker.opened" datepicker-options="dateOptions" ng-required="true" datepicker-append-to-body="true" close-text="Close"
+                                    validate-on="blur" required required-message="'Date is required'" />
+                                <span class="input-group-btn">
+                                    <button type="button" class="btn btn-default" ng-click="openDatePicker($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                                </span>
+                            </p>
+                        </div>
+                        <button type="submit" class="btn btn-success">Save</button>
+                        <a href="#/employee" class="btn btn-default" role="button">Back</a>
+                    </form>
+                </div>
             </div>
             <!--<div class="panel-footer"></div>-->
         </div>

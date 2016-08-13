@@ -14,6 +14,8 @@ using System.Net.Http.Formatting;
 using System.Web.Http;
 using System.Linq.Dynamic;
 using AutoMapper;
+using System.Web;
+using System.IO;
 
 namespace CompanyStore.Web.Controllers
 {
@@ -100,13 +102,13 @@ namespace CompanyStore.Web.Controllers
                 else
                 {
                     Employee newEmployee = new Employee();
+                    newEmployee.MapEmployee(model);
                     newEmployee.IsActive = true;
                     newEmployee.UniqueKey = Guid.NewGuid();
-                    newEmployee.MapEmployee(model);
                     _employeeRepository.Add(newEmployee);
                     _unitOfWork.Commit();
 
-                    response = request.CreateResponse(HttpStatusCode.OK);
+                    response = request.CreateResponse(HttpStatusCode.OK, newEmployee.ID);
                 }
 
                 return response;
@@ -196,6 +198,42 @@ namespace CompanyStore.Web.Controllers
                 IEnumerable<EmployeeViewModel> employeesVM = Mapper.Map<IEnumerable<Employee>, IEnumerable<EmployeeViewModel>>(employees);
 
                 response = request.CreateResponse<IEnumerable<EmployeeViewModel>>(HttpStatusCode.OK, employeesVM);
+
+                return response;
+            });
+        }
+
+        [MimeMultipart]
+        [Route("{employeeId:int}/upload/image")]
+        public HttpResponseMessage UploadImage(HttpRequestMessage request, int employeeId)
+        {
+            return CreateHttpResponseMessage(request, () =>
+            {
+                HttpResponseMessage response = null;
+
+                var employee = _employeeRepository.GetSingle(employeeId);
+                if (employee == null)
+                    response = request.CreateErrorResponse(HttpStatusCode.NotFound, "Employee not found.");
+                else
+                {
+                    var uploadPath = HttpContext.Current.Server.MapPath("~/Content/images/employees");
+                    var multipartFormDataStreamProvider = new UploadMultipartFormProvider(uploadPath);
+                    // Read MIME multipart
+                    Request.Content.ReadAsMultipartAsync(multipartFormDataStreamProvider);
+                    string _localFileName = multipartFormDataStreamProvider
+                        .FileData.Select(m => m.LocalFileName).FirstOrDefault();
+                    // Create Response
+                    FileUploadResult result = new FileUploadResult
+                    {
+                        LocalFilePath = _localFileName,
+                        FileName = Path.GetFileName(_localFileName),
+                        FileLength = new FileInfo(_localFileName).Length
+                    };
+                    employee.Image = result.FileName;
+                    _unitOfWork.Commit();
+
+                    response = request.CreateResponse(HttpStatusCode.OK, result);
+                }
 
                 return response;
             });
