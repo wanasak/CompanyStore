@@ -256,6 +256,7 @@ namespace CompanyStore.Data.Migrations
                     LastName = MockData.Person.Surname(),
                     Email = MockData.Internet.Email(),
                     IsActive = i % 9 == 0 ? false : true,
+                    Gender = i % 7 == 0 ? "M" : "F",
                     UniqueKey = Guid.NewGuid(),
                     CreatedDate =  DateTime.Now.AddDays(i)
                 };

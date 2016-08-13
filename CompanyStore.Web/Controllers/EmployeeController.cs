@@ -175,7 +175,8 @@ namespace CompanyStore.Web.Controllers
                         LastName = e.LastName,
                         Email = e.Email,
                         IsActive = e.IsActive,
-                        CreatedDate = e.CreatedDate
+                        CreatedDate = e.CreatedDate,
+                        Gender = e.Gender
                     }).FirstOrDefault();
 
                 

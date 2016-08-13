@@ -17,5 +17,6 @@ namespace CompanyStore.Web.Models
         public DateTime CreatedDate { get; set; }
         public Guid UniqueKey { get; set; }
         public bool IsActive { get; set; }
+        public string Gender { get; set; }
     }
 }

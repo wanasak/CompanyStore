@@ -3,9 +3,9 @@
 
     app.controller('editEmployeeModalCtrl', editEmployeeModalCtrl);
 
-    editEmployeeModalCtrl.$inject = ['$scope', '$modalInstance', 'employeeId', 'apiService'];
+    editEmployeeModalCtrl.$inject = ['$scope', '$modalInstance', 'employeeId', 'apiService', 'notificationService'];
 
-    function editEmployeeModalCtrl($scope, $modalInstance, employeeId, apiService) {
+    function editEmployeeModalCtrl($scope, $modalInstance, employeeId, apiService, notificationService) {
 
         $scope.ID = employeeId;
         //$scope.ok = ok;
@@ -33,7 +33,8 @@
             $modalInstance.close();
         }
         function updateEmployeeFailed(response) {
-            $modalInstance.dismiss(response.data);
+            notificationService.displayError(response.data);
+            $modalInstance.dismiss();
         }
 
         // function ok() {

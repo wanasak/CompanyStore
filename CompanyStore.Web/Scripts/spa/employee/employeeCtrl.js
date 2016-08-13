@@ -71,6 +71,7 @@
 
         function editEmployee(employeeId) {
             $modal.open({
+                //backdrop: 'static',
                 templateUrl: "scripts/spa/employee/editEmployeeModal.html",
                 controller: "editEmployeeModalCtrl",
                 scope: $scope,
@@ -83,11 +84,7 @@
                 notificationService.displaySuccess("Update employee completed");
                 // Then reload the data so that DT is refreshed
                 $scope.dtInstance.reloadData(null, false);
-            }, function (error) {
-                if (error) {
-                    notificationService.displayError(error);
-                }
-            });
+            }, function () {});
         }
 
         function deleteEmployee(employeeId) {
@@ -105,15 +102,14 @@
                 apiService.delete("api/employee/delete/" + employeeId, null,
                     deleteEmployeeCompleted,
                     deleteEmployeeFailed);
-            }, function (error) {
-            });
+            }, function () {});
         }
         function deleteEmployeeCompleted(result) {
             // Then reload the data so that DT is refreshed
             $scope.dtInstance.reloadData();
         }
         function deleteEmployeeFailed(response) {
-
+            notificationService.displayError(response.data);
         }
 
         loadEmployee();
