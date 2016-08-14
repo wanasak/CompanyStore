@@ -12,4 +12,8 @@ Installation instructors
 
 >> update-database
 
-  5.Run CompanyStore.Web application
+
+
+
+
+5.Run CompanyStore.Web application
