@@ -32,6 +32,7 @@
 
         function removeEmployeeImage() {
             $scope.employee.Image = null;
+            console.log($scope.employee.Image);
         }
 
         function loadEmployee() {

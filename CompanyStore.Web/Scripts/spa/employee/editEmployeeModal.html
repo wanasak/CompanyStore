@@ -17,8 +17,14 @@
                 </div>-->
                     <div ng-show="uploader.queue.length == 0">
                         <img ng-show="employee.Image == null" src="../../../Content/images/no-image.png" />
-                        <img ng-hide="employee.Image == null" ng-src="../../Content/images/employees/{{employee.Image}}" class="img-thumbnail center-block"
-                            height="120" alt="">
+                        <!--<img ng-hide="employee.Image == null" ng-src="../../Content/images/employees/{{employee.Image}}" class="img-thumbnail center-block"
+                            height="120" alt="">-->
+                        <div ng-hide="employee.Image == null">
+                            <img ng-src="../../Content/images/employees/{{employee.Image}}" class="img-thumbnail center-block" height="120" alt="">
+                            <button type="button" class="btn btn-danger btn-xs center-block" ng-click="removeEmployeeImage()">
+                                <span class="glyphicon glyphicon-trash"></span>Remove
+                            </button>
+                        </div>
                     </div>
                     <div ng-repeat="item in uploader.queue">
                         <!--<strong>{{ item.file.name }}</strong>-->

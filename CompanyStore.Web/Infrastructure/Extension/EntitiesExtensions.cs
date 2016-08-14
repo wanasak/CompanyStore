@@ -27,6 +27,7 @@ namespace CompanyStore.Web.Infrastructure.Extension
             employee.CreatedDate = model.CreatedDate;
             employee.IsActive = model.IsActive;
             employee.Gender = model.Gender;
+            employee.Image = model.Image;
             //employee.UniqueKey = Guid.NewGuid();
         }
     }
