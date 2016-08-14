@@ -151,7 +151,7 @@ namespace CompanyStore.Web.Controllers
                     updateEmloyee.MapEmployee(model);
                     _unitOfWork.Commit();
 
-                    response = request.CreateResponse(HttpStatusCode.OK);
+                    response = request.CreateResponse(HttpStatusCode.OK, updateEmloyee.ID);
                 }
 
                 return response;

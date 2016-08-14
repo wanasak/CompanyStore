@@ -10,10 +10,13 @@
         </div>
         <div class="form-group">
             <label class="control-label">Select Employee:</label>
-            <angucomplete-alt id="members" placeholder="Search employees" pause="200" selected-object="selectEmployee" input-changed="selectionChanged"
-                remote-url="/api/employee?filter=" remote-url-data-field="" title-field="FirstName,LastName" description-field="Email"
-                input-class="form-control form-control-small" match-class="red" text-searching="Searching employees.." text-no-results="No employee found matching your filter."
-            />
+            <div>
+                <angucomplete-alt id="members" placeholder="Search employees" pause="200" selected-object="selectEmployee" input-changed="selectionChanged"
+                    remote-url="/api/employee?filter=" remote-url-data-field="" title-field="FirstName,LastName" description-field="Email"
+                    input-class="form-control form-control-small" match-class="red" text-searching="Searching employees.." text-no-results="No employee found matching your filter."
+                />
+            </div>
+            <small class="text-muted">At least 3 characters</small>
         </div>
     </form>
 </div>

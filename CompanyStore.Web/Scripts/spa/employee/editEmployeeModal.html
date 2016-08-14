@@ -1,41 +1,80 @@
 <div class="modal-header">
-    <h4>Edit Employee</h4>      
+    <h4>Edit Employee</h4>
 </div>
-<form role="form" novalidate angular-validator name="editEmployeeForm" angular-validator-submit="updateEmployee()">
-    <div class="modal-body">
-        <div ng-show="errorMsg" class="alert alert-danger">
-            <strong>Error!</strong> {{ errorMsg }}
+<div class="modal-body">
+    <form role="form" novalidate angular-validator name="editEmployeeForm" angular-validator-submit="">
+        <div class="row">
+            <div class="col-xs-4">
+                <div class="form-group">
+                    <!--<img ng-show="employee.Image == null" src="../../Content/Images/no-image.png" class="img-responsive img-circle center-block"
+                    alt="">
+                <div ng-hide="employee.Image == null">
+                    <img ng-src="../../Content/images/employees/{{employee.Image}}" class="img-circle center-block" height="120" alt="">
+                    <br/>
+                    <button type="button" class="btn btn-danger btn-xs center-block" ng-click="removeEmployeeImage()">
+                        <span class="glyphicon glyphicon-trash"></span>Remove
+                    </button>
+                </div>-->
+                    <div ng-show="uploader.queue.length == 0">
+                        <img ng-show="employee.Image == null" src="../../../Content/images/no-image.png" />
+                        <img ng-hide="employee.Image == null" ng-src="../../Content/images/employees/{{employee.Image}}" class="img-thumbnail center-block"
+                            height="120" alt="">
+                    </div>
+                    <div ng-repeat="item in uploader.queue">
+                        <!--<strong>{{ item.file.name }}</strong>-->
+                        <div ng-show="uploader.isHTML5" ng-thumb="{ file: item._file, height: 100 }">
+                            <canvas width="66.96428571428571" height="100"></canvas>
+
+                        </div>
+                        <button type="button" class="btn btn-danger btn-xs" ng-click="item.remove()">
+                        <span class="glyphicon glyphicon-trash"></span>Remove
+                    </button>
+                    </div>
+                    <div ng-show="uploader.isHTML5">
+                        <div nv-file-drop="" uploader="uploader" options="{ url: '/foo' }">
+                            <div nv-file-over="" uploader="uploader" over-class="another-file-over-class" class="well my-drop-zone">
+                                Drop Image Here
+                            </div>
+                        </div>
+                    </div>
+                    <input type="file" nv-file-select="" uploader="uploader" multiple="">
+                </div>
+            </div>
+            <div class="col-xs-8">
+                <div ng-show="errorMsg" class="alert alert-danger">
+                    <strong>Error!</strong> {{ errorMsg }}
+                </div>
+                <div class="form-group">
+                    <label for="firstName">First Name:</label>
+                    <input type="text" id="firstName" name="firstName" class="form-control" ng-model="employee.FirstName" placeholder="First Name"
+                        validate-on="blur" required required-message="'First Name is required'">
+                </div>
+                <div class="form-group">
+                    <label for="lastName">Last Name:</label>
+                    <input type="text" id="lastName" name="lastName" class="form-control" ng-model="employee.LastName" placeholder="Last Name"
+                        validate-on="blur" required required-message="'Last Name is required'">
+                </div>
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" class="form-control" ng-model="employee.Email" placeholder="Email" validate-on="blur"
+                        required required-message="'Email is required'">
+                </div>
+                <div class="form-group">
+                    <label for="isActive">Status:</label>
+                    <!--<label><input type="radio" ng-model="employee.IsActive" ng-value="true">Active</label>
+                <label><input type="radio" ng-model="employee.IsActive" ng-value="false">Inactive</label>-->
+                    <label class="checkbox-inline"><input type="checkbox" ng-model="employee.IsActive">Active</label>
+                </div>
+                <div class="form-group">
+                    <label for="gender">Gender:</label>
+                    <label class="radio-inline"><input type="radio" ng-model="employee.Gender" value="M">Male</label>
+                    <label class="radio-inline"><input type="radio" ng-model="employee.Gender" value="F">Female</label>
+                </div>
+            </div>
         </div>
-        <div class="form-group">
-            <img ng-show="employee.Image == null" src="../../Content/Images/no-image.png" class="img-responsive img-circle center-block" alt="">
-            <img ng-hide="employee.Image == null" ng-src="../../Content/images/employees/{{employee.Image}}" class="img-circle center-block" height="120" alt="">
-        </div>
-        <div class="form-group">
-            <label for="firstName">First Name:</label>
-            <input type="text" id="firstName" name="firstName" class="form-control" ng-model="employee.FirstName" placeholder="First Name" validate-on="blur" required required-message="'First Name is required'">
-        </div>
-        <div class="form-group">
-            <label for="lastName">Last Name:</label>
-            <input type="text" id="lastName" name="lastName" class="form-control" ng-model="employee.LastName" placeholder="Last Name" validate-on="blur" required required-message="'Last Name is required'">
-        </div>
-        <div class="form-group">
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email" class="form-control" ng-model="employee.Email" placeholder="Email" validate-on="blur" required required-message="'Email is required'">
-        </div>
-        <div class="form-group">
-            <label for="isActive">Status:</label>
-            <!--<label><input type="radio" ng-model="employee.IsActive" ng-value="true">Active</label>
-            <label><input type="radio" ng-model="employee.IsActive" ng-value="false">Inactive</label>-->
-            <label class="checkbox-inline"><input type="checkbox" ng-model="employee.IsActive">Active</label>
-        </div>
-        <div class="form-group">
-            <label for="gender">Gender:</label>
-            <label class="radio-inline"><input type="radio" ng-model="employee.Gender" value="M">Male</label>
-            <label class="radio-inline"><input type="radio" ng-model="employee.Gender" value="F">Female</label>
-        </div>
-    </div>
-    <div class="modal-footer">
-        <button type="submit" class="btn btn-success">Save</button>
-        <button type="button" class="btn btn-default" ng-click="cancel()">Cancel</button> 
-    </div>
-</form>
+    </form>
+</div>
+<div class="modal-footer">
+    <button type="submit" class="btn btn-success" ng-click="updateEmployee()">Save</button>
+    <button type="button" class="btn btn-default" ng-click="cancel()">Cancel</button>
+</div>
