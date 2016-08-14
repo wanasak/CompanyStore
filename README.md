@@ -8,6 +8,7 @@ Installation instructors
 3. Open package manager console and select CompanyStore.Data as default project
 4. Run the following commands	 	
 
+>> add-migration initial
 >> update-database
 
 5. Run CompanyStore.Web application
