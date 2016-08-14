@@ -10,4 +10,5 @@ Installation instructors
 >> add-migration initial
 
 >> update-database
+
 5. Run CompanyStore.Web application
