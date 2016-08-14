@@ -321,3 +321,8 @@ ul.pagination > li
 .bs-callout-info h4 {
     color: #5bc0de;
 }
+
+.profile-image {
+    /*max-height: 25px;*/
+    max-width: 25px !important;
+}

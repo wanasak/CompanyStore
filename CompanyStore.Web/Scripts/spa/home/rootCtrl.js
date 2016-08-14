@@ -17,6 +17,7 @@
 
             if ($scope.userData.isUserLoggedIn) {
                 $scope.username = $rootScope.repository.loggedUser.username;
+                $scope.userImage = $rootScope.repository.loggedUser.image;
             }
         }
 

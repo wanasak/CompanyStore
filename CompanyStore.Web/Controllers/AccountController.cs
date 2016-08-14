@@ -39,7 +39,7 @@ namespace CompanyStore.Web.Controllers
                 {
                     MembershipContext _userContext = _membershipService.ValidateUser(model.Username, model.Password);
                     if (_userContext != null)
-                        response = request.CreateResponse(HttpStatusCode.OK, new { success = true });
+                        response = request.CreateResponse(HttpStatusCode.OK, new { success = true, image = _userContext.User.Image });
                     else
                         response = request.CreateResponse(HttpStatusCode.OK, new { success = false });
                 }

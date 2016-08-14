@@ -7,7 +7,12 @@
             <li><a href="#about">About<i class="fa fa-info-circle fa-fw pull-right"></i></a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right" ng-if="userData.isUserLoggedIn">
-            <li class="userinfo"><a href="#/">{{username}}<i class="fa fa-user fa-fw"></i></a></li>
+            <li class="userinfo">
+                <a href="#/">
+                    <img src="../../Content/images/users/{{userImage}}" class="img-circle profile-image" alt="profile image">
+                    {{username}}
+                </a>
+            </li>
         </ul>
     </div>
 </div>

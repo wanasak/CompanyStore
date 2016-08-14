@@ -50,7 +50,8 @@ namespace CompanyStore.Data.Migrations
                     IsLocked = false,
                     CreatedDate = DateTime.Now,
                     HashedPassword = "2O65mFzQWIxmfzbkPjeVnS3c8U0IN07oE8ymQWwgY5Y=",
-                    Salt = "ljd/YZrfxnkEoB0l2rvjgA=="
+                    Salt = "ljd/YZrfxnkEoB0l2rvjgA==",
+                    Image = "twitter-profile.jpg"
                 }
             });
             // Create user admin for smudger
@@ -258,7 +259,7 @@ namespace CompanyStore.Data.Migrations
                     IsActive = i % 9 == 0 ? false : true,
                     Gender = i % 7 == 0 ? "M" : "F",
                     UniqueKey = Guid.NewGuid(),
-                    CreatedDate =  DateTime.Now.AddDays(i)
+                    CreatedDate =  DateTime.Now.AddDays(i)                   
                 };
                 employees.Add(emp);
             }

@@ -17,6 +17,7 @@
 
         function loginCompleted(result) {
             if (result.data.success) {
+                $scope.user.image = result.data.image;
                 membershipService.saveCredentials($scope.user);
                 notificationService.displaySuccess('Hello ' + $scope.user.username);
                 $scope.userData.displayUserInfo();

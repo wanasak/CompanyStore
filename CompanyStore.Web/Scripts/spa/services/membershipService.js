@@ -41,7 +41,8 @@
             $rootScope.repository = {
                 loggedUser: {
                     username: user.username,
-                    authData: membershipData
+                    authData: membershipData,
+                    image: user.image
                 }
             };
             $http.defaults.headers.common['Authorization'] = 'Basic ' + membershipData;

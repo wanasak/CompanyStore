@@ -17,6 +17,7 @@ namespace CompanyStore.Entity
         public string HashedPassword { get; set; } 
         public string Salt { get; set; } 
         public bool IsLocked { get; set; }
+        public string Image { get; set; }
         public virtual ICollection<UserRole> UserRoles { get; set; }
     }
 }
