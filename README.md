@@ -12,4 +12,4 @@ Installation instructors
 
 >> update-database
 
-5. Run CompanyStore.Web application
+15. Run CompanyStore.Web application
