@@ -249,7 +249,7 @@ namespace CompanyStore.Data.Migrations
         {
             List<Employee> employees = new List<Employee>();
 
-            for (int i = 0; i < 150; i++)
+            for (int i = 0; i < 200; i++)
             {
                 Employee emp = new Employee()
                 {
