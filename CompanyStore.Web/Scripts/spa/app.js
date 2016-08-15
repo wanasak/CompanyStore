@@ -23,7 +23,8 @@
             })
             .when("/employee", {
                 templateUrl: "scripts/spa/employee/employee.html",
-                controller: "employeeCtrl"
+                controller: "employeeCtrl",
+                resolve: { isAuthenticated: isAuthenticated }
             })
             .when("/employee/add", {
                 templateUrl: "scripts/spa/employee/employeeAdd.html",
@@ -46,7 +47,8 @@
             })
             .when("/rental", {
                 templateUrl: "scripts/spa/rental/rental.html",
-                controller: "rentalCtrl"
+                controller: "rentalCtrl",
+                resolve: { isAuthenticated: isAuthenticated }
             })
             .otherwise({ redirectTo: "/" });
     }
