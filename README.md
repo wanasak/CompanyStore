@@ -1,5 +1,5 @@
 # CompanyStore
-Single Page Application using ASP.NET Web API2 and AngularJS
+Single Page Application using ASP.NET Web API 2 and AngularJS
 
 Installation instructors
 
