@@ -7,7 +7,7 @@
 
     function employeeAddCtrl($scope, apiService, $location, FileUploader) {
 
-        $scope.employee = { CreatedDate: new Date() };
+        $scope.employee = { CreatedDate: new Date(), Gender: 'M' };
         $scope.registerEmployee = registerEmployee;
         $scope.datepicker = {};
         $scope.openDatePicker = openDatePicker;
