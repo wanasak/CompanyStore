@@ -29,6 +29,7 @@ namespace CompanyStore.Web.App_Start
         }
         public static IContainer RegisterService(ContainerBuilder builder)
         {
+            // Register Web API controllers.
             builder.RegisterApiControllers(Assembly.GetExecutingAssembly());
 
             // EF Context
@@ -37,8 +38,9 @@ namespace CompanyStore.Web.App_Start
             // Infrastructure
             builder.RegisterType<DbFactory>().As<IDbFactory>().InstancePerRequest();
             builder.RegisterType<UnitOfWork>().As<IUnitOfWork>().InstancePerRequest();
+            // Generic
             builder.RegisterGeneric(typeof(EntityBaseRepository<>)).As(typeof(IEntityBaseRepository<>)).InstancePerRequest();
-
+            
             // Service
             builder.RegisterType<EncryptionService>().As<IEncryptionService>().InstancePerRequest();
             builder.RegisterType<MembershipService>().As<IMembershipService>().InstancePerRequest();
