@@ -3,9 +3,9 @@
 
     app.controller('employeeAddCtrl', employeeAddCtrl);
 
-    employeeAddCtrl.$inject = ['$scope', 'apiService', '$location', 'FileUploader'];
+    employeeAddCtrl.$inject = ['$scope', 'apiService', '$location', 'FileUploader', 'notificationService'];
 
-    function employeeAddCtrl($scope, apiService, $location, FileUploader) {
+    function employeeAddCtrl($scope, apiService, $location, FileUploader, notificationService) {
 
         $scope.employee = { CreatedDate: new Date(), Gender: 'M' };
         $scope.registerEmployee = registerEmployee;
@@ -61,7 +61,7 @@
             
         }
         function registerEmployeeFailed(response) {
-            
+            notificationService.displayError(response.data);
         }
 
     }

@@ -98,7 +98,8 @@ namespace CompanyStore.Web.Controllers
                 HttpResponseMessage response = null;
 
                 if (!ModelState.IsValid)
-                    response = request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);
+                    response = request.CreateResponse(HttpStatusCode.BadRequest, 
+                        ModelState.Keys.SelectMany(k => ModelState[k].Errors).Select(m => m.ErrorMessage).ToArray());
                 else
                 {
                     Employee newEmployee = new Employee();
