@@ -15,6 +15,7 @@ namespace CompanyStore.Web.Models
         [Required(ErrorMessage = "Last Name is required."), MaxLength(50)]
         public string LastName { get; set; }
         [Required(ErrorMessage = "Email is required."), MaxLength(100)]
+        [EmailAddress]
         public string Email { get; set; }
         [Required]
         [DataType(DataType.DateTime)]
