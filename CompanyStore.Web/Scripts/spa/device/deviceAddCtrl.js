@@ -10,7 +10,7 @@
         //var deviceImage = null;
         //$scope.prepareFile = prepareFile;
 
-        $scope.device = { NumberOfStocks: 1, CreatedDate: new Date() };
+        $scope.device = { CreatedDate: new Date() };
         $scope.categories = [];
         $scope.addDevice = addDevice;
         $scope.datepicker = {};
