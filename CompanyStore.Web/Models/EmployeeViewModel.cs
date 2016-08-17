@@ -10,8 +10,11 @@ namespace CompanyStore.Web.Models
     public class EmployeeViewModel
     {
         public int ID { get; set; }
+        [Required(ErrorMessage = "First Name is required."), MaxLength(50)]
         public string FirstName { get; set; }
+        [Required(ErrorMessage = "Last Name is required."), MaxLength(50)]
         public string LastName { get; set; }
+        [Required(ErrorMessage = "Email is required."), MaxLength(100)]
         public string Email { get; set; }
         [Required]
         [DataType(DataType.DateTime)]
