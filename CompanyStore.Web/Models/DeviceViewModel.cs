@@ -18,5 +18,6 @@ namespace CompanyStore.Web.Models
         public bool IsAvailable { get; set; }
         public int NumberOfStocksAvaiable { get; set; }
         public int NumberOfStocks { get; set; }
+        public decimal Price { get; set; }
     }
 }

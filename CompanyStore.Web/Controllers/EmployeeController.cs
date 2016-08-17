@@ -167,20 +167,9 @@ namespace CompanyStore.Web.Controllers
             {
                 HttpResponseMessage response = null;
 
-                EmployeeViewModel employeeVM = _employeeRepository
-                    .FindBy(e => e.ID == employeeId)
-                    .Select(e => new EmployeeViewModel
-                    {
-                        ID = e.ID,
-                        FirstName = e.FirstName,
-                        LastName = e.LastName,
-                        Email = e.Email,
-                        IsActive = e.IsActive,
-                        CreatedDate = e.CreatedDate,
-                        Gender = e.Gender,
-                        Image = e.Image
-                    }).FirstOrDefault();
+                var employee = _employeeRepository.GetSingle(employeeId);
 
+                var employeeVM = Mapper.Map<Employee, EmployeeViewModel>(employee);
                 
                 response = request.CreateResponse<EmployeeViewModel>(HttpStatusCode.OK, employeeVM);
 

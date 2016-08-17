@@ -21,5 +21,6 @@ namespace CompanyStore.Entity
         public virtual Category Category { get; set; }
         public DateTime CreatedDate { get; set; }
         public virtual ICollection<Stock> Stocks { get; set; }
+        public decimal Price { get; set; }
     }
 }
