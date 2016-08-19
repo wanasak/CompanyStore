@@ -3,11 +3,11 @@
 
     app.controller('deleteEmployeeModalCtrl', deleteEmployeeModalCtrl);
 
-    deleteEmployeeModalCtrl.$inject = ['$scope', '$modalInstance', 'employeeId'];
+    deleteEmployeeModalCtrl.$inject = ['$scope', '$modalInstance', 'employeeFullName'];
 
-    function deleteEmployeeModalCtrl($scope, $modalInstance, employeeId) {
+    function deleteEmployeeModalCtrl($scope, $modalInstance, employeeFullName) {
 
-        $scope.id = employeeId;
+        $scope.fullName = employeeFullName;
         $scope.ok = ok;
         $scope.cancel = cancel;
 

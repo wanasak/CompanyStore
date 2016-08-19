@@ -19,7 +19,6 @@
             DTColumnBuilder.newColumn('IsActive').withTitle('Status').notSortable().renderWith(statusHtml),
             DTColumnBuilder.newColumn(null).withTitle('Action').notSortable().renderWith(actionHtml)
         ];
-
         $scope.deleteEmployee = deleteEmployee;
         $scope.editEmployee = editEmployee;
 
@@ -61,14 +60,16 @@
             }
         }
         function actionHtml(data, type, full, meta) {
-            return '<button class="btn btn-warning" ng-click="editEmployee(' + data.ID + ')">' +
+            return '<a class="btn btn-info" title="Detail" data-toggle="popover" data-trigger="hover" href="#/employee/' + data.ID + '">' +
+               '   <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>' +
+               '</a> &nbsp; ' +
+               '<button class="btn btn-warning" title="Edit" data-toggle="popover" data-trigger="hover" ng-click="editEmployee(' + data.ID + ')">' +
                '   <i class="fa fa-edit"></i>' +
                '</button> &nbsp; ' +
-               '<button class="btn btn-danger" ng-click="deleteEmployee(' + data.ID + ')" )"="">' +
+               '<button class="btn btn-danger" title="Delete" data-toggle="popover" data-trigger="hover" ng-click="deleteEmployee(' + data.ID + ',\'' + data.FullName + '\')">' +
                '   <i class="fa fa-trash-o"></i>' +
                '</button>';
         }
-
         function editEmployee(employeeId) {
             $modal.open({
                 //backdrop: 'static',
@@ -86,16 +87,15 @@
                 $scope.dtInstance.reloadData(null, false);
             }, function () {});
         }
-
-        function deleteEmployee(employeeId) {
+        function deleteEmployee(employeeId, employeeFullName) {
             $modal.open({
                 templateUrl: "scripts/spa/employee/deleteEmployeeModal.html",
                 controller: "deleteEmployeeModalCtrl",
                 size: "sm",
                 scope: $scope,
                 resolve: {
-                    employeeId: function () {
-                        return employeeId;
+                    employeeFullName: function () {
+                        return employeeFullName;
                     }
                 }
             }).result.then(function () {

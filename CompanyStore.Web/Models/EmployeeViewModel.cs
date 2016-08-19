@@ -21,6 +21,11 @@ namespace CompanyStore.Web.Models
         [Required]
         [DataType(DataType.DateTime)]
         public DateTime CreatedDate { get; set; }
+
+        public string FullName
+        {
+            get { return FirstName + " " + LastName; }
+        }
         
         public Guid UniqueKey { get; set; }
         public bool IsActive { get; set; }
