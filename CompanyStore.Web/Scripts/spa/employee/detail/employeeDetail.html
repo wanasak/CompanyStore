@@ -6,12 +6,13 @@
                 <h3 class="panel-title">Employee Information</h3>
             </div>
             <div class="panel-body">
-                
+
                 <div class="media">
                     <a class="pull-left" href="#">
                         <!--<img class="media-object" height="120" ng-src="../../Content/images/employees/{{employee.Image}}" alt="" />-->
                         <img ng-show="employee.Image == null" src="../../../Content/images/no-image.png" />
-                        <img ng-hide="employee.Image == null" ng-src="../../Content/images/employees/{{employee.Image}}" class="img-thumbnail center-block" alt="" style="height: 120px;">
+                        <img ng-hide="employee.Image == null" ng-src="../../Content/images/employees/{{employee.Image}}" class="img-thumbnail center-block"
+                            alt="" style="height: 120px;">
                     </a>
                     <div class="media-body">
                         <h4 class="media-heading">{{ employee.FullName }}</h4>
@@ -47,22 +48,32 @@
                         </table>
                     </div>
                 </div>
-                
+
             </div>
         </div>
     </div>
     <div class="col-md-6">
         <div class="panel panel-danger">
             <div class="panel-heading">
-                <h5 class="pull-left">Rental Information</h3>
-                <div class="input-group">
-                    <input type="search" ng-model="filterRentals" class="form-control" placeholder="Filter...">
-                    <div class="input-group-btn">
-                        <button class="btn btn-danger" ng-click="clearSearch()"><i class="glyphicon glyphicon-remove-sign"></i></button>
+                <h5 class="pull-left">Rental History</h3>
+                    <div class="input-group">
+                        <input type="search" ng-model="filterRentals" class="form-control" placeholder="Filter...">
+                        <div class="input-group-btn">
+                            <button class="btn btn-danger" ng-click="clearSearch()"><i class="glyphicon glyphicon-remove-sign"></i></button>
+                        </div>
                     </div>
-                </div>
             </div>
             <div class="panel-body">
+                <form class="form-inline">
+                    <div class="form-group">
+                        <label for="filterStatus">Status:</label>
+                        <select name="filterStatus" ng-model="filterStatus" ng-change="loadEmployeeRentals()" class="form-control" required="required">
+                        <option value="All">All</option>
+                        <option value="Borrowed">Borrowed</option>
+                        <option value="Returned">Returned</option>
+                    </select>
+                    </div>
+                </form>
                 <div class="table-responsive">
                     <table class="table table-bordered">
                         <thead>

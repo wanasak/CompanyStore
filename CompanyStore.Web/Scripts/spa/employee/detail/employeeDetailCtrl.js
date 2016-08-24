@@ -13,6 +13,8 @@
         $scope.getStatusColor = getStatusColor;
         $scope.clearSearch = clearSearch;
         $scope.isBorrowed = isBorrowed;
+        $scope.loadEmployeeRentals = loadEmployeeRentals;
+        $scope.filterStatus = "All";
 
         // Load Employee
         function loadEmployee() {
@@ -24,7 +26,8 @@
         function loadEmployeeFailed(response) { notificationService.displayError(response.data); }
         // Load Rentals
         function loadEmployeeRentals() {
-            apiService.get("api/rental/employee/" + $routeParams.id, null,
+            console.log('d');
+            apiService.get("api/rental/employee/" + $routeParams.id + "/" + $scope.filterStatus, null,
                 loadEmployeeRentalsCompleted,
                 loadEmployeeRentalsFailed);
         }

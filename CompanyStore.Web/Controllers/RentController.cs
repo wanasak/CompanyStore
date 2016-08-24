@@ -117,15 +117,15 @@ namespace CompanyStore.Web.Controllers
         }
 
         [HttpGet]
-        [Route("employee/{employeeID:int}")]
-        public HttpResponseMessage GetRentalEmployee(HttpRequestMessage request, int employeeID)
+        [Route("employee/{employeeID:int}/{status?}")]
+        public HttpResponseMessage GetRentalEmployee(HttpRequestMessage request, int employeeID, string status = null)
         {
             return CreateHttpResponseMessage(request, () =>
             {
                 HttpResponseMessage response = null;
                 List<RentalHistoryViewModel> rentalHistoriesVM = new List<RentalHistoryViewModel>();
-                var rentals = _rentalRepository.GetRentalByEmployeeID(employeeID).OrderByDescending(r => r.ID);
-
+                var rentals = _rentalRepository.GetRentalByEmployeeID(employeeID, status);
+                
                 foreach (var rental in rentals)
                 {
                     RentalHistoryViewModel rentalHistoryVM = new RentalHistoryViewModel()
