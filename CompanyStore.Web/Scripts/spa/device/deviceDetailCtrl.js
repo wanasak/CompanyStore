@@ -57,8 +57,8 @@
         }
         function loadRentalHistoryFailed(response) {
             notificationService.displayError(response.data);
-        }
-        // Return Device Action
+        }   
+        // Return Rental
         function returnDevice(rentalID) {
             apiService.post("api/rental/return/" + rentalID,
                 null,
@@ -66,7 +66,7 @@
                 returnDeviceFailed);
         }
         function returnDeviceCompleted(result) {
-            notificationService.displaySuccess('Movie returned to HomeCinema succeesfully');
+            notificationService.displaySuccess('Device returned to store succeesfully');
             loadPage();
         }
         function returnDeviceFailed(response) {

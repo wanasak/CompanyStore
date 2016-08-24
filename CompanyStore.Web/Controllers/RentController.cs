@@ -116,6 +116,36 @@ namespace CompanyStore.Web.Controllers
             });
         }
 
+        [HttpGet]
+        [Route("employee/{employeeID:int}")]
+        public HttpResponseMessage GetRentalEmployee(HttpRequestMessage request, int employeeID)
+        {
+            return CreateHttpResponseMessage(request, () =>
+            {
+                HttpResponseMessage response = null;
+                List<RentalHistoryViewModel> rentalHistoriesVM = new List<RentalHistoryViewModel>();
+                var rentals = _rentalRepository.GetRentalByEmployeeID(employeeID).OrderByDescending(r => r.ID);
+
+                foreach (var rental in rentals)
+                {
+                    RentalHistoryViewModel rentalHistoryVM = new RentalHistoryViewModel()
+                    {
+                        ID = rental.ID,
+                        StockID = rental.StockID,
+                        RentalDate = rental.RentalDate,
+                        ReturnedDate = rental.ReturnedDate.HasValue ? rental.ReturnedDate : null,
+                        Status = rental.Status,
+                        Device = rental.Stock.Device.Name
+                    };
+                    rentalHistoriesVM.Add(rentalHistoryVM);
+                }
+
+                response = request.CreateResponse<IEnumerable<RentalHistoryViewModel>>(rentalHistoriesVM);
+
+                return response;
+            });
+        }
+
         private List<RentalHistoryViewModel> GetMovieRentalHistory(int deviceId)
         {
             List<RentalHistoryViewModel> _rentalHistory = new List<RentalHistoryViewModel>();

@@ -9,7 +9,9 @@
                 
                 <div class="media">
                     <a class="pull-left" href="#">
-                        <img class="media-object" height="120" ng-src="../../Content/images/employees/{{employee.Image}}" alt="" />
+                        <!--<img class="media-object" height="120" ng-src="../../Content/images/employees/{{employee.Image}}" alt="" />-->
+                        <img ng-show="employee.Image == null" src="../../../Content/images/no-image.png" />
+                        <img ng-hide="employee.Image == null" ng-src="../../Content/images/employees/{{employee.Image}}" class="img-thumbnail center-block" alt="" style="height: 120px;">
                     </a>
                     <div class="media-body">
                         <h4 class="media-heading">{{ employee.FullName }}</h4>
@@ -50,12 +52,39 @@
         </div>
     </div>
     <div class="col-md-6">
-        <div class="panel panel-default">
+        <div class="panel panel-danger">
             <div class="panel-heading">
-                <h3 class="panel-title">Rental Information</h3>
+                <h5 class="pull-left">Rental Information</h3>
+                <div class="input-group">
+                    <input type="search" ng-model="filterRentals" class="form-control" placeholder="Filter...">
+                    <div class="input-group-btn">
+                        <button class="btn btn-danger" ng-click="clearSearch()"><i class="glyphicon glyphicon-remove-sign"></i></button>
+                    </div>
+                </div>
             </div>
             <div class="panel-body">
-                Panel content
+                <div class="table-responsive">
+                    <table class="table table-bordered">
+                        <thead>
+                            <th>#</th>
+                            <th>Device</th>
+                            <th>Rental Date</th>
+                            <th>Status</th>
+                            <th></th>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="rental in rentals | filter:filterRentals">
+                                <td>{{ rental.ID }}</td>
+                                <td>{{ rental.Device }}</td>
+                                <td>{{ rental.RentalDate | date:'fullDate' }}</td>
+                                <td ng-class="getStatusColor(rental.Status)">{{ rental.Status }}</td>
+                                <td>
+                                    <button ng-if="isBorrowed(rental)" type="button" class="btn btn-primary btn-xs" ng-click="returnDevice(rental.ID)">Return</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
