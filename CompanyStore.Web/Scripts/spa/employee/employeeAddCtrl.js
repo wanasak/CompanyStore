@@ -16,6 +16,7 @@
             startingDay: 1,
             showWeeks: false
         };
+        $scope.departments = [];
 
         // FileUpload
         //var uploader = $scope.uploader = new FileUploader();
@@ -64,6 +65,19 @@
             notificationService.displayError(response.data);
         }
 
+        function loadDepartment() {
+            apiService.get("api/department", null,
+            loadDepartmentCompleted,
+            loadDepartmentFailed);
+        }
+        function loadDepartmentCompleted(result) {
+            $scope.departments = result.data;
+        }
+        function loadDepartmentFailed(response) {
+            $scope.errorMsg = response.data;
+        }
+
+        loadDepartment();
     }
 
 })(angular.module('companyStore'));
