@@ -17,5 +17,7 @@ namespace CompanyStore.Entity
         public bool IsActive { get; set; }
         public string Image { get; set; }
         public string Gender { get; set; }
+        public int DepartmentID { get; set; }
+        public virtual Department Department { get; set; }
     }
 }

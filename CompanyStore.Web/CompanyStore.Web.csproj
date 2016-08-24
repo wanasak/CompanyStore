@@ -150,6 +150,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CategoryController.cs" />
+    <Compile Include="Controllers\DepartmentController.cs" />
     <Compile Include="Controllers\DeviceController.cs" />
     <Compile Include="Controllers\EmployeeController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -171,6 +172,7 @@
     <Compile Include="Infrastructure\Mappings\ViewModelToDomainMappingProfile.cs" />
     <Compile Include="Infrastructure\MessageHandler\CompanyStoreAuthHandler.cs" />
     <Compile Include="Models\CategoryViewModel.cs" />
+    <Compile Include="Models\DepartmentViewModel.cs" />
     <Compile Include="Models\DeviceViewModel.cs" />
     <Compile Include="Models\EmployeeViewModel.cs" />
     <Compile Include="Models\LoginViewModel.cs" />

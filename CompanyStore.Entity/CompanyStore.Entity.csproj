@@ -40,6 +40,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Category.cs" />
+    <Compile Include="Department.cs" />
     <Compile Include="Device.cs" />
     <Compile Include="Employee.cs" />
     <Compile Include="IEntityBase.cs" />

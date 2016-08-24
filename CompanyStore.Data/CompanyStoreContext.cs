@@ -26,6 +26,7 @@ namespace CompanyStore.Data
         public IDbSet<User> Users { get; set; }
         public IDbSet<UserRole> UserRoles { get; set; }
         public IDbSet<Employee> Employees { get; set; }
+        public IDbSet<Department> Departments { get; set; }
 
         public virtual void Commit()
         {
@@ -44,6 +45,7 @@ namespace CompanyStore.Data
             modelBuilder.Configurations.Add(new UserConfiguration());
             modelBuilder.Configurations.Add(new UserRoleConfiguration());
             modelBuilder.Configurations.Add(new EmployeeConfiguration());
+            modelBuilder.Configurations.Add(new DepartmentConfiguration());
         }
     }
 }

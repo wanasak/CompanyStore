@@ -12,6 +12,7 @@
         $scope.cancel = cancel;
         $scope.updateEmployee = updateEmployee;
         $scope.removeEmployeeImage = removeEmployeeImage;
+        $scope.departments = [];
 
         // FileUpload
         //var uploader = $scope.uploader = new FileUploader();
@@ -70,6 +71,18 @@
             $modalInstance.dismiss();
         }
 
+        function loadDepartment() {
+            apiService.get("api/department", null,
+            loadDepartmentCompleted,
+            loadDepartmentFailed);
+        }
+        function loadDepartmentCompleted(result) {
+            $scope.departments = result.data;
+        }
+        function loadDepartmentFailed(response) {
+            $scope.errorMsg = response.data;
+        }
+
         // function ok() {
         //     $modalInstance.close();
         // }
@@ -79,6 +92,7 @@
         }
 
         loadEmployee();
+        loadDepartment();
 
     }
 

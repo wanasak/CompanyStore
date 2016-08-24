@@ -31,5 +31,8 @@ namespace CompanyStore.Web.Models
         public bool IsActive { get; set; }
         public string Gender { get; set; }
         public string Image { get; set; }
+
+        public int DepartmentID { get; set; }
+        public string DepartmentName { get; set; }
     }
 }

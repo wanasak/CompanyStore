@@ -31,6 +31,11 @@
                 controller: "employeeAddCtrl",
                 resolve: { isAuthenticated: isAuthenticated }
             })
+            .when("/employee/:id", {
+                templateUrl: "scripts/spa/employee/detail/employeeDetail.html",
+                controller: "employeeDetailCtrl",
+                resolve: { isAuthenticated: isAuthenticated }
+            })
             .when("/device", {
                 templateUrl: "scripts/spa/device/device.html",
                 controller: "deviceCtrl"

@@ -179,9 +179,9 @@ ul.pagination > li
 }
 
 /*Validation Errors*/
-.has-error .control-label {
+/*.has-error .control-label {
     color: #FFB658 !important;
-}
+}*/
 
 .movieDescription {
     margin-left: 335px;

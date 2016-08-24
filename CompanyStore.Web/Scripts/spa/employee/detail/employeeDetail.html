@@ -1,0 +1,62 @@
+<br />
+<div class="row">
+    <div class="col-md-6">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">Employee Information</h3>
+            </div>
+            <div class="panel-body">
+                
+                <div class="media">
+                    <a class="pull-left" href="#">
+                        <img class="media-object" height="120" ng-src="../../Content/images/employees/{{employee.Image}}" alt="" />
+                    </a>
+                    <div class="media-body">
+                        <h4 class="media-heading">{{ employee.FullName }}</h4>
+                        <table class="table table-striped">
+                            <tbody>
+                                <tr>
+                                    <td>Department:</td>
+                                    <td>{{ employee.DepartmentName }}</td>
+                                </tr>
+                                <tr>
+                                    <td>First:</td>
+                                    <td>{{ employee.FirstName }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Last:</td>
+                                    <td>{{ employee.LastName }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Email:</td>
+                                    <td>{{ employee.Email }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Status:</td>
+                                    <td>
+                                        <available-device is-available="{{employee.IsActive}}"></available-device>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Created Date:</td>
+                                    <td>{{ employee.CreatedDate | date: 'MMM d,y' }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">Rental Information</h3>
+            </div>
+            <div class="panel-body">
+                Panel content
+            </div>
+        </div>
+    </div>
+</div>

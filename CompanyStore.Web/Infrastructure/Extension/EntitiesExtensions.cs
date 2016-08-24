@@ -28,6 +28,7 @@ namespace CompanyStore.Web.Infrastructure.Extension
             employee.IsActive = model.IsActive;
             employee.Gender = model.Gender;
             employee.Image = model.Image;
+            employee.DepartmentID = model.DepartmentID;
             //employee.UniqueKey = Guid.NewGuid();
         }
     }

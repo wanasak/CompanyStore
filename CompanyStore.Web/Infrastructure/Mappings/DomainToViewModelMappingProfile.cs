@@ -28,7 +28,9 @@ namespace CompanyStore.Web.Infrastructure.Mappings
                 .ForMember(vm => vm.NumberOfDevices, 
                 map => map.MapFrom(c => c.Devices.Count()));
             Mapper.CreateMap<Stock, StockViewModel>();
-            Mapper.CreateMap<Employee, EmployeeViewModel>();
+            Mapper.CreateMap<Employee, EmployeeViewModel>()
+                .ForMember(vm => vm.DepartmentName, map => map.MapFrom(e => e.Department.Name));
+            Mapper.CreateMap<Department, DepartmentViewModel>();
         }
     }
 }

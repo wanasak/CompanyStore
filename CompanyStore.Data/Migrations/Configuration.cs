@@ -29,6 +29,8 @@ namespace CompanyStore.Data.Migrations
             //    );
             //
 
+            // Create Department
+            context.Departments.AddOrUpdate(e => e.Name, GenerateDepartments());
             // Create Employees
             context.Employees.AddOrUpdate(e => e.FirstName, GenerateEmployees());
             //  Create Genres
@@ -280,7 +282,8 @@ namespace CompanyStore.Data.Migrations
                     IsActive = i % 9 == 0 ? false : true,
                     Gender = i % 7 == 0 ? "M" : "F",
                     UniqueKey = Guid.NewGuid(),
-                    CreatedDate =  DateTime.Now.AddDays(i)                   
+                    CreatedDate =  DateTime.Now.AddDays(i),
+                    DepartmentID = MockData.RandomNumber.Next(1, 7)
                 };
                 employees.Add(emp);
             }
@@ -310,6 +313,52 @@ namespace CompanyStore.Data.Migrations
             }
 
             return stocks.ToArray();
+        }
+
+        private Department[] GenerateDepartments()
+        {
+            DateTime dateFrom = DateTime.Now.AddYears(-10);
+            DateTime dateTo = DateTime.Now.AddYears(5);
+            List<Department> departments = new List<Department>()
+            {
+                new Department()
+                {
+                    Name = "Engineering",
+                    StartDate = MockData.Utils.RandomDate(dateFrom, dateTo)
+                },
+                new Department()
+                {
+                    Name = "Economics",
+                    StartDate = MockData.Utils.RandomDate(dateFrom, dateTo)
+                },
+                new Department()
+                {
+                    Name = "Mathematics",
+                    StartDate = MockData.Utils.RandomDate(dateFrom, dateTo)
+                },
+                new Department()
+                {
+                    Name = "English",
+                    StartDate = MockData.Utils.RandomDate(dateFrom, dateTo)
+                },
+                new Department()
+                {
+                    Name = "Nurse",
+                    StartDate = MockData.Utils.RandomDate(dateFrom, dateTo)
+                },
+                new Department()
+                {
+                    Name = "Medicine",
+                    StartDate = MockData.Utils.RandomDate(dateFrom, dateTo)
+                },
+                new Department()
+                {
+                    Name = "Human",
+                    StartDate = MockData.Utils.RandomDate(dateFrom, dateTo)
+                }
+            };
+            
+            return departments.ToArray();
         }
     }
 }
