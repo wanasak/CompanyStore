@@ -4,6 +4,7 @@ using CompanyStore.Data.Repository;
 using CompanyStore.Entity;
 using CompanyStore.Web.Infrastructure.Core;
 using CompanyStore.Web.Models;
+using CompanyStore.Data.Extension;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -38,6 +39,22 @@ namespace CompanyStore.Web.Controllers
                 IEnumerable<DepartmentViewModel> departmentsVM = Mapper.Map<IEnumerable<Department>, IEnumerable<DepartmentViewModel>>(departments);
 
                 response = request.CreateResponse<IEnumerable<DepartmentViewModel>>(HttpStatusCode.OK, departmentsVM);
+
+                return response;
+            });
+        }
+
+        [HttpGet]
+        [Route("employee/chart")]
+        public HttpResponseMessage DepartmentByEmployee(HttpRequestMessage request)
+        {
+            return CreateHttpResponseMessage(request, () =>
+            {
+                HttpResponseMessage response = null;
+
+                var result = _departmentRepository.GetDepartmentEmployeeChart();
+
+                response = request.CreateResponse(HttpStatusCode.OK, result);
 
                 return response;
             });

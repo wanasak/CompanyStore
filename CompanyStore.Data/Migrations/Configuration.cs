@@ -270,6 +270,8 @@ namespace CompanyStore.Data.Migrations
 
         private Employee[] GenerateEmployees()
         {
+            DateTime dateFrom = DateTime.Now.AddYears(-10);
+            DateTime dateTo = DateTime.Now.AddYears(5);
             List<Employee> employees = new List<Employee>();
 
             for (int i = 0; i < 200; i++)
@@ -282,8 +284,8 @@ namespace CompanyStore.Data.Migrations
                     IsActive = i % 9 == 0 ? false : true,
                     Gender = i % 7 == 0 ? "M" : "F",
                     UniqueKey = Guid.NewGuid(),
-                    CreatedDate =  DateTime.Now.AddDays(i),
-                    DepartmentID = MockData.RandomNumber.Next(1, 7)
+                    CreatedDate = MockData.Utils.RandomDate(dateFrom, dateTo),
+                    DepartmentID = MockData.RandomNumber.Next(1, 8)
                 };
                 employees.Add(emp);
             }

@@ -50,9 +50,9 @@
                 controller: "deviceDetailCtrl",
                 resolve: { isAuthenticated: isAuthenticated }
             })
-            .when("/rental", {
-                templateUrl: "scripts/spa/rental/rental.html",
-                controller: "rentalCtrl",
+            .when("/chart", {
+                templateUrl: "scripts/spa/chart/chart.html",
+                controller: "chartCtrl",
                 resolve: { isAuthenticated: isAuthenticated }
             })
             .otherwise({ redirectTo: "/" });

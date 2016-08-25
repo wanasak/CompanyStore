@@ -30,7 +30,9 @@ namespace CompanyStore.Web.Infrastructure.Mappings
             Mapper.CreateMap<Stock, StockViewModel>();
             Mapper.CreateMap<Employee, EmployeeViewModel>()
                 .ForMember(vm => vm.DepartmentName, map => map.MapFrom(e => e.Department.Name));
-            Mapper.CreateMap<Department, DepartmentViewModel>();
+            Mapper.CreateMap<Department, DepartmentViewModel>()
+                .ForMember(vm => vm.NumberOfEmployee,
+                map => map.MapFrom(d => d.Employees.Count()));
         }
     }
 }
