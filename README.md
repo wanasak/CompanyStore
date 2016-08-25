@@ -14,5 +14,7 @@ Installation instructors
 5. Run CompanyStore.Web application
 
 Account infomation
+
 Username: smudger
+
 Password: test
