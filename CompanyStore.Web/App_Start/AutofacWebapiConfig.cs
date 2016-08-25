@@ -44,6 +44,7 @@ namespace CompanyStore.Web.App_Start
             // Service
             builder.RegisterType<EncryptionService>().As<IEncryptionService>().InstancePerRequest();
             builder.RegisterType<MembershipService>().As<IMembershipService>().InstancePerRequest();
+            builder.RegisterType<DepartmentService>().As<IDepartmentService>().InstancePerRequest();
 
             Container = builder.Build();
             return Container;

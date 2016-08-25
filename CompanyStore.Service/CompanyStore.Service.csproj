@@ -41,6 +41,7 @@
   <ItemGroup>
     <Compile Include="Abstract\IEncryptionService.cs" />
     <Compile Include="Abstract\IMembershipService.cs" />
+    <Compile Include="DepartmentService.cs" />
     <Compile Include="EncryptionService.cs" />
     <Compile Include="MembershipContext.cs" />
     <Compile Include="MembershipService.cs" />

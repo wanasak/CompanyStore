@@ -1,16 +1,15 @@
 ﻿using AutoMapper;
 using CompanyStore.Data.Infrastructure;
-using CompanyStore.Data.Repository;
 using CompanyStore.Entity;
 using CompanyStore.Web.Infrastructure.Core;
 using CompanyStore.Web.Models;
-using CompanyStore.Data.Extension;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using CompanyStore.Service;
 
 namespace CompanyStore.Web.Controllers
 {
@@ -18,13 +17,13 @@ namespace CompanyStore.Web.Controllers
     [RoutePrefix("api/department")]
     public class DepartmentController : ApiControllerBase
     {
-        private readonly IEntityBaseRepository<Department> _departmentRepository;
+        private readonly IDepartmentService _departmentService;
 
-        public DepartmentController(IEntityBaseRepository<Department> departmentRepository,
+        public DepartmentController(IDepartmentService departmentService,
             IUnitOfWork _unitOfWork)
             : base(_unitOfWork)
         {
-            _departmentRepository = departmentRepository;
+            _departmentService = departmentService;
         }
 
         [HttpGet]
@@ -34,7 +33,7 @@ namespace CompanyStore.Web.Controllers
             {
                 HttpResponseMessage response = null;
 
-                var departments = _departmentRepository.GetAll().ToList();
+                var departments = _departmentService.GetDepartments();
 
                 IEnumerable<DepartmentViewModel> departmentsVM = Mapper.Map<IEnumerable<Department>, IEnumerable<DepartmentViewModel>>(departments);
 
@@ -52,7 +51,7 @@ namespace CompanyStore.Web.Controllers
             {
                 HttpResponseMessage response = null;
 
-                var result = _departmentRepository.GetDepartmentEmployeeChart();
+                var result = _departmentService.GetDepartmentEmployeeChart();
 
                 response = request.CreateResponse(HttpStatusCode.OK, result);
 
