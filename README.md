@@ -12,3 +12,7 @@ Installation instructors
   >> update-database
 
 5. Run CompanyStore.Web application
+
+Account infomation
+Username: smudger
+Password: test
