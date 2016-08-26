@@ -26,7 +26,6 @@
         function loadEmployeeFailed(response) { notificationService.displayError(response.data); }
         // Load Rentals
         function loadEmployeeRentals() {
-            console.log('d');
             apiService.get("api/rental/employee/" + $routeParams.id + "/" + $scope.filterStatus, null,
                 loadEmployeeRentalsCompleted,
                 loadEmployeeRentalsFailed);
