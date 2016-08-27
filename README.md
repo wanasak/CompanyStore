@@ -13,8 +13,8 @@ Installation instructors
 
 5. Run CompanyStore.Web application
 
-Account infomation
+Account Infomation
 
-Username: smudger
+- Username: smudger
 
-Password: test
+- Password: test
