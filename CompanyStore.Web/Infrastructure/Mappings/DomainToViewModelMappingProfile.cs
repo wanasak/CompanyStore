@@ -26,13 +26,18 @@ namespace CompanyStore.Web.Infrastructure.Mappings
                 .ForMember(vm => vm.NumberOfStocksAvaiable, map => map.MapFrom(d => d.Stocks.Where(s => s.IsAvailable).Count()));
             Mapper.CreateMap<Category, CategoryViewModel>()
                 .ForMember(vm => vm.NumberOfDevices, 
-                map => map.MapFrom(c => c.Devices.Count()));
+                    map => map.MapFrom(c => c.Devices.Count()));
             Mapper.CreateMap<Stock, StockViewModel>();
             Mapper.CreateMap<Employee, EmployeeViewModel>()
                 .ForMember(vm => vm.DepartmentName, map => map.MapFrom(e => e.Department.Name));
             Mapper.CreateMap<Department, DepartmentViewModel>()
                 .ForMember(vm => vm.NumberOfEmployee,
-                map => map.MapFrom(d => d.Employees.Count()));
+                    map => map.MapFrom(d => d.Employees.Count()));
+            Mapper.CreateMap<Rental, RentalHistoryViewModel>()
+                .ForMember(vm => vm.Employee,
+                    map => map.MapFrom(r => string.Format("{0} {1}", r.Employee.FirstName, r.Employee.LastName)))
+                .ForMember(vm => vm.Device,
+                    map => map.MapFrom(r => r.Stock.Device.Name));
         }
     }
 }

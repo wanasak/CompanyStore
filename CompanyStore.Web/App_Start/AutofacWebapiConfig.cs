@@ -42,9 +42,12 @@ namespace CompanyStore.Web.App_Start
             builder.RegisterGeneric(typeof(EntityBaseRepository<>)).As(typeof(IEntityBaseRepository<>)).InstancePerRequest();
             
             // Service
-            builder.RegisterType<EncryptionService>().As<IEncryptionService>().InstancePerRequest();
-            builder.RegisterType<MembershipService>().As<IMembershipService>().InstancePerRequest();
-            builder.RegisterType<DepartmentService>().As<IDepartmentService>().InstancePerRequest();
+            //builder.RegisterType<EncryptionService>().As<IEncryptionService>().InstancePerRequest();
+            //builder.RegisterType<MembershipService>().As<IMembershipService>().InstancePerRequest();
+            //builder.RegisterType<DepartmentService>().As<IDepartmentService>().InstancePerRequest();
+            builder.RegisterAssemblyTypes(typeof(EncryptionService).Assembly)
+                .Where(t => t.Name.EndsWith("Service"))
+                .AsImplementedInterfaces().InstancePerRequest();
 
             Container = builder.Build();
             return Container;

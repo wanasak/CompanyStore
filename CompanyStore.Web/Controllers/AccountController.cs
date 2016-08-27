@@ -73,7 +73,7 @@ namespace CompanyStore.Web.Controllers
                     Entity.User user = _membershipService.CreateUser(
                         createUser,
                         model.Password,
-                        new int[] { 1 });
+                        new int[] { 1 }); // Admin role
                     if (user != null)
                         response = request.CreateResponse(HttpStatusCode.OK, new { success = true });
                     else

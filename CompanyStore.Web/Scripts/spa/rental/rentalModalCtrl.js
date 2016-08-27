@@ -37,7 +37,8 @@
             $modalInstance.close();
         }
         function rentFailed(response) {
-            notificationService.displayError(response.data.Message);
+            //notificationService.displayError(response.data);
+            $scope.errorMsg = response.data;
         }
 
         function selectEmployee($item) {

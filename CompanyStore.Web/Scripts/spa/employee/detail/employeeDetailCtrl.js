@@ -7,6 +7,9 @@
 
     function employeeDetailCtrl($scope, apiService, notificationService, $routeParams) {
 
+        // Morris Chart
+        var rentalHistoryChart = null;
+
         $scope.employee = {};
         $scope.rentals = [];
         $scope.returnDevice = returnDevice;
@@ -30,7 +33,23 @@
                 loadEmployeeRentalsCompleted,
                 loadEmployeeRentalsFailed);
         }
-        function loadEmployeeRentalsCompleted(result) { $scope.rentals = result.data; }
+        function loadEmployeeRentalsCompleted(result) { 
+            $scope.rentals = result.data.RentalHistories; 
+            var data = result.data.TotalRentalsByDate;
+            if (!rentalHistoryChart) {
+                rentalHistoryChart = Morris.Line({
+                    element: 'rentalHistoryByDateChart',
+                    data: data.length ? data : [ { Date: "No Rental Data", TotalRentals: 0 } ],
+                    xkey: 'Date',
+                    xLabels: 'day',
+                    ykeys: ['TotalRentals'],
+                    labels: ['Total'],
+                    resize: true
+                });
+            } else {
+                rentalHistoryChart.setData(data);
+            }
+        }
         function loadEmployeeRentalsFailed(response) { notificationService.displayError(response.data); }
         // Return Rental
         function returnDevice(rentalID) {

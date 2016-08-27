@@ -13,9 +13,11 @@ namespace CompanyStore.Data.Extension
         public static IEnumerable<Rental> GetRentalByEmployeeID(this IEntityBaseRepository<Rental> rentalRepository, int employeeID, string status)
         {
             if (!string.IsNullOrEmpty(status) && status.ToLower() != "all")
-                return rentalRepository.GetAll().Where(r => r.EmployeeID == employeeID && r.Status.ToLower() == status.ToLower());
+                return rentalRepository.GetAll()
+                    .Where(r => r.EmployeeID == employeeID && r.Status.ToLower() == status.ToLower());
             else
-                return rentalRepository.GetAll().Where(r => r.EmployeeID == employeeID);
+                return rentalRepository.GetAll()
+                    .Where(r => r.EmployeeID == employeeID);
         }
     }
 }

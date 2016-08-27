@@ -15,7 +15,7 @@
                             alt="" style="height: 120px;">
                     </a>
                     <div class="media-body">
-                        <h4 class="media-heading">{{ employee.FullName }}</h4>
+                        <h4 class="media-heading"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> {{ employee.FullName }}</h4>
                         <table class="table table-striped">
                             <tbody>
                                 <tr>
@@ -51,6 +51,14 @@
 
             </div>
         </div>
+        <div class="panel panel-success">
+              <div class="panel-heading">
+                    <h3 class="panel-title">Rantal History by Date</h3>
+              </div>
+              <div class="panel-body">
+                    <div id="rentalHistoryByDateChart"></div>
+              </div>
+        </div>
     </div>
     <div class="col-md-6">
         <div class="panel panel-danger">
@@ -74,8 +82,8 @@
                     </select>
                     </div>
                 </form>
-                <div class="table-responsive">
-                    <table class="table table-bordered">
+                <div class="table-responsive" style="overflow-y: auto; max-height: 540px;">
+                    <table class="table table-bordered" >
                         <thead>
                             <th>#</th>
                             <th>Device</th>
