@@ -12,7 +12,6 @@ namespace CompanyStore.Service
     public interface IRentalService
     {
         IEnumerable<Rental> GetRentalsByEmployeeID(int employeeID);
-        //IEnumerable<Rental> GetRentalsByEmployeeID(int employeeID, string status = null);
         void RentRental(int employeeID, int stockID);
         void ReturnRental(int rentalID);
         IEnumerable<Rental> GetRentalHistoryByDeviceID(int deviceID);

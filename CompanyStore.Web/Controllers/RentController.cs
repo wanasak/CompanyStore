@@ -88,12 +88,17 @@ namespace CompanyStore.Web.Controllers
                 HttpResponseMessage response = null;
                 RentalViewModel rentalVM = new RentalViewModel();
                 var rentals = _rentalService.GetRentalsByEmployeeID(employeeID);
-                rentalVM.TotalRentalsByDate = rentals.GroupBy(r => r.RentalDate.Date)
+
+                rentalVM.TotalRentalsByDate = rentals
+                    .GroupBy(r => r.RentalDate.Date)
                     .Select(g => new TotalRentalByDateViewModel
                     {
                         Date = g.Key,
                         TotalRentals = g.Count()
                     }).ToList();
+
+                if (!string.IsNullOrEmpty(status) && status.ToLower() != "all")
+                    rentals = rentals.Where(r => r.Status.ToLower() == status.ToLower());
 
                 rentalVM.RentalHistories = Mapper.Map<IEnumerable<Rental>, IEnumerable<RentalHistoryViewModel>>(rentals);
 
