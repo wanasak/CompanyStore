@@ -92,7 +92,7 @@
                             <th></th>
                         </thead>
                         <tbody>
-                            <tr ng-repeat="rental in rentals | filter:filterRentals">
+                            <tr ng-repeat="rental in rentals | filter:filterRentals | orderBy:'-ID' ">
                                 <td>{{ rental.ID }}</td>
                                 <td>{{ rental.Device }}</td>
                                 <td>{{ rental.RentalDate | date:'fullDate' }}</td>
