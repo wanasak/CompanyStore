@@ -52,38 +52,41 @@
             </div>
         </div>
         <div class="panel panel-success">
-              <div class="panel-heading">
-                    <h3 class="panel-title">Rantal History by Date</h3>
-              </div>
-              <div class="panel-body">
-                    <div id="rentalHistoryByDateChart"></div>
-              </div>
+            <div class="panel-heading">
+                <h3 class="panel-title">Rantal History by Date</h3>
+            </div>
+            <div class="panel-body">
+                <div id="rentalHistoryByDateChart"></div>
+            </div>
         </div>
     </div>
     <div class="col-md-6">
         <div class="panel panel-danger">
             <div class="panel-heading">
-                <h5 class="pull-left">Rental History</h3>
-                    <div class="input-group">
-                        <input type="search" ng-model="filterRentals" class="form-control" placeholder="Filter...">
-                        <div class="input-group-btn">
-                            <button class="btn btn-danger" ng-click="clearSearch()"><i class="glyphicon glyphicon-remove-sign"></i></button>
-                        </div>
-                    </div>
+                <h5 class="panel-title">Rental History</h3>
             </div>
             <div class="panel-body">
                 <form class="form-inline">
                     <div class="form-group">
+                        <label for="filterRentals">Name:</label>
+                        <div class="input-group">
+                            <input type="search" ng-model="filterRentals" class="form-control" placeholder="Filter...">
+                            <div class="input-group-btn">
+                                <button class="btn btn-danger" ng-click="clearSearch()"><i class="glyphicon glyphicon-remove-sign"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
                         <label for="filterStatus">Status:</label>
-                        <select name="filterStatus" ng-model="filterStatus" class="form-control" required="required">
-                        <option value="">All</option>
-                        <option value="Borrowed">Borrowed</option>
-                        <option value="Returned">Returned</option>
-                    </select>
+                        <select name="filterStatus" ng-model="filterStatus" class="form-control">
+                            <option value="">All</option>
+                            <option value="Borrowed">Borrowed</option>
+                            <option value="Returned">Returned</option>
+                        </select>
                     </div>
                 </form>
                 <div class="table-responsive" style="overflow-y: auto; max-height: 540px;">
-                    <table class="table table-bordered" >
+                    <table class="table table-bordered">
                         <thead>
                             <th>#</th>
                             <th>Device</th>
@@ -92,7 +95,7 @@
                             <th></th>
                         </thead>
                         <tbody>
-                            <tr ng-repeat="rental in rentals | filter: { Device: filterRentals, Status:filterStatus } | orderBy:'-ID' ">
+                            <tr ng-repeat="rental in rentals | filter: { Device: filterRentals, Status: filterStatus } | orderBy:'-ID' ">
                                 <td>{{ rental.ID }}</td>
                                 <td>{{ rental.Device }}</td>
                                 <td>{{ rental.RentalDate | date:'fullDate' }}</td>
