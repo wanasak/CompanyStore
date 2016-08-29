@@ -9,7 +9,7 @@ Installation instructors
 4. Run the following commands
   >> add-migration initial
 
-  >> update-database
+  >> update-database -verbose
 
 5. Run CompanyStore.Web application
 
