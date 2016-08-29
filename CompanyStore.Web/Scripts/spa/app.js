@@ -27,7 +27,7 @@
                 resolve: { isAuthenticated: isAuthenticated }
             })
             .when("/employee/add", {
-                templateUrl: "scripts/spa/employee/employeeAdd.html",
+                templateUrl: "scripts/spa/employee/add/employeeAdd.html",
                 controller: "employeeAddCtrl",
                 resolve: { isAuthenticated: isAuthenticated }
             })
@@ -41,12 +41,12 @@
                 controller: "deviceCtrl"
             })
             .when("/device/add", {
-                templateUrl: "scripts/spa/device/deviceAdd.html",
+                templateUrl: "scripts/spa/device/add/deviceAdd.html",
                 controller: "deviceAddCtrl",
                 resolve: { isAuthenticated: isAuthenticated }
             })
             .when("/device/:id", {
-                templateUrl: "scripts/spa/device/deviceDetail.html",
+                templateUrl: "scripts/spa/device/detail/deviceDetail.html",
                 controller: "deviceDetailCtrl",
                 resolve: { isAuthenticated: isAuthenticated }
             })
