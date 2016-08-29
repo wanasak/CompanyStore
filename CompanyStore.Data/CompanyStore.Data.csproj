@@ -64,6 +64,7 @@
     <Compile Include="Configuration\UserConfiguration.cs" />
     <Compile Include="Configuration\UserRoleConfiguration.cs" />
     <Compile Include="Extension\DepartmentExtension.cs" />
+    <Compile Include="Extension\DeviceExtension.cs" />
     <Compile Include="Extension\EmployeeExtension.cs" />
     <Compile Include="Extension\RentalExtension.cs" />
     <Compile Include="Extension\StockExtension.cs" />

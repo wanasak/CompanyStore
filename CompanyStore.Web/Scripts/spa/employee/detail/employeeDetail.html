@@ -75,8 +75,8 @@
                 <form class="form-inline">
                     <div class="form-group">
                         <label for="filterStatus">Status:</label>
-                        <select name="filterStatus" ng-model="filterStatus" ng-change="loadEmployeeRentals()" class="form-control" required="required">
-                        <option value="All">All</option>
+                        <select name="filterStatus" ng-model="filterStatus" class="form-control" required="required">
+                        <option value="">All</option>
                         <option value="Borrowed">Borrowed</option>
                         <option value="Returned">Returned</option>
                     </select>
@@ -92,7 +92,7 @@
                             <th></th>
                         </thead>
                         <tbody>
-                            <tr ng-repeat="rental in rentals | filter:filterRentals | orderBy:'-ID' ">
+                            <tr ng-repeat="rental in rentals | filter: { Device: filterRentals, Status:filterStatus } | orderBy:'-ID' ">
                                 <td>{{ rental.ID }}</td>
                                 <td>{{ rental.Device }}</td>
                                 <td>{{ rental.RentalDate | date:'fullDate' }}</td>

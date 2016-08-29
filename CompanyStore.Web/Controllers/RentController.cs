@@ -80,8 +80,8 @@ namespace CompanyStore.Web.Controllers
         }
 
         [HttpGet]
-        [Route("employee/{employeeID:int}/{status?}")]
-        public HttpResponseMessage GetRentalEmployee(HttpRequestMessage request, int employeeID, string status = null)
+        [Route("employee/{employeeID:int}")]
+        public HttpResponseMessage GetRentalEmployee(HttpRequestMessage request, int employeeID)
         {
             return CreateHttpResponseMessage(request, () =>
             {
@@ -96,9 +96,6 @@ namespace CompanyStore.Web.Controllers
                         Date = g.Key,
                         TotalRentals = g.Count()
                     }).ToList();
-
-                if (!string.IsNullOrEmpty(status) && status.ToLower() != "all")
-                    rentals = rentals.Where(r => r.Status.ToLower() == status.ToLower());
 
                 rentalVM.RentalHistories = Mapper.Map<IEnumerable<Rental>, IEnumerable<RentalHistoryViewModel>>(rentals);
 
