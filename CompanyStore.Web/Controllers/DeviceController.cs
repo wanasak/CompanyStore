@@ -14,6 +14,7 @@ using System.Net.Http;
 using System.Web.Http;
 using System.Web;
 using System.IO;
+using CompanyStore.Service;
 
 namespace CompanyStore.Web.Controllers
 {
@@ -22,13 +23,16 @@ namespace CompanyStore.Web.Controllers
     public class DeviceController : ApiControllerBase
     {
         private readonly IEntityBaseRepository<Device> _deviceRepository;
+        private readonly IDeviceService _deviceService;
 
         public DeviceController(
             IEntityBaseRepository<Device> deviceRepository, 
+            IDeviceService deviceService,
             IUnitOfWork _unitOfWork)
             : base(_unitOfWork)
         {
             _deviceRepository = deviceRepository;
+            _deviceService = deviceService;
         }
 
         [AllowAnonymous]
@@ -39,10 +43,7 @@ namespace CompanyStore.Web.Controllers
             {
                 HttpResponseMessage response = null;
 
-                var devices = _deviceRepository.GetAll()
-                    .OrderByDescending(d => new { d.CreatedDate, d.ID })
-                    .Take(6)
-                    .ToList();
+                var devices = _deviceService.GetLatestDevices(6);
 
                 IEnumerable<DeviceViewModel> deviceVM = Mapper.Map<IEnumerable<Device>, IEnumerable<DeviceViewModel>>(devices);
 
@@ -116,7 +117,7 @@ namespace CompanyStore.Web.Controllers
             {
                 HttpResponseMessage response = null;
 
-                var device = _deviceRepository.GetSingle(id);
+                var device = _deviceService.GetDevice(id);
 
                 DeviceViewModel deviceVM = Mapper.Map<Device, DeviceViewModel>(device);
 
@@ -140,18 +141,19 @@ namespace CompanyStore.Web.Controllers
                 {
                     Device newDevice = new Device();
                     newDevice.MapDevice(model);
-                    for (int i = 0; i < model.NumberOfStocks; i++)
-                    {
-                        Stock stock = new Stock()
-                        {
-                            IsAvailable = true,
-                            UniqueKey = Guid.NewGuid(),
-                            Device = newDevice
-                        };
-                        newDevice.Stocks.Add(stock);
-                    }
-                    _deviceRepository.Add(newDevice);
-                    _unitOfWork.Commit();
+                    _deviceService.CreateDevice(newDevice);
+                    //for (int i = 0; i < model.NumberOfStocks; i++)
+                    //{
+                    //    Stock stock = new Stock()
+                    //    {
+                    //        IsAvailable = true,
+                    //        UniqueKey = Guid.NewGuid(),
+                    //        Device = newDevice
+                    //    };
+                    //    newDevice.Stocks.Add(stock);
+                    //}
+                    //_deviceRepository.Add(newDevice);
+                    //_unitOfWork.Commit();
 
                     response = request.CreateResponse(HttpStatusCode.OK, newDevice.ID);
                 }
@@ -193,6 +195,19 @@ namespace CompanyStore.Web.Controllers
 
                     response = request.CreateResponse(HttpStatusCode.OK, result);
                 }
+                return response;
+            });
+        }
+
+        [HttpDelete]
+        [Route("{deviceID:int}")]
+        public HttpResponseMessage Delete(HttpRequestMessage request, int deviceID)
+        {
+            return CreateHttpResponseMessage(request, () =>
+            {
+                HttpResponseMessage response = null;
+                _deviceService.DeleteDevice(deviceID);
+                response = request.CreateResponse(HttpStatusCode.OK);
                 return response;
             });
         }

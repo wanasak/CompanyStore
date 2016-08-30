@@ -18,6 +18,17 @@ namespace CompanyStore.Web.Infrastructure.Extension
             device.CreatedDate = model.CreatedDate == DateTime.MinValue ? DateTime.Now : model.CreatedDate;
             device.Image = model.Image;
             device.CategoryID = model.CategoryID;
+
+            for (int i = 0; i < model.NumberOfStocks; i++)
+            {
+                Stock stock = new Stock()
+                {
+                    IsAvailable = true,
+                    UniqueKey = Guid.NewGuid(),
+                    Device = device
+                };
+                device.Stocks.Add(stock);
+            }
         }
         public static void MapEmployee(this Employee employee, EmployeeViewModel model)
         {

@@ -3,12 +3,13 @@
 
     app.controller('deviceDetailCtrl', deviceDetailCtrl);
 
-    deviceDetailCtrl.$inject = ['$scope', 'apiService', '$routeParams', 'notificationService', '$modal'];
+    deviceDetailCtrl.$inject = ['$scope', 'apiService', '$routeParams', 'notificationService', '$modal', '$location'];
 
-    function deviceDetailCtrl($scope, apiService, $routeParams, notificationService, $modal) {
+    function deviceDetailCtrl($scope, apiService, $routeParams, notificationService, $modal, $location) {
 
         $scope.device = {};
         $scope.openRentModal = openRentModal;
+        $scope.openDeleteModal = openDeleteModal;
         $scope.rentalHistory = [];
         $scope.returnDevice = returnDevice;
         $scope.getStatusColor = getStatusColor;
@@ -31,6 +32,24 @@
                 //     notificationService.displayError(error);
                 // }
             });
+        }
+        function openDeleteModal(id) {
+            $modal.open({
+                templateUrl: "scripts/spa/device/deleteDeviceModal.html",
+                controller: "deleteDeviceModalCtrl",
+                scope: $scope
+            }).result.then(function () {
+                apiService.delete("api/device/" + id, null,
+                deleteDeviceCompleted,
+                deleteDeviceFailed);
+            }, function (error) {
+            });
+        }
+        function deleteDeviceCompleted(result) {
+            $location.path("#/device");
+        }
+        function deleteDeviceFailed(response) {
+            notificationService.displayError(response.data);
         }
         // Load Device Detail
         function loadDeviceDetail() {
@@ -57,7 +76,7 @@
         }
         function loadRentalHistoryFailed(response) {
             notificationService.displayError(response.data);
-        }   
+        }
         // Return Rental
         function returnDevice(rentalID) {
             apiService.post("api/rental/return/" + rentalID,
