@@ -9,13 +9,11 @@ namespace CompanyStore.Data.Migrations
 
     internal sealed class Configuration : DbMigrationsConfiguration<CompanyStore.Data.CompanyStoreContext>
     {
-        private readonly DateTime _dateFrom;
-        private readonly DateTime _dateTo;
+        private DateTime _dateFrom = DateTime.Now.AddYears(-15);
+        private DateTime _dateTo = DateTime.Now;
 
         public Configuration()
         {
-            _dateFrom = DateTime.Now.AddYears(-15);
-            _dateTo = DateTime.Now;
             AutomaticMigrationsEnabled = false;
         }
 
@@ -35,7 +33,7 @@ namespace CompanyStore.Data.Migrations
             //
 
             // Create Department
-            context.Departments.AddOrUpdate(e => e.Name, GenerateDepartments());
+            context.Departments.AddOrUpdate(e => e.Name, MockDataInitializer.GenerateDepartments());
             // Create Employees
             context.Employees.AddOrUpdate(e => e.FirstName, GenerateEmployees());
             //  Create Genres
@@ -320,49 +318,49 @@ namespace CompanyStore.Data.Migrations
             return stocks.ToArray();
         }
 
-        private Department[] GenerateDepartments()
-        {
+        //private Department[] GenerateDepartments()
+        //{
             
-            List<Department> departments = new List<Department>()
-            {
-                new Department()
-                {
-                    Name = "Engineering",
-                    StartDate = MockData.Utils.RandomDate(_dateFrom, _dateTo)
-                },
-                new Department()
-                {
-                    Name = "Economics",
-                    StartDate = MockData.Utils.RandomDate(_dateFrom, _dateTo)
-                },
-                new Department()
-                {
-                    Name = "Mathematics",
-                    StartDate = MockData.Utils.RandomDate(_dateFrom, _dateTo)
-                },
-                new Department()
-                {
-                    Name = "English",
-                    StartDate = MockData.Utils.RandomDate(_dateFrom, _dateTo)
-                },
-                new Department()
-                {
-                    Name = "Nurse",
-                    StartDate = MockData.Utils.RandomDate(_dateFrom, _dateTo)
-                },
-                new Department()
-                {
-                    Name = "Medicine",
-                    StartDate = MockData.Utils.RandomDate(_dateFrom, _dateTo)
-                },
-                new Department()
-                {
-                    Name = "Human",
-                    StartDate = MockData.Utils.RandomDate(_dateFrom, _dateTo)
-                }
-            };
+        //    List<Department> departments = new List<Department>()
+        //    {
+        //        new Department()
+        //        {
+        //            Name = "Engineering",
+        //            StartDate = MockData.Utils.RandomDate(_dateFrom, _dateTo)
+        //        },
+        //        new Department()
+        //        {
+        //            Name = "Economics",
+        //            StartDate = MockData.Utils.RandomDate(_dateFrom, _dateTo)
+        //        },
+        //        new Department()
+        //        {
+        //            Name = "Mathematics",
+        //            StartDate = MockData.Utils.RandomDate(_dateFrom, _dateTo)
+        //        },
+        //        new Department()
+        //        {
+        //            Name = "English",
+        //            StartDate = MockData.Utils.RandomDate(_dateFrom, _dateTo)
+        //        },
+        //        new Department()
+        //        {
+        //            Name = "Nurse",
+        //            StartDate = MockData.Utils.RandomDate(_dateFrom, _dateTo)
+        //        },
+        //        new Department()
+        //        {
+        //            Name = "Medicine",
+        //            StartDate = MockData.Utils.RandomDate(_dateFrom, _dateTo)
+        //        },
+        //        new Department()
+        //        {
+        //            Name = "Human",
+        //            StartDate = MockData.Utils.RandomDate(_dateFrom, _dateTo)
+        //        }
+        //    };
             
-            return departments.ToArray();
-        }
+        //    return departments.ToArray();
+        //}
     }
 }

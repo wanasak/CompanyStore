@@ -75,6 +75,7 @@
     <Compile Include="Infrastructure\IUnitOfWork.cs" />
     <Compile Include="Infrastructure\UnitOfWork.cs" />
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="MockDataInitializer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\EntityBaseRepository.cs" />
     <Compile Include="Repository\IEntityBaseRepository.cs" />

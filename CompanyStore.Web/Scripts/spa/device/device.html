@@ -22,6 +22,18 @@
                     <div class="col-xs-4"></div>
                 </div>
                 <div class="row">
+                    <div class="col-md-12">
+                        <form class="form-inline" role="form">
+                            <div class="form-group">
+                                <label for="filterCategory">Category:</label>
+                                <select name="filterCategory" ng-model="filterCategory" class="form-control">
+                                <option value="">All</option>
+                                <option ng-repeat="c in categories" value="{{ c.ID }}">{{ c.Name }}</option>
+                            </select>
+                            </div>
+                            <!--<button type="submit" class="btn btn-primary">Submit</button>-->
+                        </form>
+                    </div>
                     <div ng-repeat="device in devices | filter:filterDevices">
                         <div class="col-xs-12 col-sm-6 col-md-4">
                             <div class="panel panel-default">
@@ -29,7 +41,8 @@
                                 <div class="panel-body">
                                     <div class="media">
                                         <a class="media-left" href="#/device/{{device.ID}}" title="{{device.Description | limitTo:200}}">
-                                            <img ng-if="device.Image" class="media-object" height="120" ng-src="../../Content/images/devices/{{device.Image}}" alt="" />
+                                            <img ng-if="device.Image" class="media-object" height="120" ng-src="../../Content/images/devices/{{device.Image}}" alt=""
+                                            />
                                             <img ng-if="!device.Image" class="media-object" height="120" ng-src="../../Content/images/no-image.png" alt="" />
                                         </a>
                                         <div class="media-body">

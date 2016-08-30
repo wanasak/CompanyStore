@@ -9,6 +9,7 @@
 
         $scope.loadingDevices = true;
         $scope.devices = [];
+        $scope.categories = [];
         $scope.page = 0;
         $scope.pagesCount = 0;
         $scope.search = search;
@@ -29,7 +30,6 @@
             deviceLoadCompleted,
             deviceLoadFailed);
         }
-
         function deviceLoadCompleted(result) {
             $scope.devices = result.data.Items;
             $scope.page = result.data.Page;
@@ -40,13 +40,20 @@
         function deviceLoadFailed(response) {
             notificationService.displayError(response.data);
         }
-
+        function loadCategories() {
+            apiService.get("/api/category", null,
+            loadCategoriesCompleted,
+            loadCategoriesFailed);
+        }
+        function loadCategoriesCompleted(result) { $scope.categories = result.data; }
+        function loadCategoriesFailed(response) { notificationService.displayError(response.data); }
         function clearSearch() {
             $scope.filterDevices = '';
             search();
         }
 
         $scope.search();
+        loadCategories();
 
     }
 
