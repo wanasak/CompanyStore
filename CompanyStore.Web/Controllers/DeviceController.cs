@@ -54,43 +54,21 @@ namespace CompanyStore.Web.Controllers
         }
 
         [AllowAnonymous]
-        [HttpGet]   
-        [Route("{page:int=0}/{pageSize=9}/{filter?}")]
-        public HttpResponseMessage List(HttpRequestMessage request, int? page, int? pageSize, string filter = null)
+        [HttpGet]
+        [Route("{page:int=0}/{pageSize=9}/{filter?}/{category?}")]
+        public HttpResponseMessage List(HttpRequestMessage request, int? page, int? pageSize, string filter = null, string category = null)
         {
             int currentPage = page.Value;
             int currentPageSize = pageSize.Value;
-
+            
             return CreateHttpResponseMessage(request, () =>
             {
                 HttpResponseMessage response = null;
-
+                
                 IEnumerable<Device> devices = null;
                 int totalDevices = 0;
 
-                if (!string.IsNullOrEmpty(filter))
-                {
-                    devices = _deviceRepository
-                        .FindBy(d => d.Name.ToLower().Contains(filter.ToLower().Trim()))
-                        .OrderByDescending(d => new { d.CreatedDate, d.ID })
-                        .Skip(currentPage * currentPageSize)
-                        .Take(currentPageSize)
-                        .ToList();
-                    totalDevices = _deviceRepository
-                        .FindBy(m => m.Name.ToLower()
-                        .Contains(filter.ToLower().Trim()))
-                        .Count();
-                }
-                else
-                {
-                    devices = _deviceRepository
-                        .GetAll()
-                        .OrderByDescending(d => new { d.CreatedDate, d.ID })
-                        .Skip(currentPage * currentPageSize)
-                        .Take(currentPageSize)
-                        .ToList();
-                    totalDevices = _deviceRepository.GetAll().Count();
-                }
+                devices = _deviceService.GetDevices(currentPage, currentPageSize, out totalDevices, filter, category);
 
                 IEnumerable<DeviceViewModel> devicesVM = Mapper.Map<IEnumerable<Device>, IEnumerable<DeviceViewModel>>(devices);
 

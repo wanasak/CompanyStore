@@ -13,7 +13,8 @@ namespace CompanyStore.Data.Extension
         public static IEnumerable<Device> GetLatestDevices(this IEntityBaseRepository<Device> deviceRepository)
         {
             return deviceRepository.GetAll()
-                .OrderBy(d => new { d.CreatedDate, d.ID })
+                .OrderByDescending(d => d.CreatedDate)
+                .ThenByDescending(d => d.ID)
                 .Take(6);
         }
     }

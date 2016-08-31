@@ -26,7 +26,7 @@
                         <form class="form-inline" role="form">
                             <div class="form-group">
                                 <label for="filterCategory">Category:</label>
-                                <select name="filterCategory" ng-model="filterCategory" class="form-control">
+                                <select name="filterCategory" ng-model="filterCategory" class="form-control" ng-change="search()">
                                 <option value="">All</option>
                                 <option ng-repeat="c in categories" value="{{ c.ID }}">{{ c.Name }}</option>
                             </select>

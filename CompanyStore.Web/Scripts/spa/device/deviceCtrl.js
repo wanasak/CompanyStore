@@ -22,13 +22,14 @@
                 params: {
                     page: page,
                     pageSize: 6,
-                    filter: $scope.filterDevices
+                    filter: $scope.filterDevices,
+                    category: $scope.filterCategory
                 }
             };
 
             apiService.get("/api/device", config,
-            deviceLoadCompleted,
-            deviceLoadFailed);
+                deviceLoadCompleted,
+                deviceLoadFailed);
         }
         function deviceLoadCompleted(result) {
             $scope.devices = result.data.Items;
