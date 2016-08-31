@@ -142,18 +142,6 @@ namespace CompanyStore.Web.Controllers
                     Device newDevice = new Device();
                     newDevice.MapDevice(model);
                     _deviceService.CreateDevice(newDevice);
-                    //for (int i = 0; i < model.NumberOfStocks; i++)
-                    //{
-                    //    Stock stock = new Stock()
-                    //    {
-                    //        IsAvailable = true,
-                    //        UniqueKey = Guid.NewGuid(),
-                    //        Device = newDevice
-                    //    };
-                    //    newDevice.Stocks.Add(stock);
-                    //}
-                    //_deviceRepository.Add(newDevice);
-                    //_unitOfWork.Commit();
 
                     response = request.CreateResponse(HttpStatusCode.OK, newDevice.ID);
                 }
