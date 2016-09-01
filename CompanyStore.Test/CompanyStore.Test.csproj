@@ -139,6 +139,7 @@
   <ItemGroup>
     <Compile Include="Hosting\Startup.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\CategoryTestService.cs" />
     <Compile Include="Services\DepartmentTestService.cs" />
   </ItemGroup>
   <ItemGroup />

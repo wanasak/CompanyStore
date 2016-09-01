@@ -9,6 +9,23 @@ namespace CompanyStore.Data
 {
     public static class MockDataInitializer
     {
+        public static Category[] GenerateCategories()
+        {
+            Category[] categories = new Category[] {
+                new Category() { Name = "Tablet" },
+                new Category() { Name = "Laptop" },
+                new Category() { Name = "Desktop" },
+                new Category() { Name = "Mobile" },
+                new Category() { Name = "Monitor" },
+                new Category() { Name = "UPS" },
+                new Category() { Name = "Credit Card Devices" },
+                new Category() { Name = "Other" },
+                new Category() { Name = "Network" },
+                new Category() { Name = "Printer" },
+            };
+
+            return categories;
+        }
         public static Department[] GenerateDepartments()
         {
             DateTime fromDate = DateTime.Now.AddYears(-15);

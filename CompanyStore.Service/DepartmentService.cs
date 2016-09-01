@@ -25,10 +25,8 @@ namespace CompanyStore.Service
 
         public IEnumerable<Department> GetDepartments()
         {
-            var departments = _departmentRepository.GetAll();
-            return departments;
+            return _departmentRepository.GetAll().AsEnumerable();
         }
-
         public IEnumerable<object> GetDepartmentEmployeeChart()
         {
             var result = _departmentRepository.GetAll()

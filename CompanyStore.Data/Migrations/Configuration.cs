@@ -37,7 +37,7 @@ namespace CompanyStore.Data.Migrations
             // Create Employees
             context.Employees.AddOrUpdate(e => e.FirstName, GenerateEmployees());
             //  Create Genres
-            context.Categories.AddOrUpdate(g => g.Name, GenerateCategories());
+            context.Categories.AddOrUpdate(g => g.Name, MockDataInitializer.GenerateCategories());
             // Create Devices
             context.Devices.AddOrUpdate(d => d.Name, GenerateDevices());
             // Create Stocks
@@ -67,24 +67,6 @@ namespace CompanyStore.Data.Migrations
                     RoleID = 1
                 }
             });
-        }
-
-        private Category[] GenerateCategories()
-        {
-            Category[] categories = new Category[] {
-                new Category() { Name = "Tablet" },
-                new Category() { Name = "Laptop" },
-                new Category() { Name = "Desktop" },
-                new Category() { Name = "Mobile" },
-                new Category() { Name = "Monitor" },
-                new Category() { Name = "UPS" },
-                new Category() { Name = "Credit Card Devices" },
-                new Category() { Name = "Other" },
-                new Category() { Name = "Network" },
-                new Category() { Name = "Printer" },
-            };
-
-            return categories;
         }
 
         private Device[] GenerateDevices()
@@ -261,7 +243,6 @@ namespace CompanyStore.Data.Migrations
             };
             return devices;
         }
-
         private Role[] GenerateRoles()
         {
             return new Role[] {
@@ -270,7 +251,6 @@ namespace CompanyStore.Data.Migrations
                 }
             };
         }
-
         private Employee[] GenerateEmployees()
         {
             List<Employee> employees = new List<Employee>();
@@ -293,7 +273,6 @@ namespace CompanyStore.Data.Migrations
 
             return employees.ToArray();
         }
-
         private Stock[] GenerateStocks()
         {
             List<Stock> stocks = new List<Stock>();
@@ -317,50 +296,6 @@ namespace CompanyStore.Data.Migrations
 
             return stocks.ToArray();
         }
-
-        //private Department[] GenerateDepartments()
-        //{
-            
-        //    List<Department> departments = new List<Department>()
-        //    {
-        //        new Department()
-        //        {
-        //            Name = "Engineering",
-        //            StartDate = MockData.Utils.RandomDate(_dateFrom, _dateTo)
-        //        },
-        //        new Department()
-        //        {
-        //            Name = "Economics",
-        //            StartDate = MockData.Utils.RandomDate(_dateFrom, _dateTo)
-        //        },
-        //        new Department()
-        //        {
-        //            Name = "Mathematics",
-        //            StartDate = MockData.Utils.RandomDate(_dateFrom, _dateTo)
-        //        },
-        //        new Department()
-        //        {
-        //            Name = "English",
-        //            StartDate = MockData.Utils.RandomDate(_dateFrom, _dateTo)
-        //        },
-        //        new Department()
-        //        {
-        //            Name = "Nurse",
-        //            StartDate = MockData.Utils.RandomDate(_dateFrom, _dateTo)
-        //        },
-        //        new Department()
-        //        {
-        //            Name = "Medicine",
-        //            StartDate = MockData.Utils.RandomDate(_dateFrom, _dateTo)
-        //        },
-        //        new Department()
-        //        {
-        //            Name = "Human",
-        //            StartDate = MockData.Utils.RandomDate(_dateFrom, _dateTo)
-        //        }
-        //    };
-            
-        //    return departments.ToArray();
-        //}
+        
     }
 }

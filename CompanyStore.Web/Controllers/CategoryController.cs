@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using CompanyStore.Data.Infrastructure;
-using CompanyStore.Data.Repository;
 using CompanyStore.Entity;
+using CompanyStore.Service;
 using CompanyStore.Web.Infrastructure.Core;
 using CompanyStore.Web.Models;
 using System;
@@ -17,14 +17,14 @@ namespace CompanyStore.Web.Controllers
     [RoutePrefix("api/category")]
     public class CategoryController : ApiControllerBase
     {
-        private readonly IEntityBaseRepository<Category> _categoryRepository;
+        private readonly ICategoryService _categoryService;
 
         public CategoryController(
-            IEntityBaseRepository<Category> categoryRepository,
+            ICategoryService categoryService,
             IUnitOfWork _unitOfWork)
             : base(_unitOfWork)
         {
-            _categoryRepository = categoryRepository;
+            _categoryService = categoryService;
         }
 
         [AllowAnonymous]
@@ -35,7 +35,7 @@ namespace CompanyStore.Web.Controllers
             {
                 HttpResponseMessage response = null;
 
-                var categories = _categoryRepository.GetAll().ToList();
+                var categories = _categoryService.GetCategories();
 
                 IEnumerable<CategoryViewModel> categoriesVM = Mapper.Map<IEnumerable<Category>, IEnumerable<CategoryViewModel>>(categories);
 
