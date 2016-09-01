@@ -83,12 +83,17 @@
                         <tbody>
                             <tr ng-repeat="rental in rentalHistory | filter: filterRentals">
                                 <td>{{ rental.ID }}</td>
-                                <td>{{ rental.Employee }}</td>
+                                <td>
+                                <a class="btn-link" href="#/employee/{{ rental.EmployeeID }}" role="button">{{ rental.Employee }}</a>
+                                </td>
                                 <td>{{ rental.RentalDate | date:'fullDate' }}</td>
                                 <td ng-class="getStatusColor(rental.Status)">{{rental.Status}}</td>
                                 <td class="text-center">
                                     <button ng-if="isBorrowed(rental)" type="button" class="btn btn-primary btn-xs" ng-click="returnDevice(rental.ID)">Return</button>
                                 </td>
+                            </tr>
+                            <tr ng-if="rentalHistory.length == 0">
+                                <td colspan="5" class="text-center">No Rental History</td>
                             </tr>
                         </tbody>
                     </table>

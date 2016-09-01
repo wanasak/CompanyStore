@@ -104,6 +104,9 @@
                                     <button ng-if="isBorrowed(rental)" type="button" class="btn btn-primary btn-xs" ng-click="returnDevice(rental.ID)">Return</button>
                                 </td>
                             </tr>
+                            <tr ng-if="rentals.length == 0">
+                                <td colspan="5" class="text-center">No Rental History</td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>

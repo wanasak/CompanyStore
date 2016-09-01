@@ -23,6 +23,7 @@ namespace CompanyStore.Web.Models
         public Nullable<DateTime> ReturnedDate { get; set; }
         public string Status { get; set; }
         public string Employee { get; set; }
+        public int EmployeeID { get; set; }
         public string Device { get; set; }
     }
     public class TotalRentalByDateViewModel
