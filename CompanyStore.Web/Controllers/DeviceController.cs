@@ -22,16 +22,13 @@ namespace CompanyStore.Web.Controllers
     [RoutePrefix("api/device")]
     public class DeviceController : ApiControllerBase
     {
-        private readonly IEntityBaseRepository<Device> _deviceRepository;
         private readonly IDeviceService _deviceService;
 
         public DeviceController(
-            IEntityBaseRepository<Device> deviceRepository, 
             IDeviceService deviceService,
             IUnitOfWork _unitOfWork)
             : base(_unitOfWork)
         {
-            _deviceRepository = deviceRepository;
             _deviceService = deviceService;
         }
 
@@ -136,7 +133,7 @@ namespace CompanyStore.Web.Controllers
             {
                 HttpResponseMessage response = null;
 
-                var device = _deviceRepository.GetSingle(deviceId);
+                var device = _deviceService.GetDevice(deviceId);
                 if (device == null)
                     response = request.CreateErrorResponse(HttpStatusCode.NotFound, "Invalid device.");
                 else
@@ -156,8 +153,7 @@ namespace CompanyStore.Web.Controllers
                     };
                     // Update database
                     device.Image = result.FileName;
-                    _deviceRepository.Edit(device);
-                    _unitOfWork.Commit();
+                    _deviceService.UpdateDevice(device);
 
                     response = request.CreateResponse(HttpStatusCode.OK, result);
                 }

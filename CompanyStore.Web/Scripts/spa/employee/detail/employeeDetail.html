@@ -92,7 +92,7 @@
                             <th>Device</th>
                             <th>Rental Date</th>
                             <th>Status</th>
-                            <th ng-hide="(filterStatus == 'Returned')"></th>
+                            <th ng-hide="disableRentalColumn()"></th>
                         </thead>
                         <tbody>
                             <tr ng-repeat="rental in rentals | filter: { Device: filterRentals, Status: filterStatus } | orderBy:'-ID' ">
@@ -100,7 +100,7 @@
                                 <td>{{ rental.Device }}</td>
                                 <td>{{ rental.RentalDate | date:'fullDate' }}</td>
                                 <td ng-class="getStatusColor(rental.Status)">{{ rental.Status }}</td>
-                                <td ng-hide="(filterStatus == 'Returned')">
+                                <td ng-hide="disableRentalColumn()">
                                     <button ng-if="isBorrowed(rental)" type="button" class="btn btn-primary btn-xs" ng-click="returnDevice(rental.ID)">Return</button>
                                 </td>
                             </tr>

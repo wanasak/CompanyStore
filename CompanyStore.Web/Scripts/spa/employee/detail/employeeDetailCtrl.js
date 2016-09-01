@@ -17,6 +17,7 @@
         $scope.clearSearch = clearSearch;
         $scope.isBorrowed = isBorrowed;
         $scope.loadEmployeeRentals = loadEmployeeRentals;
+        $scope.disableRentalColumn = disableRentalColumn;
         //$scope.filterStatus = "All";
 
         // Load Employee
@@ -33,13 +34,13 @@
                 loadEmployeeRentalsCompleted,
                 loadEmployeeRentalsFailed);
         }
-        function loadEmployeeRentalsCompleted(result) { 
-            $scope.rentals = result.data.RentalHistories; 
+        function loadEmployeeRentalsCompleted(result) {
+            $scope.rentals = result.data.RentalHistories;
             var data = result.data.TotalRentalsByDate;
             if (!rentalHistoryChart) {
                 rentalHistoryChart = Morris.Line({
                     element: 'rentalHistoryByDateChart',
-                    data: data.length ? data : [ { Date: "No Rental Data", TotalRentals: 0 } ],
+                    data: data.length ? data : [{ Date: "No Rental Data", TotalRentals: 0 }],
                     xkey: 'Date',
                     xLabels: 'day',
                     ykeys: ['TotalRentals'],
@@ -78,6 +79,9 @@
         }
         function clearSearch() {
             $scope.filterRentals = "";
+        }
+        function disableRentalColumn() {
+            return $scope.filterStatus == "Returned";
         }
 
         loadEmployee();

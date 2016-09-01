@@ -16,6 +16,7 @@ namespace CompanyStore.Service
         Device GetDevice(int id);
         void CreateDevice(Device device);
         void DeleteDevice(int id);
+        void UpdateDevice(Device device);
     }
 
     public class DeviceService : IDeviceService
@@ -82,6 +83,11 @@ namespace CompanyStore.Service
         {
             Device device = new Device() { ID = id };
             _deviceRepository.Delete(device);
+            _unitOfWork.Commit();
+        }
+        public void UpdateDevice(Device device)
+        {
+            _deviceRepository.Edit(device);
             _unitOfWork.Commit();
         }
     }
