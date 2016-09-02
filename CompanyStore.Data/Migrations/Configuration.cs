@@ -68,7 +68,6 @@ namespace CompanyStore.Data.Migrations
                 }
             });
         }
-
         
         private Role[] GenerateRoles()
         {

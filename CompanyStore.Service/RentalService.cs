@@ -14,7 +14,7 @@ namespace CompanyStore.Service
         IEnumerable<Rental> GetRentalsByEmployeeID(int employeeID);
         void RentRental(int employeeID, int stockID);
         void ReturnRental(int rentalID);
-        IEnumerable<Rental> GetRentalHistoryByDeviceID(int deviceID);
+        List<Rental> GetRentalHistoryByDeviceID(int deviceID);
     }
 
     public class RentalService : IRentalService
@@ -41,7 +41,7 @@ namespace CompanyStore.Service
 
         public IEnumerable<Rental> GetRentalsByEmployeeID(int employeeID)
         {
-            var rentals = _rentalRepository.GetAll().Where(r => r.EmployeeID == employeeID);
+            var rentals = _rentalRepository.GetAll().Where(r => r.EmployeeID == employeeID).AsEnumerable();
             return rentals;
         }
         public void RentRental(int employeeID, int stockID)
@@ -78,7 +78,7 @@ namespace CompanyStore.Service
             rental.Stock.IsAvailable = true;
             _unitOfWork.Commit();
         }
-        public IEnumerable<Rental> GetRentalHistoryByDeviceID(int deviceID)
+        public List<Rental> GetRentalHistoryByDeviceID(int deviceID)
         {
             List<Rental> rentals = new List<Rental>();
             var device = _deviceRepository.GetSingle(deviceID);

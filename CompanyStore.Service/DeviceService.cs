@@ -57,7 +57,7 @@ namespace CompanyStore.Service
                 .ThenByDescending(d => d.ID)
                 .Skip(cuurentPage * pageSize)
                 .Take(pageSize)
-                .ToList();
+                .AsEnumerable();
             
             return devices;
         }
@@ -66,7 +66,7 @@ namespace CompanyStore.Service
             var devices = _deviceRepository.GetAll()
                 .OrderByDescending(d => d.CreatedDate)
                 .ThenByDescending(d => d.ID)
-                .Take(numberOfDevices).ToList();
+                .Take(numberOfDevices).AsEnumerable();
             return devices;
         }
         public Device GetDevice(int id)

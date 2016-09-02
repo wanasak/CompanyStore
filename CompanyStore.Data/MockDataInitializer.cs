@@ -23,7 +23,6 @@ namespace CompanyStore.Data
                 new Category() { Name = "Network" },
                 new Category() { Name = "Printer" },
             };
-
             return categories;
         }
         public static Department[] GenerateDepartments()

@@ -69,9 +69,9 @@ namespace CompanyStore.Web.Controllers
             {
                 HttpResponseMessage response = null;
 
-                IEnumerable<Rental> rentalsHistory = _rentalService.GetRentalHistoryByDeviceID(deviceId);
+                List<Rental> rentalsHistory = _rentalService.GetRentalHistoryByDeviceID(deviceId);
 
-                IEnumerable<RentalHistoryViewModel> rentalsHistoryVM = Mapper.Map<IEnumerable<Rental>, IEnumerable<RentalHistoryViewModel>>(rentalsHistory);
+                IEnumerable<RentalHistoryViewModel> rentalsHistoryVM = Mapper.Map<List<Rental>, IEnumerable<RentalHistoryViewModel>>(rentalsHistory);
 
                 response = request.CreateResponse<IEnumerable<RentalHistoryViewModel>>(rentalsHistoryVM);
 
