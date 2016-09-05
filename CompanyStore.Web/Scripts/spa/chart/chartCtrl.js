@@ -10,12 +10,15 @@
         // Morris Chart
         var departmentDouut = null;
 
+        $scope.departments = [];
+
         function loadDepartmentDonut() {
             apiService.get("api/department/employee/chart", null,
                 loadDepartmentDonutCompleted,
                 loadDepartmentDonutFailed)
         }
         function loadDepartmentDonutCompleted(result) {
+            $scope.departments = result.data;
             if (!departmentDouut) {
                 departmentDouut = Morris.Donut({
                     element: "department-donut",

@@ -9,9 +9,10 @@ namespace CompanyStore.Data
 {
     public static class MockDataInitializer
     {
-        public static Category[] GenerateCategories()
+        public static List<Category> GenerateCategories()
         {
-            Category[] categories = new Category[] {
+            List<Category> categories = new List<Category>() 
+            {
                 new Category() { Name = "Tablet" },
                 new Category() { Name = "Laptop" },
                 new Category() { Name = "Desktop" },
@@ -25,7 +26,7 @@ namespace CompanyStore.Data
             };
             return categories;
         }
-        public static Department[] GenerateDepartments()
+        public static List<Department> GenerateDepartments()
         {
             DateTime fromDate = DateTime.Now.AddYears(-15);
             DateTime toDate = DateTime.Now;
@@ -69,13 +70,14 @@ namespace CompanyStore.Data
                 }
             };
 
-            return departments.ToArray();
+            return departments;
         }
-        public static Device[] GenerateDevices()
+        public static List<Device> GenerateDevices()
         {
             DateTime _dateFrom = DateTime.Now.AddYears(-15);
             DateTime _dateTo = DateTime.Now;
-            Device[] devices = new Device[] {
+            List<Device> devices = new List<Device>()
+            {
                 new Device() {
                     Name = "DELL DESKTOP TW V3653 W260933TH",
                     Description = "คอมพิวเตอร์ตั้งโต๊ะ ที่ครองใจผู้ใช้ทั้งด้านดีไซน์และประสิทธิภาพ ที่มาพร้อมคุณภาพในการใช้งานที่หลากหลาย ทำงานได้ครบทุกฟังก์ชั่น ที่พร้อมจะผสานไลฟ์สไตล์ของคุณได้ลงตัวอย่างไม่มีสะดุด ตอบสนองทุกการใช้งาน เเละทุกความต้องการของคุณได้อย่างลงตัว รับรองว่าถูกใจคอเกมทั้งหลายแน่นอน",
