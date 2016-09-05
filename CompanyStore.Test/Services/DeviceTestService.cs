@@ -100,7 +100,7 @@ namespace CompanyStore.Test.Services
         [Test]
         public void ServiceShouldAddNewDevice()
         {
-            var newDevice = new Device()
+            Device newDevice = new Device()
             {
                 Name = "New Macbook 2016",
                 Description = "Description...",

@@ -268,26 +268,25 @@ namespace CompanyStore.Data
             }
             return stocks;
         }
-        //public static List<Rental> GenerateRentals()
-        //{
-        //    DateTime _dateFrom = DateTime.Now.AddYears(-10);
-        //    DateTime _dateTo = DateTime.Now;
-            
-        //    List<Rental> rentals = new List<Rental>(); 
-        //    for (int i = 1; i <= 21; i++)
-        //    {
-        //        Rental rental = new Rental()
-        //        {
-        //            EmployeeID = MockData.RandomNumber.Next(1, 10),
-        //            StockID = i,
-        //            RentalDate = MockData.Utils.RandomDate(_dateFrom, _dateTo.AddYears(-1)),
-        //            ReturnedDate = MockData.Utils.RandomDate(_dateTo.AddYears(-1), _dateTo),
-        //            Status = "Returned"
-        //        };
-        //        rentals.Add(rental);
-        //    }
-        //    return rentals;
-        //}
+        public static List<Rental> GenerateRentals()
+        {
+            DateTime _dateFrom = DateTime.Now.AddYears(-10);
+            DateTime _dateTo = DateTime.Now;
+
+            List<Rental> rentals = new List<Rental>()
+            {
+                new Rental()
+                {
+                    EmployeeID = 1,
+                    StockID = 1,
+                    RentalDate = MockData.Utils.RandomDate(_dateFrom, _dateTo.AddYears(-1)),
+                    ReturnedDate = null,
+                    Status = "Borrowed"
+                }
+                //rentals.Add(rental);
+            };
+            return rentals;
+        }
         public static List<Role> GenerateRoles()
         {
             List<Role> roles = new List<Role>()
