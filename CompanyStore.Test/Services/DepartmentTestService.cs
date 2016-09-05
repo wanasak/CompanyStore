@@ -35,7 +35,7 @@ namespace CompanyStore.Test.Services
         public List<Department> SetupDepartments()
         {
             int counter = new int();
-            List<Department> departments = MockDataInitializer.GenerateDepartments().ToList();
+            List<Department> departments = MockDataInitializer.GenerateDepartments();
 
             foreach (Department d in departments)
                 d.ID = ++counter;

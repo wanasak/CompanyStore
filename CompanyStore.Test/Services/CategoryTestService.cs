@@ -34,7 +34,7 @@ namespace CompanyStore.Test.Services
         public List<Category> SetupCategories()
         {
             int counter = new int();
-            List<Category> categories = MockDataInitializer.GenerateCategories().ToList();
+            List<Category> categories = MockDataInitializer.GenerateCategories();
             foreach (Category c in categories)
                 c.ID = ++counter;
             return categories;

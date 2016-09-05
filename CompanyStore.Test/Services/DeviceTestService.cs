@@ -34,7 +34,7 @@ namespace CompanyStore.Test.Services
         public List<Device> SetupDevices()
         {
             int counter = new int();
-            List<Device> devices = MockDataInitializer.GenerateDevices().ToList();
+            List<Device> devices = MockDataInitializer.GenerateDevices();
             foreach (Device d in devices)
                 d.ID = ++counter;
             return devices;
