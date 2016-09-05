@@ -249,5 +249,76 @@ namespace CompanyStore.Data
             };
             return devices;
         }
+        public static List<Stock> GenerateStocks()
+        {
+            List<Stock> stocks = new List<Stock>();
+            int devicesCount = MockDataInitializer.GenerateDevices().Count();
+            for (int i = 1; i <= devicesCount; i++)
+            {
+                for (int j = 0; j < MockData.RandomNumber.Next(1, 10); j++)
+                {
+                    Stock stock = new Stock()
+                    {
+                        DeviceID = i,
+                        UniqueKey = Guid.NewGuid(),
+                        IsAvailable = true
+                    };
+                    stocks.Add(stock);
+                }
+            }
+            return stocks;
+        }
+        //public static List<Rental> GenerateRentals()
+        //{
+        //    DateTime _dateFrom = DateTime.Now.AddYears(-10);
+        //    DateTime _dateTo = DateTime.Now;
+            
+        //    List<Rental> rentals = new List<Rental>(); 
+        //    for (int i = 1; i <= 21; i++)
+        //    {
+        //        Rental rental = new Rental()
+        //        {
+        //            EmployeeID = MockData.RandomNumber.Next(1, 10),
+        //            StockID = i,
+        //            RentalDate = MockData.Utils.RandomDate(_dateFrom, _dateTo.AddYears(-1)),
+        //            ReturnedDate = MockData.Utils.RandomDate(_dateTo.AddYears(-1), _dateTo),
+        //            Status = "Returned"
+        //        };
+        //        rentals.Add(rental);
+        //    }
+        //    return rentals;
+        //}
+        public static List<Role> GenerateRoles()
+        {
+            List<Role> roles = new List<Role>()
+            {
+                new Role() {
+                    Name = "Admin"
+                }
+            };
+            return roles;
+        }
+        public static List<Employee> GenerateEmployees()
+        {
+            DateTime _dateFrom = DateTime.Now.AddYears(-10);
+            DateTime _dateTo = DateTime.Now;
+            List<Employee> employees = new List<Employee>();
+            for (int i = 0; i < 200; i++)
+            {
+                Employee emp = new Employee()
+                {
+                    FirstName = MockData.Person.FirstName(),
+                    LastName = MockData.Person.Surname(),
+                    Email = MockData.Internet.Email(),
+                    IsActive = i % 9 == 0 ? false : true,
+                    Gender = i % 7 == 0 ? "M" : "F",
+                    UniqueKey = Guid.NewGuid(),
+                    CreatedDate = MockData.Utils.RandomDate(_dateFrom, _dateTo),
+                    DepartmentID = MockData.RandomNumber.Next(1, 8)
+                };
+                employees.Add(emp);
+            }
+            return employees;
+        }
     }
 }

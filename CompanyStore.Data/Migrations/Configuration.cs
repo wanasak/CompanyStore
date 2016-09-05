@@ -9,9 +9,6 @@ namespace CompanyStore.Data.Migrations
 
     internal sealed class Configuration : DbMigrationsConfiguration<CompanyStore.Data.CompanyStoreContext>
     {
-        private DateTime _dateFrom = DateTime.Now.AddYears(-15);
-        private DateTime _dateTo = DateTime.Now;
-
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
@@ -33,17 +30,17 @@ namespace CompanyStore.Data.Migrations
             //
 
             // Create Department
-            context.Departments.AddOrUpdate(e => e.Name, MockDataInitializer.GenerateDepartments());
+            context.Departments.AddOrUpdate(e => e.Name, MockDataInitializer.GenerateDepartments().ToArray());
             // Create Employees
-            context.Employees.AddOrUpdate(e => e.FirstName, GenerateEmployees());
+            context.Employees.AddOrUpdate(e => e.FirstName, MockDataInitializer.GenerateEmployees().ToArray());
             //  Create Genres
-            context.Categories.AddOrUpdate(g => g.Name, MockDataInitializer.GenerateCategories());
+            context.Categories.AddOrUpdate(g => g.Name, MockDataInitializer.GenerateCategories().ToArray());
             // Create Devices
-            context.Devices.AddOrUpdate(d => d.Name, MockDataInitializer.GenerateDevices());
+            context.Devices.AddOrUpdate(d => d.Name, MockDataInitializer.GenerateDevices().ToArray());
             // Create Stocks
-            context.Stocks.AddOrUpdate(GenerateStocks());
+            context.Stocks.AddOrUpdate(MockDataInitializer.GenerateStocks().ToArray());
             // Create Roles
-            context.Roles.AddOrUpdate(r => r.Name, GenerateRoles());
+            context.Roles.AddOrUpdate(r => r.Name, MockDataInitializer.GenerateRoles().ToArray());
             // Create Users
             context.Users.AddOrUpdate(u => u.Username, new User[]{
                 new User()
@@ -53,7 +50,7 @@ namespace CompanyStore.Data.Migrations
                     LastName = "Suraintaranggoon",
                     Username = "smudger",
                     IsLocked = false,
-                    CreatedDate = MockData.Utils.RandomDate(_dateFrom, _dateTo),
+                    CreatedDate = DateTime.Now,
                     HashedPassword = "2O65mFzQWIxmfzbkPjeVnS3c8U0IN07oE8ymQWwgY5Y=",
                     Salt = "ljd/YZrfxnkEoB0l2rvjgA==",
                     Image = "twitter-profile.jpg"
@@ -67,59 +64,6 @@ namespace CompanyStore.Data.Migrations
                     RoleID = 1
                 }
             });
-        }
-        
-        private Role[] GenerateRoles()
-        {
-            return new Role[] {
-                new Role() {
-                    Name = "Admin"
-                }
-            };
-        }
-        private Employee[] GenerateEmployees()
-        {
-            List<Employee> employees = new List<Employee>();
-
-            for (int i = 0; i < 200; i++)
-            {
-                Employee emp = new Employee()
-                {
-                    FirstName = MockData.Person.FirstName(),
-                    LastName = MockData.Person.Surname(),
-                    Email = MockData.Internet.Email(),
-                    IsActive = i % 9 == 0 ? false : true,
-                    Gender = i % 7 == 0 ? "M" : "F",
-                    UniqueKey = Guid.NewGuid(),
-                    CreatedDate = MockData.Utils.RandomDate(_dateFrom, _dateTo),
-                    DepartmentID = MockData.RandomNumber.Next(1, 8)
-                };
-                employees.Add(emp);
-            }
-
-            return employees.ToArray();
-        }
-        private Stock[] GenerateStocks()
-        {
-            List<Stock> stocks = new List<Stock>();
-
-            int devicesCount = MockDataInitializer.GenerateDevices().Count();
-
-            for (int i = 1; i <= devicesCount; i++)
-            {
-                for (int j = 0; j < MockData.RandomNumber.Next(1, 10); j++)
-                {
-                    Stock stock = new Stock()
-                    {
-                        DeviceID = i,
-                        UniqueKey = Guid.NewGuid(),
-                        IsAvailable = true
-                    };
-                    stocks.Add(stock);
-                }
-            }
-
-            return stocks.ToArray();
         }
         
     }

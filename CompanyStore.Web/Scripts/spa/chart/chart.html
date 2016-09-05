@@ -12,6 +12,7 @@
                 </div>
                 <div class="col-lg-4">
                     <ul class="list-group">
+                        <li class="list-group-item" ng-repeat="d in departments | orderBy: 'label' ">
                             <span class="badge">{{ d.value }}</span> {{ d.label }}
                         </li>
                     </ul>
