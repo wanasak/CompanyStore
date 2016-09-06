@@ -142,6 +142,7 @@
     <Compile Include="Services\CategoryTestService.cs" />
     <Compile Include="Services\DepartmentTestService.cs" />
     <Compile Include="Services\DeviceTestService.cs" />
+    <Compile Include="Services\EmployeeTestService.cs" />
     <Compile Include="Services\RentalTestService.cs" />
     <Compile Include="Services\StockTestService.cs" />
   </ItemGroup>

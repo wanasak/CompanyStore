@@ -1,5 +1,4 @@
 ﻿using CompanyStore.Data.Infrastructure;
-using CompanyStore.Data.Repository;
 using CompanyStore.Entity;
 using CompanyStore.Web.Infrastructure.Core;
 using CompanyStore.Web.Models;
@@ -16,6 +15,7 @@ using System.Linq.Dynamic;
 using AutoMapper;
 using System.Web;
 using System.IO;
+using CompanyStore.Service;
 
 namespace CompanyStore.Web.Controllers
 {
@@ -23,14 +23,14 @@ namespace CompanyStore.Web.Controllers
     [RoutePrefix("api/employee")]
     public class EmployeeController : ApiControllerBase
     {
-        private readonly IEntityBaseRepository<Employee> _employeeRepository;
+        private readonly IEmployeeService _employeeService;
 
         public EmployeeController(
-            IEntityBaseRepository<Employee> employeeRepository,
+            IEmployeeService employeeService,
             IUnitOfWork _unitOfWork)
             : base(_unitOfWork)
         {
-            _employeeRepository = employeeRepository;
+            _employeeService = employeeService;
         }
 
         [HttpPost]
@@ -55,8 +55,8 @@ namespace CompanyStore.Web.Controllers
 
                 List<EmployeeViewModel> employeesVM = new List<EmployeeViewModel>();
 
-                var filterEmployees = _employeeRepository
-                    .FindBy(x => (x.IsActive == (status == "active") || status == "all"))
+                var filterEmployees = _employeeService.GetAllEmployees()
+                    .Where(x => (x.IsActive == (status == "active") || status == "all"))
                     .Select(e => new EmployeeViewModel
                     {
                         ID = e.ID,
@@ -104,10 +104,11 @@ namespace CompanyStore.Web.Controllers
                 {
                     Employee newEmployee = new Employee();
                     newEmployee.MapEmployee(model);
-                    newEmployee.IsActive = true;
-                    newEmployee.UniqueKey = Guid.NewGuid();
-                    _employeeRepository.Add(newEmployee);
-                    _unitOfWork.Commit();
+                    _employeeService.CreateEmployee(newEmployee);
+                    //newEmployee.IsActive = true;
+                    //newEmployee.UniqueKey = Guid.NewGuid();
+                    //_employeeRepository.Add(newEmployee);
+                    //_unitOfWork.Commit();
 
                     response = request.CreateResponse(HttpStatusCode.OK, newEmployee.ID);
                 }
@@ -124,9 +125,10 @@ namespace CompanyStore.Web.Controllers
             {
                 HttpResponseMessage response = null;
 
-                Employee deleteEmployee = new Employee { ID = employeeId };
-                _employeeRepository.Delete(deleteEmployee);
-                _unitOfWork.Commit();
+                //Employee deleteEmployee = new Employee { ID = employeeId };
+                //_employeeRepository.Delete(deleteEmployee);
+                //_unitOfWork.Commit();
+                _employeeService.DeleteEmployee(employeeId);
 
                 response = request.CreateResponse(HttpStatusCode.OK);
 
@@ -148,9 +150,9 @@ namespace CompanyStore.Web.Controllers
                               .Select(m => m.ErrorMessage).ToArray());
                 else
                 {
-                    Employee updateEmloyee = _employeeRepository.GetSingle(employeeId);
+                    Employee updateEmloyee = _employeeService.GetEmployee(employeeId);
                     updateEmloyee.MapEmployee(model);
-                    _unitOfWork.Commit();
+                    _employeeService.UpdateEmployee(updateEmloyee);
 
                     response = request.CreateResponse(HttpStatusCode.OK, updateEmloyee.ID);
                 }
@@ -167,7 +169,7 @@ namespace CompanyStore.Web.Controllers
             {
                 HttpResponseMessage response = null;
 
-                var employee = _employeeRepository.GetSingle(employeeId);
+                var employee = _employeeService.GetEmployee(employeeId);
 
                 var employeeVM = Mapper.Map<Employee, EmployeeViewModel>(employee);
                 
@@ -185,7 +187,7 @@ namespace CompanyStore.Web.Controllers
             {
                 HttpResponseMessage response = null;
 
-                IEnumerable<Employee> employees = _employeeRepository.GetEmployeeByFilter(filter);
+                IEnumerable<Employee> employees = _employeeService.GetEmployees(filter);
 
                 IEnumerable<EmployeeViewModel> employeesVM = Mapper.Map<IEnumerable<Employee>, IEnumerable<EmployeeViewModel>>(employees);
 
@@ -203,7 +205,7 @@ namespace CompanyStore.Web.Controllers
             {
                 HttpResponseMessage response = null;
 
-                var employee = _employeeRepository.GetSingle(employeeId);
+                var employee = _employeeService.GetEmployee(employeeId);
                 if (employee == null)
                     response = request.CreateErrorResponse(HttpStatusCode.NotFound, "Employee not found.");
                 else
