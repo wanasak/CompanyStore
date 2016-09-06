@@ -10,7 +10,7 @@ namespace CompanyStore.Data.Extension
 {
     public static class StockExtension
     {
-        public static IEnumerable<Stock> GetStockAvailable(this IEntityBaseRepository<Stock> stockRepository, int deviceId)
+        public static IEnumerable<Stock> GetAvailableStocksByDeviceID(this IEntityBaseRepository<Stock> stockRepository, int deviceId)
         {
             return stockRepository.GetAll().Where(s => s.IsAvailable && s.DeviceID == deviceId);
         }

@@ -1,8 +1,6 @@
 ﻿using CompanyStore.Data.Infrastructure;
-using CompanyStore.Data.Repository;
 using CompanyStore.Entity;
 using CompanyStore.Web.Infrastructure.Core;
-using CompanyStore.Data.Extension;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,6 +9,7 @@ using System.Net.Http;
 using System.Web.Http;
 using CompanyStore.Web.Models;
 using AutoMapper;
+using CompanyStore.Service;
 
 namespace CompanyStore.Web.Controllers
 {
@@ -18,14 +17,14 @@ namespace CompanyStore.Web.Controllers
     [RoutePrefix("api/stock")]
     public class StockController : ApiControllerBase
     {
-        private readonly IEntityBaseRepository<Stock> _stockRepository;
+        private readonly IStockService _stockService;
 
         public StockController(
-            IEntityBaseRepository<Stock> stockRepository,
+            IStockService stockService,
             IUnitOfWork _unitOfWork)
             : base(_unitOfWork)
         {
-            _stockRepository = stockRepository;
+            _stockService = stockService;
         }
 
         [HttpGet]
@@ -36,7 +35,7 @@ namespace CompanyStore.Web.Controllers
             {
                 HttpResponseMessage response = null;
 
-                IEnumerable<Stock> stocks = _stockRepository.GetStockAvailable(deviceId);
+                IEnumerable<Stock> stocks = _stockService.GetAvailableStocksByDeviceID(deviceId);
 
                 IEnumerable<StockViewModel> stocksVM = Mapper.Map<IEnumerable<Stock>, IEnumerable<StockViewModel>>(stocks);
 
