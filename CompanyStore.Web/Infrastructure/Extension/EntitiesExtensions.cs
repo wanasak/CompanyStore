@@ -18,6 +18,7 @@ namespace CompanyStore.Web.Infrastructure.Extension
             device.CreatedDate = model.CreatedDate == DateTime.MinValue ? DateTime.Now : model.CreatedDate;
             device.Image = model.Image;
             device.CategoryID = model.CategoryID;
+            device.Price = model.Price;
 
             for (int i = 0; i < model.NumberOfStocks; i++)
             {
