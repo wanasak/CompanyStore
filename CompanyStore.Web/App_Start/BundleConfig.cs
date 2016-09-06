@@ -36,6 +36,7 @@ namespace CompanyStore.Web.App_Start
                 "~/Scripts/Vendors/dataTables.responsive.js",
                 "~/Scripts/Vendors/buttons.print.js",
                 "~/Scripts/Vendors/buttons.html5.js",
+                "~/Scripts/Vendors/buttons.colVis.js",
                 "~/Scripts/Vendors/loading-bar.js"
                 ));
 
