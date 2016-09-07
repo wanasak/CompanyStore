@@ -14,25 +14,30 @@
                     </div>
                     <div class="col-xs-4"></div>
                 </div>
-                <div class="col-xs-12 col-sm-6" ng-repeat="device in latestDevices">
-                    <div class="panel panel-default">
-                        <div class="panel-heading"><strong>{{device.Name}} </strong></div>
-                        <div class="panel-body">
-                            <div class="media">
-                                <a class="media-left" href="#/device/{{device.ID}}" title="{{device.Description | limitTo:200}}">
-                                    <img class="media-object" height="120" ng-src="../../Content/images/devices/{{device.Image}}" alt="" />
-                                </a>
-                                <div class="media-body">
-                                    <h4 class="media-heading">Media heading</h4>
-                                    <p><available-device is-available="{{device.IsAvailable}}"></available-device></p>
-                                    <small>{{device.Description | limitTo: 120}}...</small>
-                                    <p><label class="label label-info">{{device.Category}}</label><br /></p>
+                <div ng-repeat="device in latestDevices">
+                    <div class="clearfix visible-sm-block visible-md-block visible-lg-block" ng-if="$index % 2 == 0"></div>
+                    <div class="col-xs-12 col-sm-6">
+                        <div class="panel panel-default">
+                            <div class="panel-heading"><strong>{{device.Name}} </strong></div>
+                            <div class="panel-body">
+                                <div class="media">
+                                    <a class="media-left" href="#/device/{{device.ID}}" title="{{device.Description | limitTo:200}}">
+                                        <img class="media-object" height="120" ng-src="../../Content/images/devices/{{device.Image}}" alt="" />
+                                    </a>
+                                    <div class="media-body">
+                                        <h4 class="media-heading">Media heading</h4>
+                                        <p>
+                                            <available-device is-available="{{device.IsAvailable}}"></available-device>
+                                        </p>
+                                        <small>{{device.Description | limitTo: 120}}...</small>
+                                        <p><label class="label label-info">{{device.Category}}</label><br /></p>
+                                    </div>
                                 </div>
                             </div>
+                            <div class="panel-footer clearfix">
+                                <!--<span component-rating="{{device.Rating}}"></span>-->
+                                <a class="pull-right" href="#/device/{{device.ID}}">More detail <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span></a>                                </div>
                         </div>
-                        <div class="panel-footer clearfix">
-                            <!--<span component-rating="{{device.Rating}}"></span>-->
-                            <a class="pull-right" href="#/device/{{device.ID}}">More detail <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span></a> </div>
                     </div>
                 </div>
             </div>
