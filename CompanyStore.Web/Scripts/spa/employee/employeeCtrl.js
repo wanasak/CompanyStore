@@ -15,6 +15,7 @@
             DTColumnBuilder.newColumn('FirstName').withTitle('First'),
             DTColumnBuilder.newColumn('LastName').withTitle('Last'),
             DTColumnBuilder.newColumn('Email').withTitle('Email'),
+            DTColumnBuilder.newColumn('DepartmentName').withTitle('Department'),
             //DTColumnBuilder.newColumn('IsActive').withTitle('Status'),
             DTColumnBuilder.newColumn('IsActive').withTitle('Status').notSortable().renderWith(statusHtml),
             DTColumnBuilder.newColumn(null).withTitle('Action').notSortable().renderWith(actionHtml)

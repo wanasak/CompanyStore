@@ -63,7 +63,9 @@ namespace CompanyStore.Web.Controllers
                         FirstName = e.FirstName,
                         LastName = e.LastName,
                         Email = e.Email,
-                        IsActive = e.IsActive
+                        IsActive = e.IsActive,
+                        DepartmentID = e.DepartmentID,
+                        DepartmentName = e.Department.Name
                     });
 
                 if (!string.IsNullOrEmpty(searchValue))
