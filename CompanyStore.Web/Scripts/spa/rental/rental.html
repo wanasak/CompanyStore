@@ -2,10 +2,72 @@
 <div class="row">
     <div class="col-md-12">
         <div class="panel panel-default">
-            <div class="panel-heading">
-                <h4>Rental History</h4>
-            </div>
             <div class="panel-body">
+
+                <div class="page-header">
+                    <h1>Rental <small>history</small></h1>
+                </div>
+
+                <ul class="nav nav-pills">
+                    <li class="active">
+                        <a href="javascript:#sectionA" data-toggle="tab">
+                            <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span> Calendar
+                        </a>
+                    </li>
+                    <li>
+                        <a href="javascript:#sectionB" data-toggle="tab">
+                            <span class="glyphicon glyphicon-list" aria-hidden="true"></span> Table
+                        </a>
+                    </li>
+                </ul>
+
+                <div class="tab-content">
+                    <div id="sectionA" class="tab-pane fade in active">
+                        <br>
+
+                    </div>
+                    <div id="sectionB" class="tab-pane fade">
+                        <br>
+                        <div class="pull-right">
+
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-default">Table Style</button>
+                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+    <span class="caret"></span>
+  </button>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li><a href="javascript:" ng-click="tableStyle = ''">Default</a></li>
+                                    <li><a href="javascript:" ng-click="tableStyle = 'table-striped'">Striped</a></li>
+                                    <li><a href="javascript:" ng-click="tableStyle = 'table-condensed'">Condensed</a></li>
+                                    <li><a href="javascript:" ng-click="tableStyle = 'table-bordered'">Bordered</a></li>
+                                </ul>
+                            </div>
+
+                        </div>
+
+                        <table class="table {{ tableStyle }}">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Name</th>
+                                    <th>Employee</th>
+                                    <th>Rental Date</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="rental in rentalHistory | orderBy: '-ID' ">
+                                    <td>{{ rental.ID }}</td>
+                                    <td>{{ rental.Device }}</td>
+                                    <td>{{ rental.Employee }}</td>
+                                    <td>{{ rental.RentalDate | date: 'fullDate' }}</td>
+                                    <td ng-class="getStatusColor(rental.Status)">{{ rental.Status }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        
+                    </div>
+                </div>
 
             </div>
         </div>

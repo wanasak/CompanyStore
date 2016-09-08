@@ -1,6 +1,7 @@
 ﻿using CompanyStore.Data.Infrastructure;
 using CompanyStore.Data.Repository;
 using CompanyStore.Entity;
+using CompanyStore.Data.Extension;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -63,10 +64,7 @@ namespace CompanyStore.Service
         }
         public IEnumerable<Device> GetLatestDevices(int numberOfDevices)
         {
-            var devices = _deviceRepository.GetAll()
-                .OrderByDescending(d => d.CreatedDate)
-                .ThenByDescending(d => d.ID)
-                .Take(numberOfDevices).AsEnumerable();
+            var devices = _deviceRepository.GetLatestDevices(numberOfDevices);
             return devices;
         }
         public Device GetDevice(int id)

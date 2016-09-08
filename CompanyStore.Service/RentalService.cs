@@ -1,6 +1,7 @@
 ﻿using CompanyStore.Data.Infrastructure;
 using CompanyStore.Data.Repository;
 using CompanyStore.Entity;
+using CompanyStore.Data.Extension;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,6 +16,7 @@ namespace CompanyStore.Service
         void RentRental(int employeeID, int stockID);
         void ReturnRental(int rentalID);
         List<Rental> GetRentalHistoryByDeviceID(int deviceID);
+        IEnumerable<Rental> GetAllRentals();
     }
 
     public class RentalService : IRentalService
@@ -41,7 +43,7 @@ namespace CompanyStore.Service
 
         public IEnumerable<Rental> GetRentalsByEmployeeID(int employeeID)
         {
-            var rentals = _rentalRepository.GetAll().Where(r => r.EmployeeID == employeeID).AsEnumerable();
+            var rentals = _rentalRepository.GetRentalByEmployeeID(employeeID);
             return rentals;
         }
         public void RentRental(int employeeID, int stockID)
@@ -88,6 +90,11 @@ namespace CompanyStore.Service
 
             rentals.Sort((r1, r2) => r2.RentalDate.CompareTo(r1.RentalDate));
 
+            return rentals;
+        }
+        public IEnumerable<Rental> GetAllRentals()
+        {
+            var rentals = _rentalRepository.GetAll();
             return rentals;
         }
     }

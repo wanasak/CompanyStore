@@ -10,12 +10,12 @@ namespace CompanyStore.Data.Extension
 {
     public static class DeviceExtension
     {
-        public static IEnumerable<Device> GetLatestDevices(this IEntityBaseRepository<Device> deviceRepository)
+        public static IEnumerable<Device> GetLatestDevices(this IEntityBaseRepository<Device> deviceRepository, int numberOfDevices)
         {
             return deviceRepository.GetAll()
                 .OrderByDescending(d => d.CreatedDate)
                 .ThenByDescending(d => d.ID)
-                .Take(6);
+                .Take(numberOfDevices);
         }
     }
 }

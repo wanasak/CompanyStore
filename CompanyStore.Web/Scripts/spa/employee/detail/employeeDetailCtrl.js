@@ -3,12 +3,13 @@
 
     app.controller('employeeDetailCtrl', employeeDetailCtrl);
 
-    employeeDetailCtrl.$inject = ['$scope', 'apiService', 'notificationService', '$routeParams'];
+    employeeDetailCtrl.$inject = ['$scope', 'apiService', 'notificationService', '$routeParams', '$timeout'];
 
-    function employeeDetailCtrl($scope, apiService, notificationService, $routeParams) {
+    function employeeDetailCtrl($scope, apiService, notificationService, $routeParams, $timeout) {
 
         // Morris Chart
         var rentalHistoryChart = null;
+        var totalRentalByDate = null;
 
         $scope.employee = {};
         $scope.rentals = [];
@@ -36,20 +37,8 @@
         }
         function loadEmployeeRentalsCompleted(result) {
             $scope.rentals = result.data.RentalHistories;
-            var data = result.data.TotalRentalsByDate;
-            if (!rentalHistoryChart) {
-                rentalHistoryChart = Morris.Line({
-                    element: 'rentalHistoryByDateChart',
-                    data: data.length ? data : [{ Date: "No Rental Data", TotalRentals: 0 }],
-                    xkey: 'Date',
-                    xLabels: 'day',
-                    ykeys: ['TotalRentals'],
-                    labels: ['Total'],
-                    resize: true
-                });
-            } else {
-                rentalHistoryChart.setData(data);
-            }
+            totalRentalByDate = result.data.TotalRentalsByDate;
+            
         }
         function loadEmployeeRentalsFailed(response) { notificationService.displayError(response.data); }
         // Return Rental
@@ -82,6 +71,26 @@
         }
         function disableRentalColumn() {
             return $scope.filterStatus == "Returned";
+        }
+        // Morrisjs display collapse in bootstrap tab
+        $scope.redrawChart = function () {
+            $timeout(function () {
+                //loadEmployeeRentals();
+                var data = totalRentalByDate //result.data.TotalRentalsByDate;
+                if (!rentalHistoryChart) {
+                    rentalHistoryChart = Morris.Line({
+                        element: 'rentalHistoryByDateChart',
+                        data: data.length ? data : [{ Date: "No Rental Data", TotalRentals: 0 }],
+                        xkey: 'Date',
+                        xLabels: 'day',
+                        ykeys: ['TotalRentals'],
+                        labels: ['Total'],
+                        resize: true
+                    });
+                } else {
+                    rentalHistoryChart.setData(data);
+                }
+            }, 200); // delay 200 ms
         }
 
         loadEmployee();

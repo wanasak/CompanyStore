@@ -17,11 +17,11 @@ namespace CompanyStore.Web.Controllers
 {
     [Authorize(Roles = "Admin")]
     [RoutePrefix("api/rental")]
-    public class RentController : ApiControllerBase
+    public class RentalController : ApiControllerBase
     {
         private readonly IRentalService _rentalService;
 
-        public RentController(
+        public RentalController(
             IRentalService rentalService,
             IUnitOfWork _unitOfWork)
             : base(_unitOfWork)
@@ -100,6 +100,23 @@ namespace CompanyStore.Web.Controllers
                 rentalVM.RentalHistories = Mapper.Map<IEnumerable<Rental>, IEnumerable<RentalHistoryViewModel>>(rentals);
 
                 response = request.CreateResponse<RentalViewModel>(rentalVM);
+
+                return response;
+            });
+        }
+
+        [HttpGet]
+        public HttpResponseMessage GetAllRental(HttpRequestMessage request)
+        {
+            return CreateHttpResponseMessage(request, () =>
+            {
+                HttpResponseMessage response = null;
+
+                var rentals = _rentalService.GetAllRentals();
+
+                IEnumerable<RentalHistoryViewModel> rentalsVM = Mapper.Map<IEnumerable<Rental>, IEnumerable<RentalHistoryViewModel>>(rentals);
+
+                response = request.CreateResponse<IEnumerable<RentalHistoryViewModel>>(HttpStatusCode.OK, rentalsVM);
 
                 return response;
             });

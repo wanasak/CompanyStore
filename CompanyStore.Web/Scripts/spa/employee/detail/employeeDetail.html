@@ -1,12 +1,14 @@
 <br />
 <div class="row">
-    <div class="col-md-6">
+    <div class="col-md-12">
         <div class="panel panel-default">
-            <div class="panel-heading">
+            <!--<div class="panel-heading">
                 <h3 class="panel-title">Employee Information</h3>
-            </div>
+            </div>-->
             <div class="panel-body">
-
+                <div class="page-header">
+                    <h1>Employee <small>Information</small></h1>
+                </div>
                 <div class="media">
                     <a class="pull-left" href="#">
                         <!--<img class="media-object" height="120" ng-src="../../Content/images/employees/{{employee.Image}}" alt="" />-->
@@ -16,99 +18,98 @@
                     </a>
                     <div class="media-body">
                         <h4 class="media-heading"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> {{ employee.FullName }}</h4>
-                        <table class="table table-striped">
-                            <tbody>
-                                <tr>
-                                    <td>Department:</td>
-                                    <td>{{ employee.DepartmentName }}</td>
-                                </tr>
-                                <tr>
-                                    <td>First:</td>
-                                    <td>{{ employee.FirstName }}</td>
-                                </tr>
-                                <tr>
-                                    <td>Last:</td>
-                                    <td>{{ employee.LastName }}</td>
-                                </tr>
-                                <tr>
-                                    <td>Email:</td>
-                                    <td>{{ employee.Email }}</td>
-                                </tr>
-                                <tr>
-                                    <td>Status:</td>
-                                    <td>
-                                        <available-device is-available="{{employee.IsActive}}"></available-device>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Created Date:</td>
-                                    <td>{{ employee.CreatedDate | date: 'MMM d,y' }}</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-        <div class="panel panel-success">
-            <div class="panel-heading">
-                <h3 class="panel-title">Rantal History by Date</h3>
-            </div>
-            <div class="panel-body">
-                <div id="rentalHistoryByDateChart"></div>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-6">
-        <div class="panel panel-danger">
-            <div class="panel-heading">
-                <h5 class="panel-title">Rental History</h3>
-            </div>
-            <div class="panel-body">
-                <form class="form-inline">
-                    <div class="form-group">
-                        <label for="filterRentals">Name:</label>
-                        <div class="input-group">
-                            <input type="search" ng-model="filterRentals" class="form-control" placeholder="Filter...">
-                            <div class="input-group-btn">
-                                <button class="btn btn-danger" ng-click="clearSearch()"><i class="glyphicon glyphicon-remove-sign"></i></button>
+                        <ul class="nav nav-tabs">
+                            <li class="active"><a data-toggle="tab" href="javascript:#sectionA">Personal</a></li>
+                            <li><a data-toggle="tab" href="javascript:#sectionB">Rental History</a></li>
+                            <li><a ng-click="redrawChart()" data-toggle="tab" href="javascript:#sectionC">Rental Chart</a></li>
+                        </ul>
+                        <div class="tab-content">
+                            <div id="sectionA" class="tab-pane fade in active">
+                                <br>
+                                <table class="table table-striped">
+                                    <tbody>
+                                        <tr>
+                                            <td>Department:</td>
+                                            <td>{{ employee.DepartmentName }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>First:</td>
+                                            <td>{{ employee.FirstName }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Last:</td>
+                                            <td>{{ employee.LastName }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Email:</td>
+                                            <td><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span> {{ employee.Email }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Status:</td>
+                                            <td>
+                                                <available-device is-available="{{employee.IsActive}}"></available-device>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Created Date:</td>
+                                            <td>{{ employee.CreatedDate | date: 'MMM d,y' }}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div id="sectionB" class="tab-pane fade">
+                                <br>
+                                <form class="form-inline">
+                                    <div class="form-group">
+                                        <label for="filterRentals">Name:</label>
+                                        <div class="input-group">
+                                            <input type="search" ng-model="filterRentals" class="form-control" placeholder="Filter...">
+                                            <div class="input-group-btn">
+                                                <button class="btn btn-danger" ng-click="clearSearch()"><i class="glyphicon glyphicon-remove-sign"></i></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="filterStatus">Status:</label>
+                                        <select name="filterStatus" ng-model="filterStatus" class="form-control">
+                                            <option value="">All</option>
+                                            <option value="Borrowed">Borrowed</option>
+                                            <option value="Returned">Returned</option>
+                                        </select>
+                                    </div>
+                                </form>
+                                <div style="overflow-y: auto; max-height: 540px;">
+                                    <table class="table table-bordered">
+                                        <thead>
+                                            <th>#</th>
+                                            <th>Device</th>
+                                            <th>Rental Date</th>
+                                            <th>Status</th>
+                                            <th ng-hide="disableRentalColumn()"></th>
+                                        </thead>
+                                        <tbody>
+                                            <tr ng-repeat="rental in rentals | filter: { Device: filterRentals, Status: filterStatus } | orderBy:'-ID' ">
+                                                <td>{{ rental.ID }}</td>
+                                                <td>{{ rental.Device }}</td>
+                                                <td>{{ rental.RentalDate | date:'fullDate' }}</td>
+                                                <td ng-class="getStatusColor(rental.Status)">{{ rental.Status }}</td>
+                                                <td ng-hide="disableRentalColumn()">
+                                                    <button ng-if="isBorrowed(rental)" type="button" class="btn btn-primary btn-xs" ng-click="returnDevice(rental.ID)">Return</button>
+                                                </td>
+                                            </tr>
+                                            <tr ng-if="rentals.length == 0">
+                                                <td colspan="5" class="text-center">No Rental History</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div id="sectionC" class="tab-pane fade">
+                                <br>
+                                <div id="rentalHistoryByDateChart"></div>
                             </div>
                         </div>
                     </div>
-                    <div class="form-group">
-                        <label for="filterStatus">Status:</label>
-                        <select name="filterStatus" ng-model="filterStatus" class="form-control">
-                            <option value="">All</option>
-                            <option value="Borrowed">Borrowed</option>
-                            <option value="Returned">Returned</option>
-                        </select>
-                    </div>
-                </form>
-                <div class="table-responsive" style="overflow-y: auto; max-height: 540px;">
-                    <table class="table table-bordered">
-                        <thead>
-                            <th>#</th>
-                            <th>Device</th>
-                            <th>Rental Date</th>
-                            <th>Status</th>
-                            <th ng-hide="disableRentalColumn()"></th>
-                        </thead>
-                        <tbody>
-                            <tr ng-repeat="rental in rentals | filter: { Device: filterRentals, Status: filterStatus } | orderBy:'-ID' ">
-                                <td>{{ rental.ID }}</td>
-                                <td>{{ rental.Device }}</td>
-                                <td>{{ rental.RentalDate | date:'fullDate' }}</td>
-                                <td ng-class="getStatusColor(rental.Status)">{{ rental.Status }}</td>
-                                <td ng-hide="disableRentalColumn()">
-                                    <button ng-if="isBorrowed(rental)" type="button" class="btn btn-primary btn-xs" ng-click="returnDevice(rental.ID)">Return</button>
-                                </td>
-                            </tr>
-                            <tr ng-if="rentals.length == 0">
-                                <td colspan="5" class="text-center">No Rental History</td>
-                            </tr>
-                        </tbody>
-                    </table>
                 </div>
             </div>
         </div>
