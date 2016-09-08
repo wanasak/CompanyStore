@@ -20,21 +20,50 @@
                         </a>
                     </li>
                 </ul>
-
+                <!--end nav pills-->
                 <div class="tab-content">
                     <div id="sectionA" class="tab-pane fade in active">
                         <br>
-
+                        <div class="row">
+                            <div class="col-md-8">
+                                <div id="calendar" ui-calendar="uiConfig.calendar" ng-model="eventSources" calendar="myCalendar"></div>
+                            </div>
+                            <div class="col-md-4">
+                                
+                                <div class="panel panel-default" style="margin-top:50px">
+                                      <div class="panel-heading">
+                                            <h3 class="panel-title">Rental Information</h3>
+                                      </div>
+                                      <div class="panel-body">
+                                            <p ng-hide="SelectedEvent" class="text-center">No Selected Rental</p>
+                                            <dl ng-show="SelectedEvent">
+                                                <dt>ID</dt>
+                                                <dd>#{{ SelectedEvent.id }}</dd>
+                                                <dt>Employee</dt>
+                                                <dd>{{ SelectedEvent.title }}</dd>
+                                                <dt>Device</dt>
+                                                <dd>{{ SelectedEvent.description }}</dd>
+                                                <dt>Rental Date</dt>
+                                                <dd>{{ SelectedEvent.start }}</dd>
+                                                <dt>Returned Date</dt>
+                                                <dd>{{ SelectedEvent.end != null ? SelectedEvent.end : "-" }}</dd>
+                                                <dt>Status</dt>
+                                                <dd ng-class="SelectedEvent.color">{{ SelectedEvent.end != null ? "Returned" : "Borrowed" }}</dd>
+                                            </dl>
+                                      </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
+                    <!--end tab A-->
                     <div id="sectionB" class="tab-pane fade">
                         <br>
                         <div class="pull-right">
-
                             <div class="btn-group">
                                 <button type="button" class="btn btn-default">Table Style</button>
                                 <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-    <span class="caret"></span>
-  </button>
+                                    <span class="caret"></span>
+                                </button>
                                 <ul class="dropdown-menu" role="menu">
                                     <li><a href="javascript:" ng-click="tableStyle = ''">Default</a></li>
                                     <li><a href="javascript:" ng-click="tableStyle = 'table-striped'">Striped</a></li>
@@ -42,9 +71,7 @@
                                     <li><a href="javascript:" ng-click="tableStyle = 'table-bordered'">Bordered</a></li>
                                 </ul>
                             </div>
-
                         </div>
-
                         <table class="table {{ tableStyle }}">
                             <thead>
                                 <tr>
@@ -52,6 +79,7 @@
                                     <th>Name</th>
                                     <th>Employee</th>
                                     <th>Rental Date</th>
+                                    <th>Returned Date</th>
                                     <th>Status</th>
                                 </tr>
                             </thead>
@@ -61,14 +89,16 @@
                                     <td>{{ rental.Device }}</td>
                                     <td>{{ rental.Employee }}</td>
                                     <td>{{ rental.RentalDate | date: 'fullDate' }}</td>
+                                    <td>{{ rental.ReturnedDate | date: 'fullDate' }}</td>
                                     <td ng-class="getStatusColor(rental.Status)">{{ rental.Status }}</td>
                                 </tr>
                             </tbody>
                         </table>
-                        
+                        <!--end table-->
                     </div>
+                    <!--end tab B-->
                 </div>
-
+                <!--end tab content-->
             </div>
         </div>
     </div>

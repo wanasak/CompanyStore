@@ -37,6 +37,11 @@ namespace CompanyStore.Web.App_Start
                 "~/Scripts/Vendors/buttons.print.js",
                 "~/Scripts/Vendors/buttons.html5.js",
                 "~/Scripts/Vendors/buttons.colVis.js",
+                "~/Scripts/Vendors/moment.js",
+                "~/Scripts/Vendors/jquery-1.11.3.js",
+                "~/Scripts/Vendors/calendar.js",
+                "~/Scripts/Vendors/fullcalendar.js",
+                "~/Scripts/Vendors/gcal.js",
                 "~/Scripts/Vendors/loading-bar.js"
                 ));
 
@@ -79,8 +84,9 @@ namespace CompanyStore.Web.App_Start
                 "~/content/css/morris.css",
                 "~/content/css/buttons.dataTables.css",
                 "~/content/css/dataTables.responsive.css",
-                "~/content/css/jquery.dataTables.css", 
-                "~/content/css/toastr.css", 
+                "~/content/css/jquery.dataTables.css",
+                "~/content/css/toastr.css",
+                "~/content/css/fullcalendar.css", 
                 "~/content/css/jquery.fancybox.css", 
                 "~/content/css/loading-bar.css"
                 ));
