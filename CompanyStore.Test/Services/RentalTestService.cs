@@ -169,6 +169,13 @@ namespace CompanyStore.Test.Services
             Assert.That(returnRental.ReturnedDate, Is.Not.Null);
             Assert.That(returnRental.Stock.IsAvailable, Is.True);
         }
+        [Test]
+        public void ServiceShouldReturnAllRental()
+        {
+            var rentals = _rentalService.GetAllRentals();
+
+            Assert.That(rentals, Is.EqualTo(_randomRentals));
+        }
         #endregion
     }
 }

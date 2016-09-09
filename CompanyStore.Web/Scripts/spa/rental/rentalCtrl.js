@@ -9,6 +9,7 @@
 
         $scope.rentalHistory = [];
         $scope.getStatusColor = getStatusColor;
+        $scope.clearSearch = clearSearch;
         // Config Calendar
         $scope.SelectedEvent = null;
         var isFirstTime = true;
@@ -72,6 +73,9 @@
             else {
                 return 'green';
             }
+        }
+        function clearSearch() {
+            $scope.filterRentals = "";
         }
         
         loadRentalHistory();
