@@ -48,7 +48,7 @@
                                             <dt>Returned Date</dt>
                                             <dd>{{ SelectedEvent.end != null ? SelectedEvent.end : "-" }}</dd>
                                             <dt>Status</dt>
-                                            <dd ng-class="SelectedEvent.color">{{ SelectedEvent.end != null ? "Returned" : "Borrowed" }}</dd>
+                                            <dd><span ng-class="getStatusColor(SelectedEvent.color)">{{ SelectedEvent.end != null ? "Returned" : "Borrowed" }}</span></dd>
                                         </dl>
                                     </div>
                                 </div>
@@ -101,7 +101,9 @@
                                     <td>{{ rental.Employee }}</td>
                                     <td>{{ rental.RentalDate | date: 'M/d/yyyy' }}</td>
                                     <td>{{ rental.ReturnedDate | date: 'M/d/yyyy' }}</td>
-                                    <td ng-class="getStatusColor(rental.Status)">{{ rental.Status }}</td>
+                                    <td>
+                                    <span ng-class="getStatusColor(rental.Status)">{{ rental.Status }}</span>
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>

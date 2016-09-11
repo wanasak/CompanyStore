@@ -68,10 +68,10 @@
             notificationService.displayError(response.data);
         }
         function getStatusColor(status) {
-            if (status == 'Borrowed')
-                return 'red'
+            if (status == 'Borrowed' || status == 'red')
+                return 'label label-danger'
             else {
-                return 'green';
+                return 'label label-success';
             }
         }
         function clearSearch() {
