@@ -12,7 +12,8 @@ namespace CompanyStore.Data.Extension
     {
         public static User GetSingleByUsername(this IEntityBaseRepository<User> userRepository, string username)
         {
-            return userRepository.GetAll().FirstOrDefault(u => u.Username == username);
+            return userRepository.GetAll()
+                .FirstOrDefault(u => u.Username == username);
         }
     }
 }
